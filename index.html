@@ -3581,7 +3581,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     [['買う ×1',1,1],['買う ×10',1,10],['売る ×1',0,1],['ぜんぶ売る',0,1e9]].forEach(function(b){var bt=sEl('button','flex:none;min-width:88px;padding:8px 12px;font-size:15px;font-weight:bold;font-family:'+SFONT+';letter-spacing:.06em;color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6)',b[0]);bt.onclick=function(){trade(!!b[1],b[2])};row.appendChild(bt)});
     bd.appendChild(row)}
    rd()}
-  function openBaccarat(msg){var RK='miarina_td_medal_v1',side=0,bet=0,rules=false,m=msg||'いらっしゃい！ チップで バカラを あそぼう',SD=['プレイヤー','バンカー','タイ'],SC=['#3a7bd5','#d9327c','#2fa86a'],PO=['2倍','2倍','10倍'],SU=['\u2660','\u2665','\u2666','\u2663'];
+  function openBaccarat(msg){var RK='miarina_td_medal_v1',side=0,bet=0,rules=false,m=msg||'いらっしゃい！ チップで バカラを あそぼう',SD=['プレイヤー','バンカー','タイ'],SC=['#3a7bd5','#d9327c','#2fa86a'],PO=['3倍','3倍','20倍'],SU=['\u2660','\u2665','\u2666','\u2663'];
    function cg(){try{return Math.max(0,parseInt(localStorage.getItem(RK)||'0',10)||0)}catch(e){return 0}}
    function cs(n){try{localStorage.setItem(RK,String(Math.max(0,n|0)))}catch(e){}}
    function dr(){return{r:1+Math.floor(Math.random()*13),s:Math.floor(Math.random()*4)}}
@@ -3595,8 +3595,8 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
      else{v=vl(p3);if(bt<=2||(bt===3&&v!==8)||(bt===4&&v>=2&&v<=7)||(bt===5&&v>=4&&v<=7)||(bt===6&&(v===6||v===7)))b.push(dr())}}
     return{p:p,b:b}}
    function settle(r,sd,bt){var pt=tt(r.p),bk=tt(r.b),w=pt>bk?0:bk>pt?1:2,ret;
-    if(w===2)ret=sd===2?bt*10:bt;
-    else if(sd===w)ret=bt*2;
+    if(w===2)ret=sd===2?bt*20:bt;
+    else if(sd===w)ret=bt*3;
     else ret=0;
     return{w:w,ret:ret,pt:pt,bk:bk}}
    function cardEl(c){var e=window.__czPC(c,38);e.style.cssText+=';transform:scale(.3);opacity:0;transition:transform .22s,opacity .22s';setTimeout(function(){e.style.transform='scale(1)';e.style.opacity='1'},20);return e}
@@ -3636,7 +3636,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
      [[0,E.pl,E.pc,'#3a7bd5,#1f4f9a'],[1,E.bl,E.bc,'#e0245e,#9a1030']].forEach(function(a){var c=sEl('div','flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0');c.append(sEl('div','padding:2px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.75);font-weight:900;font-size:14px;line-height:1.3;color:#fff;text-align:center;background:linear-gradient(180deg,'+a[3]+')',NM[a[0]]),a[1],a[2]);top.appendChild(c)});
           E.ban=sEl('div','display:none;position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);z-index:5;padding:4px 18px;border:3px solid #fff;border-radius:6px;background:linear-gradient(180deg,#5cc0ff,#0a5fc0 55%,#074a9a);color:#fff;font-weight:900;font-size:17px;letter-spacing:.08em;text-shadow:0 2px 2px #002a5a;box-shadow:0 4px 12px rgba(0,0,0,.6);white-space:nowrap');top.appendChild(E.ban);
      E.msg=sEl('div','text-align:center;font-size:12.5px;font-weight:700;color:#fff3c4;min-height:18px;line-height:18px;background:rgba(0,0,0,.4);border-radius:6px;padding:3px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis');
-     var band=sEl('div','text-align:center;font-weight:800;font-size:13px;letter-spacing:.1em;color:#e6c25a;padding:4px 0;border-top:2px solid rgba(230,194,90,.5);border-bottom:2px solid rgba(230,194,90,.5);background:rgba(0,40,20,.5)','当たると 2倍（タイは 10倍）');band.appendChild(sEl('div','font-size:11.5px;font-weight:700;letter-spacing:.02em;color:#f0e2b0','プレイヤー 2倍 ／ バンカー 2倍 ／ タイ 10倍'));
+     var band=sEl('div','text-align:center;font-weight:800;font-size:13px;letter-spacing:.1em;color:#e6c25a;padding:4px 0;border-top:2px solid rgba(230,194,90,.5);border-bottom:2px solid rgba(230,194,90,.5);background:rgba(0,40,20,.5)','当たると 3倍（タイは 20倍）');band.appendChild(sEl('div','font-size:11.5px;font-weight:700;letter-spacing:.02em;color:#f0e2b0','プレイヤー 3倍 ／ バンカー 3倍 ／ タイ 20倍'));
      var sp=sEl('div','--s:min(40vw,22vh,200px);position:relative;flex:none;height:calc(var(--s)*1.52);margin:0 2px');E.sp=[];E.sl=[];E.sc=[];E.ht=[];
      [0,1,2].forEach(function(i){var z=i===2?'calc(var(--s)*.9)':'var(--s)',s=sEl('div','position:absolute;'+(i===0?'left:0;top:0':i===1?'right:0;top:0':'left:50%;margin-left:calc(var(--s)*-.45);top:calc(var(--s)*.62)')+';--k:'+KC[i]+';width:'+z+';height:'+z+';box-sizing:border-box;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;-webkit-tap-highlight-color:transparent'),l=led('0','min-width:calc(var(--s)*.3);font-size:calc(var(--s)*.1);padding:1px 6px');
       E.sl[i]=l;E.sp[i]=s;E.sc[i]=sEl('div','display:none');E.ht[i]=sEl('div','font-size:calc(var(--s)*.1);font-weight:800;line-height:1.3;color:#fff6cf;text-shadow:0 1px 2px #000;text-align:center;white-space:pre-line','タップして\nベット');
@@ -3648,7 +3648,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
      E.rb=sb('もういちど',function(){if(phase==='play'||phase==='peek')return;reset();if(sum(last)>0&&sum(last)<=cg())bets=last.slice();hist=[];paint()});
      E.dl=gbtn('ディール','flex:1;min-width:96px;font-size:15px;padding:4px 14px');E.dl.classList.add('bcb');E.dl.onclick=deal;ctl.append(E.cl,E.rb,E.dl);
      E.cr=led('0','font-size:16px');E.net=sEl('div','font-weight:900;font-size:15px;min-width:84px;text-align:left');var cb=sEl('div','display:flex;align-items:center;gap:8px'),bt2=sEl('div','display:flex;gap:6px;margin-left:auto'),
-      rl=sEl('div','display:none;position:absolute;inset:0;z-index:30;overflow-y:auto;font-size:13px;line-height:1.7;white-space:pre-line;background:rgba(0,22,10,.96);border:1px solid rgba(230,194,90,.6);border-radius:10px;padding:12px','【バカラの ルール】\n2まいの 合計の 1の位が「てん」です（A=1、10・J・Q・K=0）。9に ちかいほうの勝ち。\n8か9は「ナチュラル」で その場で 決着。それ以外は ルールで 3まいめが 配られます。\n当たると：プレイヤー 2倍 ／ バンカー 2倍 ／ タイ 10倍\n（プレイヤー・バンカーに かけた分は、タイのとき もどります）\nプレイヤー・バンカー・タイに 同時に かけられます。\n\n▼ タップして とじる');
+      rl=sEl('div','display:none;position:absolute;inset:0;z-index:30;overflow-y:auto;font-size:13px;line-height:1.7;white-space:pre-line;background:rgba(0,22,10,.96);border:1px solid rgba(230,194,90,.6);border-radius:10px;padding:12px','【バカラの ルール】\n2まいの 合計の 1の位が「てん」です（A=1、10・J・Q・K=0）。9に ちかいほうの勝ち。\n8か9は「ナチュラル」で その場で 決着。それ以外は ルールで 3まいめが 配られます。\n当たると：プレイヤー 3倍 ／ バンカー 3倍 ／ タイ 20倍\n（プレイヤー・バンカーに かけた分は、タイのとき もどります）\nプレイヤー・バンカー・タイに 同時に かけられます。\n\n▼ タップして とじる');
      rl.onclick=function(){showR=false;rl.style.display='none'};
      cb.append(E.net);bt2.append(sb('ルール',function(){showR=true;rl.style.display='block'}),sb('もどる',function(){openCasino()}));
      var bot=sEl('div','display:flex;align-items:center;gap:8px');bot.append(cb,bt2);
@@ -3745,6 +3745,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
   function openPoker(msg){var RK='miarina_td_medal_v1',SU=['♠','♥','♦','♣'],bet=0,m=msg||'いらっしゃい！ ジョーカー入りで ディーラーと しょうぶ！',deck,H,D,hold,rules=false,res=null,busy=false,bdCur=null,PT=[['ロイヤルフラッシュ',100],['ストレートフラッシュ',60],['フォーカード',40],['フルハウス',20],['フラッシュ',12],['ストレート',8],['スリーカード',5],['ツーペア',3],['ワンペア',2]];
    function cg(){try{return Math.max(0,parseInt(localStorage.getItem(RK)||'0',10)||0)}catch(e){return 0}}
    function cs(n){try{localStorage.setItem(RK,String(Math.max(0,n|0)))}catch(e){}}
+function sk(){try{return Math.max(0,parseInt(localStorage.getItem('miarina_td_poker_streak_v1')||'0',10)||0)}catch(e){return 0}}function setSk(n){try{localStorage.setItem('miarina_td_poker_streak_v1',String(Math.max(0,n|0)))}catch(e){}}function skMul(n){return Math.min(1+n,10)}
    function snd(n){try{sfx(n)}catch(er){}}
    function rn(c){if(c.r===0)return 'JOKER';return c.r===1?'A':c.r===11?'J':c.r===12?'Q':c.r===13?'K':String(c.r)}
    function shuf(){var d=[],i,j,t;for(i=0;i<52;i++)d.push({r:i%13+1,s:i/13|0});d.push({r:0,s:4},{r:0,s:5});for(i=d.length-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=d[i];d[i]=d[j];d[j]=t}return d}
@@ -3841,7 +3842,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     var al=gbtn('ぜんぶ');al.onclick=function(){bet=cg();bt()};var cl=gbtn('クリア','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');cl.onclick=function(){bet=0;bt()};cr.append(al,cl);bd.appendChild(cr);
     var dl=gbtn('🃏 ディール！','display:block;width:100%;margin-top:10px;font-size:16px;padding:9px 12px');if(bet<1)dl.disabled=true;dl.onclick=deal;bd.appendChild(dl);
     bd.appendChild(sm(rules?'ルールを とじる':'📖 ポーカーのルール',function(){rules=!rules;bt()}));bd.appendChild(sm('↩ ゲームを えらびなおす',function(){openCasino()}));
-    if(rules)bd.appendChild(sEl('div','font-size:11.5px;color:#8a3a6a;background:#fff;border:2px dashed #f0c8dc;border-radius:10px;padding:8px;margin-top:6px;line-height:1.6;white-space:pre-line','トランプ54まい（ジョーカー2まい入り）で しょうぶ！\nディーラーと 5まいずつ もらうよ。\nのこしたいカードを タップで「キープ」にして、「チェンジ」で それ以外を とりかえよう（1回だけ）。\nその あと ディーラーも とりかえて、手札の つよさを くらべるよ。\nあなたの手札が つよければ かけ金が 2ばい。ひきわけは あなたの かち！ まけると かけ金は なくなるよ。\n\n【ジョーカー】\nジョーカーは どの数字にも どのマークにも なれる万能カード。いちばん つよい形で数えるよ。\n\n【やくの つよさ】\n'+PT.map(function(x){return x[0]}).join('\n')+'\n（同じやくなら、数字の大きいほうが つよい）'));}
+    if(rules)bd.appendChild(sEl('div','font-size:11.5px;color:#8a3a6a;background:#fff;border:2px dashed #f0c8dc;border-radius:10px;padding:8px;margin-top:6px;line-height:1.6;white-space:pre-line','トランプ54まい（ジョーカー2まい入り）で しょうぶ！\nディーラーと 5まいずつ もらうよ。\nのこしたいカードを タップで「キープ」にして、「チェンジ」で それ以外を とりかえよう（1回だけ）。\nその あと ディーラーも とりかえて、手札の つよさを くらべるよ。\nあなたの手札が つよければ かけ金が 2ばい。連勝すると 2れんしょうで ×3、3れんしょうで ×4…と 倍率が どんどん上がるよ（最大×10）。まけると 連勝は 0にもどるよ。ひきわけは あなたの かち！ まけると かけ金は なくなるよ。\n\n【ジョーカー】\nジョーカーは どの数字にも どのマークにも なれる万能カード。いちばん つよい形で数えるよ。\n\n【やくの つよさ】\n'+PT.map(function(x){return x[0]}).join('\n')+'\n（同じやくなら、数字の大きいほうが つよい）'));}
    /* 画面を組み立てる。o: hideD（ディーラーを伏せる）, flipP/flipD（めくって出すカード）, discP/discD（すてるカード）, gap（めくりの間隔）, busy, end */
    function render(o){o=o||{};var bd=shpBox('♠ ポーカー');bdCur=bd;var end=!!o.end,hideD=!!o.hideD,r=cat(H);
     bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#8a3a6a;margin-bottom:4px','かけ金 '+bet+' チップ'+(end||o.busy?'':'　（のこすカードを タップで キープ）')));
@@ -3867,7 +3868,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     var net=res===1?bet:res===-1?-bet:0;
     var msg2=res===1?'🎉 あなたの かち！ +'+bet+' チップ':res===-1?'ディーラーの かち… −'+bet+' チップ':'ひきわけ（かけ金もどり）';
     var rl=sEl('div','text-align:center;font-weight:bold;font-size:15px;line-height:1.5;margin-top:6px;color:'+(net>0?'#d9327c':net<0?'#6a7a9a':'#2fa86a'),msg2);rl.style.animation='czPop .5s ease-out both';bd.appendChild(rl);
-    bd.appendChild(sEl('div','display:table;margin:4px 0 0 auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' チップ'));
+    bd.appendChild(sEl('div','display:table;margin:4px 0 0 auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' チップ'));bd.appendChild(sEl('div','text-align:center;font-size:12px;font-weight:bold;color:#b93a0a;margin-top:2px','🔥 '+sk()+'れんしょう中　次の勝ちは ×'+skMul(sk()+1)));
     bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🃏 ディール！',fn:function(){deal()}}]}))}
    function deal(){if(busy)return;var have=cg();if(bet<1||bet>have){snd('deny');m='かけるチップが たりないよ';bt();return}
     cs(have-bet);deck=shuf();H=deck.splice(0,5);D=deck.splice(0,5);hold=[0,0,0,0,0];res=null;busy=true;m='ディーラーが カードを くばっているよ…';
@@ -3887,8 +3888,8 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     later(1500,function(){render({busy:true,hideD:true,discD:drepIdx,hint:'ディーラーが カードを とりかえているよ…'});snd('tap')});
     later(2100,function(){D=newD;render({busy:true,hideD:true,flipD:drepIdx,gap:150,hint:'ディーラーの てふだが そろったよ'});snd('place')});
     later(3000,function(){render({busy:true,hideD:false,flipD:[0,1,2,3,4],gap:220,hint:'オープン！ 手札を くらべるよ'});snd('place')});
-    setTimeout(function(){var rr=res;if(rr===1)cs(cg()+bet*2);else if(rr===0)cs(cg()+bet);busy=false;
-     m=rr===1?'あなたの かち！':rr===-1?'ディーラーの かち…':'ひきわけ';
+    setTimeout(function(){var rr=res;var sN=sk();if(rr===1){sN++;setSk(sN);cs(cg()+bet*skMul(sN))}else if(rr===0)cs(cg()+bet);else setSk(0);busy=false;
+     m=rr===1?('あなたの かち！ '+sN+'れんしょう！ ×'+skMul(sN)+'（+'+(bet*skMul(sN)-bet)+' チップ）'):rr===-1?'ディーラーの かち…（れんしょう ストップ）':'ひきわけ';
      if(rr===1&&typeof czBurst==='function')czBurst(16);
      snd(rr===1?'win':rr===-1?'lose':'pop');
      later(0,function(){render({end:true,hideD:false})})},4300)}
@@ -12212,4 +12213,14 @@ function wrapper(e,t){
 drawEn2=wrapper;
 })();
 </script>
+<style id="cz-calm">
+/* カジノ：ずっと動き続ける演出を止めて、目がちらつかないようにする（一度だけの動きは残す） */
+.czg .czamb{display:none!important}
+.czg *,.czg *::before,.czg *::after{animation-iteration-count:1!important}
+.czg button{transition:none!important}
+/* 文章の行数が変わっても下のボタンがずれないように、メッセージ欄の高さを固定 */
+.czg [style*="background:#ffeef6"]{min-height:3.9em!important;box-sizing:border-box!important}
+.czg [style*="font-size:15px"][style*="line-height:1.5"]{min-height:2.9em!important;box-sizing:border-box!important}
+.czg .cz-stacks{height:56px!important;min-height:0!important;box-sizing:border-box!important;overflow:visible!important}
+</style>
 </body></html>
