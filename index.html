@@ -3602,44 +3602,49 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
    function chips(bd){var cr=sEl('div','display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px');
     [1,5,10,100].forEach(function(n){var b=gbtn('+'+n);b.onclick=function(){try{sfx('tap')}catch(er){}bet=Math.min(cg(),bet+n);bt()};cr.appendChild(b)});
     var al=gbtn('ぜんぶ');al.onclick=function(){try{sfx('tap')}catch(er){}bet=cg();bt()};var cl=gbtn('クリア','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');cl.onclick=function(){bet=0;bt()};cr.append(al,cl);bd.appendChild(cr)}
-   function bt(){var bd=shpBox('🃁 カジノ（バカラ）'),have=cg();if(bet>have)bet=have;
-    bd.appendChild(sEl('div','font-size:12px;color:#8a3a6a;background:#ffeef6;border-radius:10px;padding:6px 8px;margin-bottom:6px;line-height:1.4',have<=0?'メダルが ないよ… カジノの 交換所で メダルを 買ってね':m));
-    bd.appendChild(sEl('div','display:table;margin:0 0 4px auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+have+' メダル'));
-    var sr=sEl('div','display:flex;gap:6px;justify-content:center;margin:6px 0 4px');
-    SD.forEach(function(n,i){var on=side===i,b=sEl('button','flex:1;min-width:0;width:auto;min-height:0;height:auto;padding:7px 4px;font-size:13px;font-weight:bold;font-family:'+SFONT+';line-height:1.3;border-radius:12px;border:3px solid '+(on?SC[i]:'#f0c8dc')+';background:'+(on?SC[i]:'#fff')+';color:'+(on?'#fff':SC[i]),n);b.append(sEl('div','font-size:11px;font-weight:normal','当たると '+PO[i]));b.onclick=function(){try{sfx('tap')}catch(er){}side=i;bt()};sr.appendChild(b)});
-    bd.appendChild(sr);
-    bd.appendChild(sEl('div','text-align:center;font-size:15px;font-weight:bold;color:#7a3b2e;margin:6px 0 0','かける数：'+bet+' メダル（'+SD[side]+'）'));
-    chips(bd);
-    var dl=gbtn('🃏 ディール！','display:block;width:100%;margin-top:10px;font-size:16px;padding:9px 12px');if(bet<1)dl.disabled=true;dl.onclick=function(){deal()};bd.appendChild(dl);
-    var rb=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f',rules?'ルールを とじる':'📖 バカラのルール');rb.onclick=function(){rules=!rules;bt()};bd.appendChild(rb);var bk=sEl('button','display:block;margin:6px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk);
-    if(rules)bd.appendChild(sEl('div','font-size:11.5px;color:#8a3a6a;background:#fff;border:2px dashed #f0c8dc;border-radius:10px;padding:8px;margin-top:6px;line-height:1.6','カードの数：A=1、2〜9はそのまま、10・J・Q・K=0。2まいの合計の 1の位が「てん」（15なら5てん）。\nプレイヤーと バンカーで、9に ちかいほうの勝ち。どっちが勝つか、またはタイ（同点）になるかを よそうしてね。\n8か9は「ナチュラル」で、その場で 勝負が決まるよ。それ以外は きまりに そって 3まいめが 配られることがあるよ。\n当たると：プレイヤー 2倍／バンカー 1.95倍（手数料つき）／タイ 9倍。タイのときは プレイヤー・バンカーにかけた分は もどってくるよ。'));
-    bd.lastChild.style.whiteSpace='pre-line'}
-   function deal(){var have=cg();if(bet<1||bet>have){try{sfx('deny')}catch(er){}m='かけるメダルが たりないよ';bt();return}
-    var sd=side,b0=bet,r=play(),o=settle(r,sd,b0);cs(have-b0+o.ret);
-    var bd=shpBox('🃁 カジノ（バカラ）'),pc=sEl('div','display:flex;gap:4px;justify-content:center;min-height:50px;flex-wrap:wrap'),bc=sEl('div','display:flex;gap:4px;justify-content:center;min-height:50px;flex-wrap:wrap'),pe=sEl('div','text-align:center;font-weight:bold;font-size:16px;color:#3a7bd5;min-height:22px','　'),be=sEl('div','text-align:center;font-weight:bold;font-size:16px;color:#d9327c;min-height:22px','　'),
-     rs=sEl('div','text-align:center;font-weight:bold;font-size:15px;line-height:1.5;margin-top:8px;min-height:46px','　'),bx=sEl('div','display:flex;gap:8px;margin-top:8px');
-    var cp=sEl('div','flex:1;background:#eaf2ff;border-radius:12px;padding:6px 4px'),cb=sEl('div','flex:1;background:#ffeaf3;border-radius:12px;padding:6px 4px');
-    cp.append(sEl('div','text-align:center;font-size:12px;font-weight:bold;color:#3a7bd5;margin-bottom:4px','プレイヤー'+(sd===0?' 👈':'')),pc,pe);cb.append(sEl('div','text-align:center;font-size:12px;font-weight:bold;color:#d9327c;margin-bottom:4px','バンカー'+(sd===1?' 👈':'')),bc,be);bx.append(cp,cb);
-    bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#8a3a6a;margin-bottom:6px',SD[sd]+'に '+b0+' メダル かけたよ'));bd.appendChild(bx);bd.appendChild(rs);
-    var ord=[['p',0],['b',0],['p',1],['b',1]];if(r.p.length>2)ord.push(['p',2]);if(r.b.length>2)ord.push(['b',2]);
-    var sp=[],sb=[],nat=false;
-    var wn=o.w===sd&&sd!==2?true:o.w===2&&sd===2,net=o.ret-b0,fin;
-    if(o.w===2)fin=sd===2?'タイ！ 🎉 '+(net)+'メダルの もうけ！':'タイ（引き分け）… かけた分は もどるよ';
-    else if(wn)fin='🎉 '+SD[o.w]+'の勝ち！ +'+net+' メダル';
-    else fin=(o.w===0?'プレイヤー':'バンカー')+'の勝ち… −'+b0+' メダル';
-    var tm=function(){return 'プレイヤー '+o.pt+' てん ／ バンカー '+o.bk+' てん'};
-    function done(){rs.textContent='';rs.append(sEl('div','font-size:13px;color:#8a3a6a',tm()),sEl('div','font-size:16px;color:'+(net>0?'#d9327c':net<0?'#6a7a9a':'#2fa86a'),fin));
-     try{sfx(net>0?(o.w===2?'star':'clear'):net<0?'lose':'pop')}catch(er){}
-     bd.appendChild(sEl('div','display:table;margin:4px 0 0 auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' メダル'));
-     var sw=sEl('div',null);function sideRow(){var r=sEl('div','display:flex;gap:6px;justify-content:center;margin-bottom:6px');SD.forEach(function(n,i){var on=side===i,sb=sEl('button','flex:1;min-width:0;width:auto;min-height:0;height:auto;padding:5px 4px;font-size:13px;font-weight:bold;font-family:'+SFONT+';line-height:1.3;border-radius:12px;border:3px solid '+(on?SC[i]:'#f0c8dc')+';background:'+(on?SC[i]:'#fff')+';color:'+(on?'#fff':SC[i]),n);sb.append(sEl('div','font-size:11px;font-weight:normal','当たると '+PO[i]));sb.onclick=function(){try{sfx('tap')}catch(er){}side=i;sw.textContent='';sw.appendChild(sideRow())};r.appendChild(sb)});return r}sw.appendChild(sideRow());bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},extra:sw,acts:[{t:'🃏 ディール！',fn:function(){deal()}}]}))}
-    function step(k){if(!bd.isConnected){toast=6;tmsg=fin;return}
-     if(k>=ord.length){setTimeout(function(){if(!bd.isConnected){toast=6;tmsg=fin;return}done()},500);return}
-     var o2=ord[k],c=(o2[0]==='p'?r.p:r.b)[o2[1]];(o2[0]==='p'?pc:bc).appendChild(cardEl(c));try{sfx('place')}catch(er){}
-     if(o2[0]==='p')sp.push(c);else sb.push(c);
-     if(k===3){pe.textContent=tt(sp)+' てん';be.textContent=tt(sb)+' てん';if(tt(sp)>=8||tt(sb)>=8){rs.textContent='ナチュラル！ ✨'}else if(ord.length>4){rs.textContent='3まいめが 配られるよ…'}else rs.textContent='…'}
-     else if(k>3){if(o2[0]==='p')pe.textContent=tt(sp)+' てん';else be.textContent=tt(sb)+' てん'}
-     setTimeout(function(){step(k+1)},k===3?900:520)}
-    step(0)}
+    var CH=[1,5,10,100],CC={1:'#d8d8d8',5:'#c8102e',10:'#1f5fd0',100:'#17171a'},NM=['PLAYER','BANKER','TIE'],SJ=['プレイヤー','バンカー','タイ'],bets=[0,0,0],last=[0,0,0],hist=[],chip=5,phase='bet',R={},E={},bd,showR=false;
+    function sum(a){return a[0]+a[1]+a[2]}
+    function led(t,x){return sEl('div','min-width:52px;box-sizing:border-box;padding:2px 10px;background:#000;border:2px solid #b98516;border-radius:4px;color:#ffd23f;font:bold 18px ui-monospace,Menlo,monospace;text-align:right;box-shadow:inset 0 0 8px rgba(255,200,60,.35);'+(x||''),t)}
+    function mini(n){var h=sEl('div','display:flex;gap:2px;justify-content:center;flex-wrap:wrap;max-width:100px'),k=0;[100,10,5,1].forEach(function(v){while(n>=v&&k<6){n-=v;k++;h.appendChild(sEl('div','width:20px;height:20px;border-radius:50%;box-sizing:border-box;border:3px dashed #fff;background:'+CC[v]+';box-shadow:0 2px 0 rgba(0,0,0,.5)'))}});return h}
+    function paint(){var have=cg(),tot=sum(bets);[0,1,2].forEach(function(i){var b=bets[i];E.sl[i].textContent=b;E.sp[i].className='bcspot'+(b>0?' on':'')+(phase==='result'&&R.w===i?' win':'');E.sc[i].textContent='';if(b>0)E.sc[i].appendChild(mini(b));E.sc[i].style.display=b>0?'block':'none';E.ht[i].style.display=b>0?'none':'block'});
+     E.cr.textContent=have;E.ch.forEach(function(c,j){c.className='bcchip'+(CH[j]===chip?' sel':'')});
+     E.dl.disabled=!(phase==='bet'&&tot>0);E.un.disabled=E.cl.disabled=phase==='play'||(phase==='bet'&&tot===0);E.rb.disabled=phase==='play'||sum(last)<1||sum(last)>have}
+    function reset(){bets=[0,0,0];hist=[];R={};phase='bet';E.pc.textContent='';E.bc.textContent='';E.pl.textContent=E.bl.textContent='-';E.ban.style.display='none';E.net.textContent='';E.msg.textContent=cg()<=0?'メダルが ないよ… 交換所で 買ってね':'チップを えらんで、まるを タップして ベット！'}
+    function tap(i){if(phase==='play')return;if(phase==='result')reset();if(sum(bets)+chip>cg()){try{sfx('deny')}catch(er){}E.msg.textContent='メダルが たりないよ';return}
+     bets[i]+=chip;hist.push([i,chip]);try{sfx('tap')}catch(er){}E.msg.textContent=SJ[i]+'に '+bets[i]+' メダル ベット中';paint()}
+    function deal(){if(phase!=='bet')return;var tot=sum(bets),have=cg();if(tot<1||tot>have){try{sfx('deny')}catch(er){}return}
+     last=bets.slice();phase='play';cs(have-tot);var r=play(),o=settle(r,0,1),ret=0,i;for(i=0;i<3;i++)if(bets[i]>0)ret+=settle(r,i,bets[i]).ret;
+     var net=ret-tot,paid=false,ord=[['p',0],['b',0],['p',1],['b',1]],p2=[],b2=[];if(r.p.length>2)ord.push(['p',2]);if(r.b.length>2)ord.push(['b',2]);E.msg.textContent='ディール中…';paint();
+     function pay(){if(!paid){paid=true;cs(cg()+ret)}}
+     function done(){pay();if(!bd.isConnected)return;phase='result';R={w:o.w};E.ban.textContent=NM[o.w]+(o.w===2?'':' WIN');E.ban.style.display='block';E.net.textContent=net>0?'+'+net+' WIN!':net<0?String(net):'PUSH';E.net.style.color=net>0?'#7dffa8':net<0?'#ff9aa8':'#fff';E.msg.textContent='プレイヤー '+o.pt+' ／ バンカー '+o.bk+'　「REBET」で もういちど';paint();try{sfx(net>0?(o.w===2?'star':'clear'):net<0?'lose':'pop')}catch(er){}}
+     function step(k){if(!bd.isConnected){pay();return}if(k>=ord.length){setTimeout(done,500);return}
+      var q=ord[k],c=(q[0]==='p'?r.p:r.b)[q[1]];(q[0]==='p'?E.pc:E.bc).appendChild(cardEl(c));try{sfx('tap')}catch(er){}
+      if(q[0]==='p'){p2.push(c);E.pl.textContent=tt(p2)}else{b2.push(c);E.bl.textContent=tt(b2)}
+      if(k===3)E.msg.textContent=(tt(p2)>=8||tt(b2)>=8)?'NATURAL！ ✨':ord.length>4?'3まいめが 配られるよ…':'…';
+      setTimeout(function(){step(k+1)},k===3?900:520)}
+     step(0)}
+    function build(){bd=shpBox('🃁 カジノ（バカラ）');var w=sEl('div','position:relative'),top=sEl('div','display:flex;justify-content:space-between;gap:8px;position:relative;z-index:1');
+     E.pl=led('-');E.bl=led('-');E.pc=sEl('div','display:flex;gap:6px;justify-content:center;min-height:68px');E.bc=sEl('div','display:flex;gap:6px;justify-content:center;min-height:68px');
+     [[0,E.pl,E.pc],[1,E.bl,E.bc]].forEach(function(a){var c=sEl('div','flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0');c.append(sEl('div','font:900 16px Georgia,serif;letter-spacing:.1em;color:'+(a[0]?'#ffb020':'#fff3c4'),NM[a[0]]),a[1],a[2]);top.appendChild(c)});
+     var ti=sEl('div','position:absolute;left:0;right:0;top:30px;text-align:center;font:italic 46px \"Snell Roundhand\",\"Brush Script MT\",cursive;color:rgba(255,255,255,.16);pointer-events:none','Baccarat');
+     E.ban=sEl('div','display:none;position:absolute;left:50%;top:92px;transform:translateX(-50%);z-index:5;padding:5px 22px;border:3px solid #fff;border-radius:6px;background:linear-gradient(180deg,#5cc0ff,#0a5fc0 55%,#074a9a);color:#fff;font:900 20px Georgia,serif;letter-spacing:.12em;text-shadow:0 2px 2px #002a5a;box-shadow:0 4px 12px rgba(0,0,0,.6);white-space:nowrap');
+     E.msg=sEl('div','text-align:center;font-size:12px;color:#ffe9a0;margin:104px 0 6px;min-height:18px;background:rgba(0,0,0,.4);border-radius:6px;padding:4px 8px');
+     var band=sEl('div','text-align:center;font:700 13px Georgia,serif;letter-spacing:.18em;color:#e6c25a;padding:6px 0;border-top:2px solid rgba(230,194,90,.5);border-bottom:2px solid rgba(230,194,90,.5);background:rgba(0,40,20,.5)','TIE BETS PAY 8 TO 1');band.appendChild(sEl('div','font-size:10px;letter-spacing:.08em;color:#cdbb85','PLAYER 1 : 1　／　BANKER 0.95 : 1'));
+     var sp=sEl('div','position:relative;height:292px;margin-top:10px');E.sp=[];E.sl=[];E.sc=[];E.ht=[];
+     [0,1,2].forEach(function(i){var z=i===2?124:138,s=sEl('div','position:absolute;'+(i===0?'left:0;top:0':i===1?'right:0;top:0':'left:50%;margin-left:-62px;top:132px')+';width:'+z+'px;height:'+z+'px;box-sizing:border-box;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;-webkit-tap-highlight-color:transparent'),l=led('0','min-width:44px;font-size:15px');
+      E.sl[i]=l;E.sp[i]=s;E.sc[i]=sEl('div','display:none');E.ht[i]=sEl('div','font-size:10px;letter-spacing:.1em;line-height:1.3;color:#e8d9a0;text-align:center;white-space:pre-line','TAP TO\nPLACE BETS');
+      s.append(l,sEl('div','font:900 '+(i===2?20:23)+'px Georgia,serif;letter-spacing:.06em;color:'+(i===1?'#ffb020':'#ffe9a0'),NM[i]),E.sc[i],E.ht[i]);s.onclick=function(){tap(i)};sp.appendChild(s)});
+     var tray=sEl('div','display:flex;justify-content:center;gap:14px;margin:6px 0 4px');E.ch=[];CH.forEach(function(v){var c=sEl('div',null,String(v));c.setAttribute('data-v',v);c.onclick=function(){chip=v;try{sfx('tap')}catch(er){}paint()};E.ch.push(c);tray.appendChild(c)});
+     var ctl=sEl('div','display:flex;gap:6px;justify-content:center;align-items:center;margin-top:12px;flex-wrap:wrap');
+     function sb(t,f){var b=sEl('button','padding:4px 10px;font-size:12px',t);b.onclick=f;return b}
+     E.un=sb('↶ UNDO',function(){if(phase!=='bet')return;var h=hist.pop();if(h)bets[h[0]]-=h[1];paint()});E.cl=sb('CLEAR',function(){if(phase==='play')return;if(phase==='result')reset();bets=[0,0,0];hist=[];paint()});
+     E.rb=sb('REBET',function(){if(phase==='play')return;reset();if(sum(last)>0&&sum(last)<=cg())bets=last.slice();hist=[];paint()});
+     E.dl=gbtn('🃏 DEAL','flex:1;min-width:120px;font-size:17px;padding:9px 14px');E.dl.onclick=deal;ctl.append(E.un,E.cl,E.rb,E.dl);
+     E.cr=led('0','font-size:20px');E.net=sEl('div','font:900 18px Georgia,serif;min-width:90px;text-align:left');var cb=sEl('div','display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px');cb.append(sEl('div','font:900 14px Georgia,serif;letter-spacing:.2em;color:#ffd23f','CREDIT'),E.cr,E.net);
+     var ft=sEl('div','display:flex;gap:8px;justify-content:center;margin-top:10px'),rl=sEl('div','display:none;font-size:11.5px;line-height:1.6;white-space:pre-line;background:rgba(0,0,0,.45);border:1px dashed rgba(230,194,90,.5);border-radius:8px;padding:8px;margin-top:8px','2枚の合計の 1の位が「てん」（A=1、10・J・Q・K=0）。9に ちかいほうの勝ち。\n8か9は ナチュラルで その場で決着、それ以外は ルールで 3枚目が 配られます。\n当たると：PLAYER 2倍／BANKER 1.95倍／TIE 9倍（PLAYER・BANKER は タイで もどる）。\nPLAYER・BANKER・TIE に 同時に かけられます。');
+     ft.append(sb('📖 RULES',function(){showR=!showR;rl.style.display=showR?'block':'none'}),sb('↩ ゲームを えらびなおす',function(){openCasino()}));
+     w.append(ti,top,E.ban,E.msg,band,sp,tray,ctl,cb,ft,rl);bd.appendChild(w);reset();paint()}
+    function bt(){build()}
    bt()}
   function openBlackjack(msg){var RK='miarina_td_medal_v1',bet=0,cur=0,m=msg||'いらっしゃい！ 21に ちかづけたほうが 勝ちだよ',P,D,SU=['\u2660','\u2665','\u2666','\u2663'],rules=false;
    function cg(){try{return Math.max(0,parseInt(localStorage.getItem(RK)||'0',10)||0)}catch(e){return 0}}
@@ -11471,7 +11476,36 @@ html body .czg.czg button.czchip[data-v="100"]{--c:#17171a;color:#ffd23f!importa
 html body .czg.czg div[style*="grid-template-columns"]{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))!important;gap:14px!important;margin-top:12px!important}
 html body .czg.czg div[style*="grid-template-columns"]>button[style]:not(.sb-card){display:flex!important;flex-direction:column!important;align-items:center;justify-content:center;gap:6px;min-height:112px!important;margin:0!important;font-size:19px!important;border-radius:14px!important;background:radial-gradient(circle at 50% 0%,#5a1630,#1b0510 75%)!important;color:#ffe9a0!important;border:2px solid #e6c25a!important;box-shadow:0 0 0 3px #1b0510,0 0 0 4px #7a5a12,0 0 18px rgba(255,60,120,.45),inset 0 0 22px rgba(255,200,80,.12)!important;text-shadow:0 0 8px #ff2d6f,0 1px 0 #000!important}
 html body .czg.czg div[style*="grid-template-columns"]>button div{font-size:11px!important;font-weight:normal!important;color:#f3d9a0!important;letter-spacing:0!important;line-height:1.35!important}
+
+html body .czg.czg button.sb-opt:not(.czchip):not(.czutil):not(.sb-card){background:rgba(0,0,0,.5)!important;color:#bfae7a!important;text-shadow:none!important;border:1px solid rgba(230,194,90,.35)!important;box-shadow:none!important;opacity:.85!important;filter:saturate(.6)!important}
+html body .czg.czg button.sb.sb-on:not(.sb-card){background:linear-gradient(180deg,#fff7b8,#ffd23f 50%,#e89a10)!important;color:#2a1000!important;text-shadow:0 1px 0 rgba(255,255,255,.6)!important;border:3px solid #fff!important;box-shadow:0 0 0 3px #e0245e,0 0 24px rgba(255,220,100,.95),0 4px 0 #7a4a00!important;opacity:1!important;filter:none!important;transform:scale(1.05)!important;position:relative;z-index:2;animation:czSel 1.2s ease-in-out infinite!important}
+html body .czg.czg button.sb.sb-on:not(.sb-card)::before{content:"\2713 ";font-weight:900;color:#e0245e}
+@keyframes czSel{50%{box-shadow:0 0 0 3px #e0245e,0 0 36px rgba(255,235,140,1),0 4px 0 #7a4a00}}
+html body .czg.czg button.sb-go:not(.sb-card){background:linear-gradient(180deg,#6cf59a,#14a84c 55%,#0a6a2c)!important;color:#fff!important;text-shadow:0 1px 2px #000!important;border:2px solid #d9ffe4!important;font-size:17px!important;box-shadow:0 4px 0 #064d1f,0 0 20px rgba(80,255,140,.6)!important;animation:czGo 1.4s ease-in-out infinite}
+@keyframes czGo{50%{box-shadow:0 4px 0 #064d1f,0 0 32px rgba(120,255,170,.95)}}
+html body .czg.czg button.sb-go:disabled:not(.sb-card){background:#2a2a2a!important;color:#777!important;border:1px dashed #666!important;text-shadow:none!important;box-shadow:none!important;animation:none!important;filter:none!important}
+html body .czg.czg div[style*="grid-template-columns"]>button[style]:not(.sb-card){animation:none!important}
+html body .czg.czg .czbet{display:flex!important;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;max-width:92%;margin:10px auto!important;padding:8px 16px!important;border-radius:12px;font-size:16px!important;font-weight:900!important;letter-spacing:.05em}
+html body .czg.czg .czbet::before{font:900 12px ui-monospace,Menlo,monospace;letter-spacing:.2em;padding:3px 8px;border-radius:4px}
+html body .czg.czg .czbet::after{font-size:12px;font-weight:700}
+html body .czg.czg .czbet[data-on="1"]{background:linear-gradient(180deg,#2b1a00,#120a00)!important;color:#ffe27a!important;border:2px solid #ffd23f;box-shadow:0 0 16px rgba(255,210,60,.7),inset 0 0 12px rgba(255,210,60,.25)}
+html body .czg.czg .czbet[data-on="1"]::before{content:"BET";background:#ffd23f;color:#2a1000}
+html body .czg.czg .czbet[data-on="1"]::after{content:"\2714 ベット済み";color:#7dffa8}
+html body .czg.czg .czbet[data-on="0"]{background:rgba(0,0,0,.35)!important;color:#ff9aa8!important;border:2px dashed #ff6b81}
+html body .czg.czg .czbet[data-on="0"]::before{content:"BET";background:#7a1a2a;color:#ffd0d8}
+html body .czg.czg .czbet[data-on="0"]::after{content:"\2190 チップを えらんでね";color:#ffb0bc}
+
+html body .czg.czg .bcspot{border:3px dashed rgba(255,243,196,.85);background:radial-gradient(circle,rgba(0,0,0,.12),rgba(0,0,0,.38));transition:all .2s}
+html body .czg.czg .bcspot.on{border:4px solid #ffd23f;background:radial-gradient(circle,rgba(255,210,63,.22),rgba(0,0,0,.38));box-shadow:0 0 18px rgba(255,210,63,.8),inset 0 0 18px rgba(255,210,63,.35)}
+html body .czg.czg .bcspot.win{border-color:#7dffa8;animation:bcWin 1s ease-in-out infinite}
+@keyframes bcWin{50%{box-shadow:0 0 36px #7dffa8,inset 0 0 26px rgba(125,255,168,.6)}0%,100%{box-shadow:0 0 16px #7dffa8,inset 0 0 12px rgba(125,255,168,.3)}}
+html body .czg.czg .bcchip{--c:#6a1fa8;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:900 15px ui-monospace,Menlo,monospace;color:#fff;cursor:pointer;background:radial-gradient(circle,var(--c) 56%,#fff 57% 61%,var(--c) 62%);box-shadow:0 4px 0 rgba(0,0,0,.55),0 0 0 3px var(--c);opacity:.55;transition:transform .15s}
+html body .czg.czg .bcchip.sel{opacity:1;transform:translateY(-8px) scale(1.14);box-shadow:0 9px 0 rgba(0,0,0,.4),0 0 0 3px #ffd23f,0 0 20px #ffd23f}
+html body .czg.czg .bcchip[data-v="1"]{--c:#d8d8d8;color:#222}
+html body .czg.czg .bcchip[data-v="5"]{--c:#c8102e}
+html body .czg.czg .bcchip[data-v="10"]{--c:#1f5fd0}
+html body .czg.czg .bcchip[data-v="100"]{--c:#17171a;color:#ffd23f}
 </style><script>(function(){var K='miarina_td_medal_v1',t=0;
 function scan(){try{document.querySelectorAll('.czg button').forEach(function(b){var m=/^\+(\d+)$/.exec((b.textContent||'').trim());if(m&&!b.classList.contains('czchip')){b.classList.add('czchip');b.setAttribute('data-v',m[1])}});
-document.querySelectorAll('.czg>div:not(.czamb):not([style*="pointer-events"])>div:first-child').forEach(function(h){var s=h.querySelector('.czhud');if(!s){s=document.createElement('span');s.className='czhud';h.insertBefore(s,h.lastElementChild)}var n='\ud83e\ude99 '+(parseInt(localStorage.getItem(K)||'0',10)||0);if(s.textContent!==n)s.textContent=n})}catch(e){}}
+document.querySelectorAll('.czg button').forEach(function(b){var x=(b.textContent||'').trim();if((x==='\u305c\u3093\u3076'||x==='\u30af\u30ea\u30a2')&&!b.classList.contains('czutil'))b.classList.add('czutil')});document.querySelectorAll('.czg div').forEach(function(d){if(d.children.length)return;var x=(d.textContent||'').trim();if(!/^(\u304b\u3051\u308b\u6570|\u304b\u3051\u91d1)/.test(x))return;var m=/(\d+)/.exec(x),on=m&&+m[1]>0?'1':'0';d.classList.add('czbet');if(d.getAttribute('data-on')!==on)d.setAttribute('data-on',on)});document.querySelectorAll('.czg>div:not(.czamb):not([style*="pointer-events"])>div:first-child').forEach(function(h){var s=h.querySelector('.czhud');if(!s){s=document.createElement('span');s.className='czhud';h.insertBefore(s,h.lastElementChild)}var n='\ud83e\ude99 '+(parseInt(localStorage.getItem(K)||'0',10)||0);if(s.textContent!==n)s.textContent=n})}catch(e){}}
 new MutationObserver(function(){clearTimeout(t);t=setTimeout(scan,40)}).observe(document.body,{childList:true,subtree:true,characterData:true});})();</script></body></html>
