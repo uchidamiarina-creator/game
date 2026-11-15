@@ -3189,8 +3189,8 @@ function openTown2(TN){
   try{sfx('clear')}catch(er){}}
 
  var MCH=null,mnext=R(4,10),gm=null,gmT=0;
- function spawnM(){var d=Math.random()<.5?1:-1;MCH={x:d>0?-30:390,y:R(110,200),sy:0,dir:d,ph:0,type:['j','a','o','q'][Math.random()*4|0]}}
- var MNM={j:'じゃんけん',a:'あみだくじ',o:'おみくじ',q:'クイズ'},MIC={j:'✌️',a:'🎫',o:'⛩️',q:'❓'},MCL={j:'#ff8fb5',a:'#7fd0ff',o:'#ffd23f',q:'#b9a2ff'};
+ function spawnM(){var d=Math.random()<.5?1:-1;MCH={x:d>0?-30:390,y:R(110,200),sy:0,dir:d,ph:0,type:['j','a','o','q','k','f'][Math.random()*6|0]}}
+ var MNM={j:'じゃんけん',a:'あみだくじ',o:'おみくじ',q:'クイズ',k:'くす玉わり',f:'福引き'},MIC={j:'✌️',a:'🎫',o:'⛩️',q:'❓',k:'🎊',f:'🎰'},MCL={j:'#ff8fb5',a:'#7fd0ff',o:'#ffd23f',q:'#b9a2ff',k:'#ffb36b',f:'#7fe0a0'};
  function drawMI(g,t){g.save();g.lineCap='round';g.lineJoin='round';
  if(t=='j'){g.fillStyle='#fff3e6';g.strokeStyle='#d9607f';g.lineWidth=1.4;
   for(var k=-1;k<=1;k+=2){g.save();g.translate(k*3.2,-1);g.rotate(k*.28);g.beginPath();g.roundRect(-1.9,-9.5,3.8,10,1.9);g.fill();g.stroke();g.restore()}
@@ -3209,7 +3209,9 @@ function openTown2(TN){
    g.beginPath();g.moveTo(-4,5.4);g.lineTo(-6.5,10.5);g.lineTo(2,5.4);g.fill();g.stroke();g.fillStyle='#fff';g.fillRect(-3.6,4.6,5,1.8);
    g.fillStyle='#6a4ad0';g.font='bold 15px sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('?',0,-2);
    g.fillStyle='#fff';g.beginPath();g.moveTo(13,-5);g.lineTo(14,-2.6);g.lineTo(16.4,-1.6);g.lineTo(14,-.6);g.lineTo(13,1.8);g.lineTo(12,-.6);g.lineTo(9.6,-1.6);g.lineTo(12,-2.6);g.closePath();g.fill()}
-  else{g.fillStyle='#fffdf5';g.strokeStyle='#d9a23a';g.lineWidth=1.3;
+  else if(t=='k'){g.fillStyle='#ffd7a8';g.strokeStyle='#fff';g.lineWidth=1.4;g.beginPath();g.arc(0,2,8.5,0,7);g.fill();g.stroke();g.strokeStyle='#ff5f9b';g.lineWidth=1.8;g.beginPath();g.moveTo(-8,2);g.lineTo(8,2);g.stroke();g.fillStyle='#ff5f9b';g.beginPath();g.arc(0,-6.5,2.4,0,7);g.fill();g.strokeStyle='#ff9cc8';g.lineWidth=1.2;g.beginPath();g.moveTo(-1.2,-4.5);g.lineTo(-4.5,-11);g.moveTo(1.2,-4.5);g.lineTo(4.5,-11);g.stroke();g.fillStyle='#fff';g.beginPath();g.moveTo(-12,-9);g.lineTo(-10.8,-6.4);g.lineTo(-8.2,-5.5);g.lineTo(-10.8,-4.6);g.lineTo(-12,-2);g.lineTo(-13.2,-4.6);g.lineTo(-15.8,-5.5);g.lineTo(-13.2,-6.4);g.closePath();g.fill()}
+else if(t=='f'){g.fillStyle='#fff';g.strokeStyle='#2fb36b';g.lineWidth=1.4;g.beginPath();g.roundRect(-9,-8,18,16,4);g.fill();g.stroke();g.fillStyle='#ffe14d';g.beginPath();g.arc(-2,0,3.2,0,7);g.fill();g.strokeStyle='#ff6b6b';g.lineWidth=1.2;g.stroke();g.strokeStyle='#2fb36b';g.lineWidth=1.8;g.beginPath();g.moveTo(9,-2);g.lineTo(13,-2);g.lineTo(13,-9);g.stroke();g.fillStyle='#ff6b6b';g.beginPath();g.arc(13,-10.5,2,0,7);g.fill();g.fillStyle='#fff';g.beginPath();g.moveTo(-13,-6);g.lineTo(-12,-3.6);g.lineTo(-9.6,-2.8);g.lineTo(-12,-2);g.lineTo(-13,.4);g.lineTo(-14,-2);g.lineTo(-16.4,-2.8);g.lineTo(-14,-3.6);g.closePath();g.fill()}
+else{g.fillStyle='#fffdf5';g.strokeStyle='#d9a23a';g.lineWidth=1.3;
   g.beginPath();g.roundRect(-5.5,-9,11,20,2.5);g.fill();g.stroke();
   g.strokeStyle='#ff5a5a';g.lineWidth=1.6;g.beginPath();g.moveTo(-2.4,-3.5);g.lineTo(2.4,-3.5);g.moveTo(-2.4,0);g.lineTo(2.4,0);g.moveTo(-2.4,3.5);g.lineTo(2.4,3.5);g.stroke();
   g.strokeStyle='#ff7eb6';g.lineWidth=2;g.beginPath();g.moveTo(0,-9);g.lineTo(-5,-13);g.moveTo(0,-9);g.lineTo(5,-13);g.stroke();
@@ -3246,7 +3248,7 @@ function fin(msg,d,box,r0,extra){var r=aff(d,r0),up=d>0;msg.innerHTML='';msg.sty
  var c=tgBtn('とじる','padding:7px 24px;font-size:13px;margin-top:10px','linear-gradient(#ff9cc8,#ff6fa5)');c.onclick=closeGm;msg.appendChild(c)}
 function openTownGame(ty){if(gm)return;tgSty();
  gm=mk('div','position:absolute;inset:0;z-index:6;background:radial-gradient(circle at 50% 35%,rgba(255,190,225,.4),rgba(36,20,38,.62));display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box');
- var IC={j:['#ff8fb5','#ff5f9b'],a:['#7fd0ff','#4aa8ee'],o:['#ffd23f','#ffa31a'],q:['#b9a2ff','#8f72f0']},DS={j:'かてば なかよしに！まけると…',a:'あみだを えらぼう！当たりで なかよし♪',o:'ひいた おみくじで なかよし度が かわるよ',q:'このゲームの もんだい！1問 せいかいで なかよし♪'};
+ var IC={j:['#ff8fb5','#ff5f9b'],a:['#7fd0ff','#4aa8ee'],o:['#ffd23f','#ffa31a'],q:['#b9a2ff','#8f72f0'],k:['#ffb36b','#ff7a9c'],f:['#7fe0a0','#2fb36b']},DS={j:'かてば なかよしに！まけると…',a:'あみだを えらぼう！当たりで なかよし♪',o:'ひいた おみくじで なかよし度が かわるよ',q:'このゲームの もんだい！1問 せいかいで なかよし♪',k:'くすだまを えらんで、あたりを だそう！あたりで 住民となかよし♪',f:'ガラガラで 玉を だそう！一等〜五等は ひみつ道具がもらえるよ（赤はハズレ）'};
  var bx=mk('div','position:relative;overflow:hidden;width:min(100%,310px);background:linear-gradient(180deg,#fffafc 0%,#ffeaf5 100%);border:3px solid #fff;outline:3px solid #f6a9cb;border-radius:24px;padding:14px 12px 12px;box-sizing:border-box;text-align:center;color:#8a3a6a;font-size:13px;box-shadow:0 8px 0 #e58fb6,0 16px 30px rgba(60,20,60,.4);animation:tgPop .35s ease-out');
  [['✨',4,26,0],['🌸',90,20,.6],['⭐',6,84,1.1],['🎀',88,90,.3],['✨',92,52,1.5]].forEach(function(d){bx.appendChild(mk('span','position:absolute;left:'+d[1]+'%;top:'+d[2]+'%;font-size:13px;opacity:.6;pointer-events:none;animation:tgTw 2.4s ease-in-out '+d[3]+'s infinite',d[0]))});
  var ct=mk('div','position:relative;z-index:2'),hd=mk('div','display:flex;align-items:center;gap:8px;margin:0 0 4px'),
@@ -3321,7 +3323,39 @@ function openTownGame(ty){if(gm)return;tgSty();
        ar.innerHTML='';var d=sc>=1?6:-6;fin(msg,d,bx,null,sc+' / '+pool.length+' もん せいかい'+(sc>=pool.length?'！ぜんぶ せいかい🎉':''))},1300)};
      qa.appendChild(b)})};
    qShow()}
- else{var N=4,RW=7,rg=[],W9=240,H9=196,LC=['#ff9cc8','#8fd0ff','#ffd66b','#b9a2ff'],xs=function(i){return 30+i*60},win=Math.random()*N|0,sel=mk('div','display:flex;width:240px;margin:4px auto 2px'),cv9=mk('canvas','display:block;margin:0 auto;width:240px;height:196px'),k9;cv9.width=W9*2;cv9.height=H9*2;var c9=cv9.getContext('2d');c9.scale(2,2);
+ else if(ty=='k'){var KW=Math.random()*3|0,KD=false,KB=[],KR=mk('div','display:flex;gap:12px;justify-content:center;margin:10px 0 4px'),KG=['linear-gradient(135deg,#fff3d6,#ffb36b)','linear-gradient(135deg,#ffe6f4,#ff8fc2)','linear-gradient(135deg,#e6f7ff,#7fc8ff)'];
+ var kRes=function(t){msg.innerHTML='';msg.appendChild(mk('div','padding:8px 10px;border-radius:16px;background:linear-gradient(#f0f0ff,#e3e3f7);border:2px solid #b9b9e0;font-weight:bold;color:#6a5aa0;font-size:13px;line-height:1.5;animation:tgPop .35s ease-out',t));var c=tgBtn('とじる','padding:7px 24px;font-size:13px;margin-top:10px','linear-gradient(#ff9cc8,#ff6fa5)');c.onclick=closeGm;msg.appendChild(c)};
+ ar.append(mk('div','font-size:12px;color:#9a5a85;margin-bottom:2px','3つの くすだまから ひとつ えらんでね'),KR);
+ for(var ki=0;ki<3;ki++)(function(i){var b=tgBtn('','width:84px;height:84px;padding:0;border-radius:50%;font-size:30px;display:flex;align-items:center;justify-content:center;color:#8a3a6a;text-shadow:none',KG[i]);b.textContent='？';KB.push(b);KR.appendChild(b);
+  b.onclick=function(){if(KD)return;KD=true;KB.forEach(function(x){x.disabled=true});b.style.animation='tgShake .4s ease-in-out infinite';try{sfx('tap')}catch(er){}
+   gmT=setTimeout(function(){b.style.animation='';KB.forEach(function(x,j){x.textContent=j===KW?'🎉':'🎀';if(j===KW)x.style.animation='tgGlow 1s ease-in-out infinite'});
+    gmT=setTimeout(function(){if(i===KW){fin(msg,8,bx,null,'🎊 くすだまから あたりが出たよ！')}else{kRes('ざんねん… あたりは ほかの くすだまだったよ。また あそんでね！')}},700)},700)}})(ki)}
+else if(ty=='f'){var FT=[{n:'一等',c:'金',p:.01,col:'#ffd700',sh:'#b8860b',it:['ライオンバス','全自動Pカード','猛毒コブラ']},{n:'二等',c:'銀',p:.02,col:'#dfe4ea',sh:'#8d96a3',it:['レベアゲZZ','メカナオール','むちむちアップ']},{n:'三等',c:'紫',p:.05,col:'#b38cff',sh:'#6a3fd0',it:['金色スプレー','シャボン玉','穴埋めパズル']},{n:'四等',c:'黄',p:.12,col:'#ffe14d',sh:'#c9a100',it:['レベアゲZ','穴埋めパズル','シャボン玉']},{n:'五等',c:'緑',p:.2,col:'#5fd17e',sh:'#2a9d50',it:['レベアゲZ','むちむちアップ','金色スプレー']},{n:'はずれ',c:'赤',p:.6,col:'#ff6b6b',sh:'#c93b3b',it:null}],
+ lg=mk('div','display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:center;font-size:11px;font-weight:bold;color:#7a4a6a;margin:4px 0 2px'),
+ drum=mk('div','width:96px;height:96px;margin:6px auto 4px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffff,#ffe3f1 45%,#ffb3d6);border:4px solid #fff;box-shadow:0 5px 0 #e58fb6,0 8px 14px rgba(120,30,80,.25);display:flex;align-items:center;justify-content:center;font-size:44px;animation:tgFloat 2s ease-in-out infinite','🎰'),
+ slot=mk('div','min-height:74px;display:flex;align-items:center;justify-content:center;margin-top:2px;font-size:18px;font-weight:900;color:#c08a00'),
+ fB=tgBtn('🎁 ガラガラ！','padding:10px 24px;font-size:15px;margin-top:6px','linear-gradient(#7fe0a0,#2fb36b)');
+ FT.forEach(function(t){var sp=mk('span','display:inline-flex;align-items:center;gap:3px'),dot=mk('span','width:10px;height:10px;border-radius:50%;background:'+t.col+';border:1px solid '+t.sh+';display:inline-block');sp.append(dot,mk('span','',t.c+' '+t.n));lg.appendChild(sp)});
+ ar.append(lg,drum,slot,fB);
+ fB.onclick=function(){fB.disabled=true;drum.style.animation='tgShake .28s ease-in-out infinite';slot.textContent='ガラガラ…';msg.innerHTML='';
+  gmT=setTimeout(function(){var q=Math.random(),tier=FT[FT.length-1],acc=0,fi;for(fi=0;fi<FT.length;fi++){acc+=FT[fi].p;if(q<acc){tier=FT[fi];break}}
+   drum.style.animation='tgFloat 2s ease-in-out infinite';
+   var ball=mk('div','width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,'+tier.col+' 55%,'+tier.sh+');border:3px solid #fff;box-shadow:0 4px 0 '+tier.sh+';display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#5a3a4a;animation:tgPop .45s ease-out',tier.n==='はずれ'?'はずれ':tier.c+'の玉');
+   slot.innerHTML='';slot.appendChild(ball);
+   var win=!!tier.it,extra='';
+   if(win){try{var pk=tier.it[Math.random()*tier.it.length|0],ids=window.rinIds(),inf=window.rinInv(),ix=-1,fj;for(fj=0;fj<inf.length;fj++)if(inf[fj].name===pk){ix=fj;break}
+     if(ix>=0&&window.rinGrant(ids[ix],1))extra='🎒 ひみつ道具「'+pk+'」ゲット！';else extra='ひみつ道具が もらえなかったよ…'}catch(er){extra='ひみつ道具が もらえなかったよ…'}}
+   else extra='ざんねん… ハズレだったよ';
+   try{sfx(win?'clear':'deny')}catch(er){}
+   if(win)tgBurst(bx,['✨','🌸','⭐','🎀','🎊'],14,false);
+   var rc=mk('div','padding:8px 10px;border-radius:16px;background:'+(win?'linear-gradient(#fff8dc,#ffeeb0)':'linear-gradient(#f0f0ff,#e3e3f7)')+';border:2px solid '+(win?'#e0b860':'#b9b9e0')+';font-weight:bold;line-height:1.5;animation:tgPop .35s ease-out;color:'+(win?'#d05a8a':'#6a5aa0'));
+   rc.append(mk('div','font-size:15px',win?tier.n+'！ '+tier.c+'の玉が出た！':'はずれ… 赤い玉だったよ'),mk('div','font-size:12px;color:#c08a00;margin-top:2px',extra));
+   msg.innerHTML='';msg.appendChild(rc);
+   var cl=tgBtn('とじる','padding:7px 24px;font-size:13px;margin-top:10px','linear-gradient(#ff9cc8,#ff6fa5)');cl.onclick=closeGm;
+   var again=tgBtn('もういちど まわす','padding:7px 18px;font-size:13px;margin-top:10px','linear-gradient(#7fe0a0,#2fb36b)');again.onclick=function(){again.remove();cl.remove();fB.click()};
+   msg.append(again,cl);
+   fB.disabled=false;fB.textContent='🎁 もういちど！'},1000)}}
+else{var N=4,RW=7,rg=[],W9=240,H9=196,LC=['#ff9cc8','#8fd0ff','#ffd66b','#b9a2ff'],xs=function(i){return 30+i*60},win=Math.random()*N|0,sel=mk('div','display:flex;width:240px;margin:4px auto 2px'),cv9=mk('canvas','display:block;margin:0 auto;width:240px;height:196px'),k9;cv9.width=W9*2;cv9.height=H9*2;var c9=cv9.getContext('2d');c9.scale(2,2);
   for(var rr=0;rr<RW;rr++){rg[rr]=[];for(var j=0;j<N-1;j++)if(Math.random()<.5&&!(j>0&&rg[rr].indexOf(j-1)>=0))rg[rr].push(j)}
   var dw=function(prog,pts,cum,done){c9.clearRect(0,0,W9,H9);c9.fillStyle='#fff6fb';c9.beginPath();c9.roundRect(2,2,W9-4,H9-4,16);c9.fill();c9.strokeStyle='#f6c0d8';c9.lineWidth=2;c9.setLineDash([5,4]);c9.stroke();c9.setLineDash([]);c9.lineCap='round';c9.lineJoin='round';var i,r,q;
    for(i=0;i<N;i++){c9.strokeStyle=LC[i];c9.lineWidth=5;c9.beginPath();c9.moveTo(xs(i),12);c9.lineTo(xs(i),166);c9.stroke()}
@@ -3561,7 +3595,7 @@ var PWC={"おにぎり": "ぎゅっとにぎったの、ほっとするよね", 
    var cl=qbBtn('クリア','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');cl.onclick=function(){c.set(0);paint()};
    cr.append(al,cl);
    (c.acts||[]).forEach(function(a){var b=qbBtn(a.t,'font-size:15px;padding:8px 12px');b.onclick=function(){a.fn()};btns.push({el:b});ar.appendChild(b)});
-   var en=qbBtn('おしまい','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');en.onclick=closeShp;ar.appendChild(en);
+   var en=qbBtn(c.back?c.back.t:'おしまい','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');en.onclick=c.back?c.back.fn:closeShp;ar.appendChild(en);
    box.append(lb);if(c.extra)box.appendChild(c.extra);box.append(cr,ar);paint();return box}
   function shpBox(title){closeShp();shp=sEl('div','position:absolute;inset:0;z-index:5;background:rgba(36,20,38,.55);display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box;font-family:'+SFONT+'');
    var bx=sEl('div','width:min(100%,340px);max-height:86%;display:flex;flex-direction:column;background:#fff8fb;border:3px solid #f0a8c8;border-radius:16px;padding:10px;box-sizing:border-box'),
@@ -3661,7 +3695,7 @@ var PWC={"おにぎり": "ぎゅっとにぎったの、ほっとするよね", 
      E.rb=sb('もういちど',function(){if(phase==='play'||phase==='peek')return;reset();if(sum(last)>0&&sum(last)<=cg())bets=last.slice();hist=[];paint()});
      E.dl=gbtn('ディール','flex:1;min-width:96px;font-size:15px;padding:4px 14px');E.dl.classList.add('bcb');E.dl.onclick=deal;ctl.append(E.cl,E.rb,E.dl);
      E.cr=led('0','font-size:16px');E.net=sEl('div','font-weight:900;font-size:15px;min-width:84px;text-align:left');var cb=sEl('div','display:flex;align-items:center;gap:8px'),bt2=sEl('div','display:flex;gap:6px;margin-left:auto'),
-      rl=sEl('div','display:none;position:absolute;inset:0;z-index:30;overflow-y:auto;font-size:13px;line-height:1.7;white-space:pre-line;background:rgba(0,22,10,.96);border:1px solid rgba(230,194,90,.6);border-radius:10px;padding:12px','【バカラの ルール】\n2まいの 合計の 1の位が「てん」です（A=1、10・J・Q・K=0）。9に ちかいほうの勝ち。\n8か9は「ナチュラル」で その場で 決着。それ以外は ルールで 3まいめが 配られます。\n当たると：プレイヤー 3倍 ／ バンカー 3倍 ／ タイ 20倍\n（プレイヤー・バンカーに かけた分は、タイのとき もどります）\nプレイヤー・バンカー・タイに 同時に かけられます。\n\n▼ タップして とじる');
+      rl=sEl('div','display:none;position:absolute;inset:0;z-index:30;overflow-y:auto;font-size:14px;line-height:1.8;white-space:pre-line;color:#fff6d6;background:#06200f;border:2px solid #e6c25a;border-radius:12px;padding:14px;letter-spacing:.01em','【バカラの ルール】\n2まいの 合計の 1の位が「てん」です（A=1、10・J・Q・K=0）。9に ちかいほうの勝ち。\n8か9は「ナチュラル」で その場で 決着。それ以外は ルールで 3まいめが 配られます。\n当たると：プレイヤー 3倍 ／ バンカー 3倍 ／ タイ 20倍\n（プレイヤー・バンカーに かけた分は、タイのとき もどります）\nプレイヤー・バンカー・タイに 同時に かけられます。\n\n▼ タップして とじる');
      rl.onclick=function(){showR=false;rl.style.display='none'};
      cb.append(E.net);bt2.append(sb('ルール',function(){showR=true;rl.style.display='block'}),sb('もどる',function(){openCasino()}));
      var bot=sEl('div','display:flex;align-items:center;gap:8px');bot.append(cb,bt2);
@@ -3715,8 +3749,8 @@ var PWC={"おにぎり": "ぎゅっとにぎったの、ほっとするよね", 
     var al=gbtn('ぜんぶ');al.onclick=function(){bet=cg();bt()};var cl=gbtn('クリア','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');cl.onclick=function(){bet=0;bt()};cr.append(al,cl);bd.appendChild(cr);
     var dl=gbtn('🃏 ディール！','display:block;width:100%;margin-top:10px;font-size:16px;padding:9px 12px');if(bet<1)dl.disabled=true;dl.onclick=deal;bd.appendChild(dl);
     var rb=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f',rules?'ルールを とじる':'📖 ブラックジャックのルール');rb.onclick=function(){rules=!rules;bt()};bd.appendChild(rb);
-    var bk=sEl('button','display:block;margin:6px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk);
-    if(rules){var ru=sEl('div','font-size:11.5px;color:#8a3a6a;background:#fff;border:2px dashed #f0c8dc;border-radius:10px;padding:8px;margin-top:6px;line-height:1.6;white-space:pre-line','カードの数：2〜10はそのまま、J・Q・K=10、Aは1か11（ best なほう）。\n合計が 21に ちかい人の勝ち。21を こえたら「バースト」で まけ。\n「ヒット」でカードを1まい もらう／「スタンド」でやめる／「ダブル」は かけ金を 2ばいにして 1まいだけ もらうよ（さいしょの2まいのときだけ）。「スプリット」は 同じ数の2まいを 2つの手に わけるよ（かけ金も もう1つぶん いるよ）。\nディーラーは 16いじょうに なるまで ひくよ（16で とまるよ）。同点は あなたの 勝ちだよ！\n勝つと 2倍。21で 勝つと 3倍。さいしょの2まいで 21の「ブラックジャック」は 5倍！ ダブルや スプリットで 勝つと 実質 4倍（かけ金が 2つぶんに なるため）。同点は かけ金が もどるよ。');bd.appendChild(ru)}}
+    var bk=sEl('button','display:block;margin:6px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk);
+    if(rules){var ru=sEl('div','font-size:14px;color:#2b1526;background:#fffdf6;border:2px solid #e8a0c0;border-radius:12px;padding:12px;margin-top:8px;line-height:1.8;letter-spacing:.01em;white-space:pre-line','カードの数：2〜10はそのまま、J・Q・K=10、Aは1か11（ best なほう）。\n合計が 21に ちかい人の勝ち。21を こえたら「バースト」で まけ。\n「ヒット」でカードを1まい もらう／「スタンド」でやめる／「ダブル」は かけ金を 2ばいにして 1まいだけ もらうよ（さいしょの2まいのときだけ）。「スプリット」は 同じ数の2まいを 2つの手に わけるよ（かけ金も もう1つぶん いるよ）。\nディーラーは 16いじょうに なるまで ひくよ（16で とまるよ）。同点は あなたの 勝ちだよ！\n勝つと 2倍。21で 勝つと 3倍。さいしょの2まいで 21の「ブラックジャック」は 5倍！ ダブルや スプリットで 勝つと 実質 4倍（かけ金が 2つぶんに なるため）。同点は かけ金が もどるよ。');bd.appendChild(ru)}}
    function deal(){var have=cg();if(bet<1||bet>have){try{sfx('deny')}catch(er){}m='かけるチップが たりないよ';bt();return}
     cs(have-bet);cur=bet;HS=[{c:[dr(),dr()],b:bet,dbl:0,sp:0}];ai=0;D=[dr(),dr()];NEW=[HS[0].c[0],D[0],HS[0].c[1],D[1]];try{sfx('place')}catch(er){}
     if(isBJ(HS[0].c)||isBJ(D))fin();else show()}
@@ -3855,7 +3889,7 @@ function sk(){try{return Math.max(0,parseInt(localStorage.getItem('miarina_td_po
     var al=gbtn('ぜんぶ');al.onclick=function(){bet=cg();bt()};var cl=gbtn('クリア','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');cl.onclick=function(){bet=0;bt()};cr.append(al,cl);bd.appendChild(cr);
     var dl=gbtn('🃏 ディール！','display:block;width:100%;margin-top:10px;font-size:16px;padding:9px 12px');if(bet<1)dl.disabled=true;dl.onclick=deal;bd.appendChild(dl);
     bd.appendChild(sm(rules?'ルールを とじる':'📖 ポーカーのルール',function(){rules=!rules;bt()}));bd.appendChild(sm('↩ ゲームを えらびなおす',function(){openCasino()}));
-    if(rules)bd.appendChild(sEl('div','font-size:11.5px;color:#8a3a6a;background:#fff;border:2px dashed #f0c8dc;border-radius:10px;padding:8px;margin-top:6px;line-height:1.6;white-space:pre-line','トランプ54まい（ジョーカー2まい入り）で しょうぶ！\nディーラーと 5まいずつ もらうよ。\nのこしたいカードを タップで「キープ」にして、「チェンジ」で それ以外を とりかえよう（1回だけ）。\nその あと ディーラーも とりかえて、手札の つよさを くらべるよ。\nあなたの手札が つよければ かけ金が 2ばい。連勝すると 2れんしょうで ×3、3れんしょうで ×4…と 倍率が どんどん上がるよ（最大×10）。まけると 連勝は 0にもどるよ。ひきわけは あなたの かち！ まけると かけ金は なくなるよ。\n\n【ジョーカー】\nジョーカーは どの数字にも どのマークにも なれる万能カード。いちばん つよい形で数えるよ。\n\n【やくの つよさ】\n'+PT.map(function(x){return x[0]}).join('\n')+'\n（同じやくなら、数字の大きいほうが つよい）'));}
+    if(rules)bd.appendChild(sEl('div','font-size:14px;color:#2b1526;background:#fffdf6;border:2px solid #e8a0c0;border-radius:12px;padding:12px;margin-top:8px;line-height:1.8;letter-spacing:.01em;white-space:pre-line','トランプ54まい（ジョーカー2まい入り）で しょうぶ！\nディーラーと 5まいずつ もらうよ。\nのこしたいカードを タップで「キープ」にして、「チェンジ」で それ以外を とりかえよう（1回だけ）。\nその あと ディーラーも とりかえて、手札の つよさを くらべるよ。\nあなたの手札が つよければ かけ金が 2ばい。連勝すると 2れんしょうで ×3、3れんしょうで ×4…と 倍率が どんどん上がるよ（最大×10）。まけると 連勝は 0にもどるよ。ひきわけは あなたの かち！ まけると かけ金は なくなるよ。\n\n【ジョーカー】\nジョーカーは どの数字にも どのマークにも なれる万能カード。いちばん つよい形で数えるよ。\n\n【やくの つよさ】\n'+PT.map(function(x){return x[0]}).join('\n')+'\n（同じやくなら、数字の大きいほうが つよい）'));}
    /* 画面を組み立てる。o: hideD（ディーラーを伏せる）, flipP/flipD（めくって出すカード）, discP/discD（すてるカード）, gap（めくりの間隔）, busy, end */
    function render(o){o=o||{};var bd=shpBox('♠ ポーカー');bdCur=bd;var end=!!o.end,hideD=!!o.hideD,r=cat(H);
     bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#8a3a6a;margin-bottom:4px','かけ金 '+bet+' チップ'+(end||o.busy?'':'　（のこすカードを タップで キープ）')));
@@ -3882,7 +3916,7 @@ function sk(){try{return Math.max(0,parseInt(localStorage.getItem('miarina_td_po
     var msg2=res===1?'🎉 あなたの かち！ +'+bet+' チップ':res===-1?'ディーラーの かち… −'+bet+' チップ':'ひきわけ（かけ金もどり）';
     var rl=sEl('div','text-align:center;font-weight:bold;font-size:15px;line-height:1.5;margin-top:6px;color:'+(net>0?'#d9327c':net<0?'#6a7a9a':'#2fa86a'),msg2);rl.style.animation='czPop .5s ease-out both';bd.appendChild(rl);
     bd.appendChild(sEl('div','display:table;margin:4px 0 0 auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' チップ'));bd.appendChild(sEl('div','text-align:center;font-size:12px;font-weight:bold;color:#b93a0a;margin-top:2px','🔥 '+sk()+'れんしょう中　次の勝ちは ×'+skMul(sk()+1)));
-    bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🃏 ディール！',fn:function(){deal()}}]}))}
+    bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🃏 ディール！',fn:function(){deal()}}],back:{t:'戻る',fn:function(){openCasino()}}}))}
    function deal(){if(busy)return;var have=cg();if(bet<1||bet>have){snd('deny');m='かけるチップが たりないよ';bt();return}
     cs(have-bet);deck=shuf();H=deck.splice(0,5);D=deck.splice(0,5);hold=[0,0,0,0,0];res=null;busy=true;m='ディーラーが カードを くばっているよ…';
     var all=[0,1,2,3,4];
@@ -3923,7 +3957,7 @@ function openHiLo(msg){var RK='miarina_td_medal_v1',bet=0,orig=0,pot=0,cur=null,
     [1,5,10,100].forEach(function(n){var b=gbtn('+'+n);b.onclick=function(){try{sfx('tap')}catch(er){}bet=Math.min(cg(),bet+n);bt()};cr.appendChild(b)});
     var al=gbtn('ぜんぶ');al.onclick=function(){bet=cg();bt()};var cl=gbtn('クリア','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');cl.onclick=function(){bet=0;bt()};cr.append(al,cl);bd.appendChild(cr);
     var dl=gbtn('🔼 スタート！','display:block;width:100%;margin-top:10px;font-size:16px;padding:9px 12px');if(bet<1)dl.disabled=true;dl.onclick=start;bd.appendChild(dl);
-    var bk=sEl('button','display:block;margin:6px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
+    var bk=sEl('button','display:block;margin:6px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
    function start(){var have=cg();if(bet<1||bet>have){try{sfx('deny')}catch(er){}m='かけるチップが たりないよ';bt();return}
     cs(have-bet);orig=bet;pot=bet;cur=dr();last=null;st='play';m='つぎは 上？ 下？（同じ数字は ひきわけ）';try{sfx('place')}catch(er){}show()}
    function show(){var bd=shpBox(TT);head(bd);
@@ -3935,8 +3969,8 @@ function openHiLo(msg){var RK='miarina_td_medal_v1',bet=0,orig=0,pot=0,cur=null,
     var hi=gbtn('⬆ 上','min-width:90px;justify-content:center');var lo=gbtn('⬇ 下','min-width:90px');
     hi.disabled=cur.r===13;lo.disabled=cur.r===1;
     hi.onclick=function(){guess(1)};lo.onclick=function(){guess(-1)};br.append(hi,lo);bd.appendChild(br);
-    var wait=pot<=orig,co=gbtn(wait?'💰 回収（1回 当てると おせるよ）':'💰 ここで回収（+'+(pot-orig)+'）','display:block;width:100%;margin-top:10px;font-size:14px;padding:8px 12px');co.disabled=wait;if(wait)co.style.opacity='.45';co.onclick=function(){if(pot>orig)cashout()};bd.appendChild(co);
-    var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
+    var wait=pot<=orig,co=gbtn(wait?'💰 回収（1回 当てると おせるよ）':'💰 ここで回収（元本 '+orig+' ＋ '+(pot-orig)+'）','display:block;width:100%;margin-top:10px;font-size:14px;padding:8px 12px');co.disabled=wait;if(wait)co.style.opacity='.45';co.onclick=function(){if(pot>orig)cashout()};bd.appendChild(co);
+    var bk=sEl('button','display:block;margin:8px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
    function guess(d){var nx=dr(),old=cur;last=nx;
     if(nx.r===cur.r){m='同じ数字！ かけ金は そのまま';last=old;cur=nx;show();return}
     if((nx.r>cur.r?1:-1)===d){pot*=2;last=old;cur=nx;try{sfx('win')}catch(er){}m='あたり！ 払い戻しが 2ばい！ つぎは？';show()}
@@ -3945,32 +3979,32 @@ function openHiLo(msg){var RK='miarina_td_medal_v1',bet=0,orig=0,pot=0,cur=null,
      if(last){var lr=sEl('div','display:flex;justify-content:center;margin:8px 0');lr.appendChild(czc(cardEl(last)));bd.appendChild(lr)}
      bet=Math.min(orig,cg());
      bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🔼 スタート！',fn:function(){start()}}]}));
-     var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
-   function cashout(){cs(cg()+pot);try{sfx('clear')}catch(er){}m='回収！ +'+(pot-orig)+' チップ';bet=0;st='bet';cur=null;last=null;res()}
+     var bk=sEl('button','display:block;margin:8px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
+   function cashout(){cs(cg()+pot);try{sfx('clear')}catch(er){}m='回収！ 元本 '+orig+' ＋ '+(pot-orig)+' チップ';bet=0;st='bet';cur=null;last=null;res()}
    if(cg()<=0)m='チップが ないよ… カジノの 交換所で チップを 買ってね';
    bt()}
   function openChohan(msg){var RK='miarina_td_medal_v1',PK='miarina_td_chohan_pot_v1',bet=0,streak=0,pot=0,m=msg||'いらっしゃい！ 壺振りが サイコロを ふるよ。壺が ふせられてから 丁か半か 張ろう',TT='🎲 丁半博打',SHOW=null;
    function cg(){try{return Math.max(0,parseInt(localStorage.getItem(RK)||'0',10)||0)}catch(e){return 0}}
    function cs(n){try{localStorage.setItem(RK,String(Math.max(0,n|0)))}catch(e){}}
-   function chance(n){return Math.max(10,50-8*n)}
+   function chance(n){return Math.max(35,70-6*n)}
    function pend(v){try{if(v>0)localStorage.setItem(PK,String(v));else localStorage.removeItem(PK)}catch(e){}}
    (function(){var pv=0;try{pv=Math.max(0,parseInt(localStorage.getItem(PK)||'0',10)||0)}catch(e){}if(pv>0){pend(0);cs(cg()+pv);m='まえの 勝ち分 '+pv+' チップを うけとったよ'}})();
    function gbtn(txt,css){return sEl('button','flex:none;width:auto;min-height:0;height:auto;min-width:0;padding:7px 11px;font-size:13px;font-weight:bold;font-family:'+SFONT+';letter-spacing:.04em;color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6);'+(css||''),txt)}
    function die(n){var d=sEl('div','width:52px;height:52px;box-sizing:border-box;border:2px solid #d9c3d0;border-radius:10px;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.12)');czPips(d,n);return d}
    function head(bd){bd.appendChild(sEl('div','font-size:12px;text-align:center;color:#8a3a6a;background:#ffeef6;border-radius:10px;padding:6px 8px;margin-bottom:6px;line-height:1.4',m));bd.appendChild(sEl('div','display:table;margin:0 0 4px auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' チップ'))}
    function bt(){var bd=shpBox(TT),have=cg();if(bet>have)bet=have;head(bd);
-    bd.appendChild(sEl('div','text-align:center;font-size:11.5px;color:#8a3a6a;line-height:1.5;margin-top:2px','当たると 2倍。つづけて 当てるたびに 倍々！\nでも だんだん 当たりにくくなって、はずれると かけ金は 没収だよ（さいしょの 当たる確率 '+chance(0)+'%）')).style.whiteSpace='pre-line';
+    bd.appendChild(sEl('div','text-align:center;font-size:11.5px;color:#8a3a6a;line-height:1.5;margin-top:2px','当たると 2倍。つづけて 当てるたびに 倍々！\nでも だんだん 当たりにくくなって、はずれると かけ金は 没収だよ')).style.whiteSpace='pre-line';
     bd.appendChild(sEl('div','text-align:center;font-size:15px;font-weight:bold;color:#7a3b2e;margin:6px 0 0','かける数：'+bet+' チップ'));
     var cr=sEl('div','display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px');
     [1,5,10,100].forEach(function(n){var b=gbtn('+'+n);b.onclick=function(){try{sfx('tap')}catch(er){}bet=Math.min(cg(),bet+n);bt()};cr.appendChild(b)});
     var al=gbtn('ぜんぶ');al.onclick=function(){bet=cg();bt()};var cl=gbtn('クリア','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');cl.onclick=function(){bet=0;bt()};cr.append(al,cl);bd.appendChild(cr);
     var ch=sEl('div','display:flex;gap:8px;justify-content:center;margin-top:12px');var c1=gbtn('🏺 壺を ふる！','min-width:200px;justify-content:center;font-size:16px;padding:9px 14px');if(bet<1)c1.disabled=true;c1.onclick=start;ch.appendChild(c1);bd.appendChild(ch);
-    var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
+    var bk=sEl('button','display:block;margin:8px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
    function chCss(){if(document.getElementById('ch-css'))return;var st=document.createElement('style');st.id='ch-css';st.textContent='@keyframes chDrop{0%{transform:translateY(-170px)}70%{transform:translateY(5px)}100%{transform:translateY(0)}}@keyframes chShake{0%,100%{transform:translate(0,0) rotate(0)}15%{transform:translate(-10px,-8px) rotate(-7deg)}30%{transform:translate(10px,-14px) rotate(7deg)}45%{transform:translate(-9px,-6px) rotate(-6deg)}60%{transform:translate(10px,-12px) rotate(6deg)}80%{transform:translate(-4px,-4px) rotate(-2deg)}}@keyframes chSlam{0%{transform:translateY(-70px)}55%{transform:translateY(0) scale(1.05,.93)}75%{transform:translateY(-7px)}100%{transform:translateY(0)}}@keyframes chLift{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-140px) rotate(-10deg);opacity:0}}@keyframes chPop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}';document.head.appendChild(st)}
    function start(){var have=cg();if(streak===0&&(bet<1||bet>have)){try{sfx('deny')}catch(er){}m='かけるチップが たりないよ';bt();return}
     chCss();var a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6),bd=shpBox(TT),T=[],done=false;
     m='壺振り「いざ、勝負！」';head(bd);var mm=bd.firstChild;
-    bd.appendChild(sEl('div','text-align:center;font-size:15px;font-weight:bold;color:#7a3b2e;margin:6px 0 0',(streak?'いまの 払い戻し '+pot+' チップ → 当たると '+pot*2:'かけ金 '+bet+' チップ')+'\n当たる確率：'+chance(streak)+'%')).style.whiteSpace='pre-line';
+    bd.appendChild(sEl('div','text-align:center;font-size:15px;font-weight:bold;color:#7a3b2e;margin:6px 0 0',(streak?'いまの 払い戻し '+pot+' チップ → 当たると '+pot*2:'かけ金 '+bet+' チップ'))).style.whiteSpace='pre-line';
     var stg=sEl('div','position:relative;height:150px;margin:8px 0;border-radius:12px;overflow:hidden;border:3px solid #7a3b2e;background:repeating-linear-gradient(90deg,#f7f0e0 0 7px,#eadfc3 7px 8px);box-shadow:inset 0 0 18px rgba(90,50,20,.35)');
     var dA=sEl('div','width:52px;height:52px;box-sizing:border-box;border:2px solid #d9c3d0;border-radius:10px;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.2)'),dB=sEl('div','width:52px;height:52px;box-sizing:border-box;border:2px solid #d9c3d0;border-radius:10px;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.2)');
     czPips(dA,1);czPips(dB,1);dA.classList.add('cz-roll');dB.classList.add('cz-roll');dB.style.animationDelay='.1s';
@@ -3981,7 +4015,7 @@ function openHiLo(msg){var RK='miarina_td_medal_v1',bet=0,orig=0,pot=0,cur=null,
     stg.append(dr,bowl);bd.appendChild(stg);
     var ch=sEl('div','display:none;gap:8px;justify-content:center;margin-top:6px'),c1=gbtn('丁（ちょう）','min-width:110px;justify-content:center;font-size:15px;padding:9px 12px'),c2=gbtn('半（はん）','min-width:110px;justify-content:center;font-size:15px;padding:9px 12px');
     ch.append(c1,c2);bd.appendChild(ch);
-    var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){T.forEach(clearTimeout);if(streak>0){cs(cg()+pot);pend(0);streak=0;pot=0}openCasino()};bd.appendChild(bk);
+    var bk=sEl('button','display:block;margin:8px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){T.forEach(clearTimeout);if(streak>0){cs(cg()+pot);pend(0);streak=0;pot=0}openCasino()};bd.appendChild(bk);
     function at(ms,f){T.push(setTimeout(function(){if(bd.isConnected)f()},ms))}
     function snd(n){try{sfx(n)}catch(er){}}
     var rl=setInterval(function(){if(!bd.isConnected){clearInterval(rl);return}czPips(dA,1+Math.floor(Math.random()*6));czPips(dB,1+Math.floor(Math.random()*6))},90);
@@ -4007,7 +4041,7 @@ function openHiLo(msg){var RK='miarina_td_medal_v1',bet=0,orig=0,pot=0,cur=null,
     var row=sEl('div','display:flex;gap:12px;justify-content:center;margin:10px 0');row.append(czc(die(SHOW.a)),czc(die(SHOW.b)));bd.appendChild(row);
     bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#7a3b2e;margin-bottom:4px','合計 '+SHOW.sum+'（'+(SHOW.res?'半（奇数）':'丁（偶数）')+'）'));
     bd.appendChild(sEl('div','text-align:center;font-size:17px;font-weight:bold;color:#d9327c;margin:4px 0','🎉 '+streak+'れんしょう！ '+pot+' チップ'));
-    bd.appendChild(sEl('div','text-align:center;font-size:12px;color:#8a3a6a;line-height:1.5','つづけると '+pot*2+' チップ。でも 当たる確率は '+chance(streak)+'%！\nはずれると ぜんぶ 没収だよ')).style.whiteSpace='pre-line';
+    bd.appendChild(sEl('div','text-align:center;font-size:12px;color:#8a3a6a;line-height:1.5','つづけると '+pot*2+' チップ。\nはずれると ぜんぶ 没収だよ')).style.whiteSpace='pre-line';
     var col=sEl('div','display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:10px');
     var go=gbtn('🏺 もういちど！（'+pot*2+' チップを ねらう）','justify-content:center;font-size:14px;padding:9px 14px;min-width:230px');go.onclick=function(){start()};
     var co=gbtn('💰 回収する（'+pot+' チップ）','justify-content:center;font-size:15px;padding:9px 14px;min-width:230px;color:#fff;background:linear-gradient(180deg,#5fd08a,#1f9a55);outline-color:#17803f;box-shadow:0 3px 0 #17803f');co.onclick=cashout;
@@ -4016,7 +4050,7 @@ function openHiLo(msg){var RK='miarina_td_medal_v1',bet=0,orig=0,pot=0,cur=null,
     var row=sEl('div','display:flex;gap:12px;justify-content:center;margin:10px 0');row.append(czc(die(SHOW.a)),czc(die(SHOW.b)));bd.appendChild(row);
     bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#7a3b2e;margin-bottom:6px','合計 '+SHOW.sum+'（'+(SHOW.res?'半（奇数）':'丁（偶数）')+'）'));
     bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🏺 壺を ふる！',fn:start}]}));
-    var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
+    var bk=sEl('button','display:block;margin:8px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
    if(cg()<=0)m='チップが ないよ… カジノの 交換所で チップを 買ってね';
    bt()}
   /* ===== カジノ演出（やさしい動き。reduce-motion の設定ではオフ） ===== */
@@ -4067,7 +4101,7 @@ var _sfx0=sfx;sfx=function(k){_sfx0(k);try{if(!czOn)return;if(k==='win'||k==='cl
    function cg(){try{return Math.max(0,parseInt(localStorage.getItem(RK)||'0',10)||0)}catch(e){return 0}}
    function cs(n){try{localStorage.setItem(RK,String(Math.max(0,n|0)))}catch(e){}}
    function gbtn(txt,css){return sEl('button','flex:none;width:auto;min-height:0;height:auto;min-width:0;padding:7px 11px;font-size:13px;font-weight:bold;font-family:'+SFONT+';letter-spacing:.04em;color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6);'+(css||''),txt)}
-   function back(bd){var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
+   function back(bd){var bk=sEl('button','display:block;margin:8px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
    function head(bd){bd.appendChild(sEl('div','font-size:12px;color:#8a3a6a;background:#ffeef6;border-radius:10px;padding:6px 8px;margin-bottom:6px;line-height:1.4',m));bd.appendChild(sEl('div','display:table;margin:0 0 4px auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' チップ'))}
    function bt(){var bd=shpBox(TT),have=cg();if(bet>have)bet=have;head(bd);
     bd.appendChild(sEl('div','text-align:center;font-size:15px;font-weight:bold;color:#7a3b2e;margin:6px 0 0','かける数：'+bet+' チップ'));
@@ -4104,7 +4138,7 @@ var _sfx0=sfx;sfx=function(k){_sfx0(k);try{if(!czOn)return;if(k==='win'||k==='cl
    function cs(n){try{localStorage.setItem(RK,String(Math.max(0,n|0)))}catch(e){}}
    function gbtn(txt,css){return sEl('button','flex:none;width:auto;min-height:0;height:auto;min-width:0;padding:6px 10px;font-size:13px;font-weight:bold;font-family:'+SFONT+';color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6);'+(css||''),txt)}
    function head(bd){bd.appendChild(sEl('div','font-size:12px;color:#8a3a6a;background:#ffeef6;border-radius:10px;padding:6px 8px;margin-bottom:6px;line-height:1.4',m));bd.appendChild(sEl('div','display:table;margin:0 0 4px auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' チップ'))}
-   function back(bd){var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
+   function back(bd){var bk=sEl('button','display:block;margin:8px 0 0 auto;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
    function pt(c){return c.r===1||c.r>=10?1:0}
    function val(c){var v=c.r===1?14:c.r;return kak?15-v:v}
    function str(c,ls){return (c.s===T?100:0)+(c.s===ls&&c.s!==T?50:0)+val(c)}
@@ -4189,7 +4223,7 @@ var _sfx0=sfx;sfx=function(k){_sfx0(k);try{if(!czOn)return;if(k==='win'||k==='cl
   function openCasino(msg){var bd=shpBox('🃁 カジノ'),mb=sEl('div','font-size:12px;color:#8a3a6a;background:#ffeef6;border-radius:10px;padding:6px 8px;margin-bottom:6px;line-height:1.4',msg||(mdl()<=0?'いらっしゃい！ まずは 交換所で チップを 買ってね':'いらっしゃい！ どのゲームで あそぶ？'));bd.appendChild(mb);
    bd.appendChild(sEl('div','display:table;margin:0 0 4px auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+mdl()+' チップ'));
    var gw=sEl('div','display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:4px');bd.appendChild(gw);
-   [['🏅 チップ交換所','ゴールドで チップを 買う・換金する',openMedal],['✧ バカラ','プレイヤーか バンカーか タイを よそう',openBaccarat],['🃏 ブラックジャック','21に ちかづけて ディーラーに 勝とう',openBlackjack,1],['♠ ポーカー','カードを のこして やくを つくろう',openPoker],['🔼 ハイ＆ロー','つぎのカードが 上か 下か あてよう',openHiLo],['🎲 丁半博打','サイコロの目が 丁（偶数）か 半（奇数）か あてよう',openChohan],['🐉 ドラゴンタイガー','バカラをシンプルにした スピード勝負',null,1],['💘 ときめきルーレット','回せ回せ！ 恋愛ときめきルーレット',null,1],['🎰 地獄スロット666','毎月6のつく日は 設定6',null,1],['🎡 マネーホイール','円盤を回す 運ゲーだよ！',null,1],['🎲 クラップス7','7つのサイコロを ふろう',null,1],['👑 令和の大富豪','オンラインで戦う 令和の大富豪',null,1],['🤡 ジョーカーズ','ジョーカーの向きで 次のカードを きめよう',null,1]].forEach(function(g,gi){var b=sEl('button','display:block;width:100%;margin-top:5px;min-height:0;height:auto;padding:5px 10px;font-size:14px;font-weight:bold;font-family:'+SFONT+';color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6)',g[0]);var ds=sEl('div','font-size:10px;line-height:1.2;font-weight:normal;color:#8a5a7a',g[1]);ds.className='cz-mdesc';b.append(ds);b.onclick=function(){if(g[3]){try{sfx('deny')}catch(e){}mb.textContent='まだ遊べないよ';return}g[2]()};b.className=g[3]?'cz-pop cz-fake':'cz-pop';if(g[2]===openMedal)b.style.gridColumn='1 / -1';b.style.animationDelay=(gi*.09)+'s';gw.appendChild(b)})}
+   [['🏅 チップ交換所','ゴールドで チップを 買う・換金する',openMedal],['✧ バカラ','プレイヤーか バンカーか タイを よそう',openBaccarat],['🃏 ブラックジャック','21に ちかづけて ディーラーに 勝とう',openBlackjack,1],['♠ ポーカー','カードを のこして やくを つくろう',openPoker],['🔼 ハイ＆ロー','つぎのカードが 上か 下か あてよう',openHiLo],['🎲 丁半博打','サイコロの目が 丁（偶数）か 半（奇数）か あてよう',openChohan],['🐉 ドラゴンタイガー','バカラをシンプルにした スピード勝負',null,1],['💘 ときめきルーレット','回せ回せ！ 恋愛ときめきルーレット',null,1],['👹 地獄スロット666','毎月6のつく日は 設定6',null,1],['🎡 マネーホイール','円盤を回す 運ゲーだよ！',null,1],['🎲 クラップス7','7つのサイコロを ふろう',null,1],['👑 令和の大富豪','オンラインで戦う 令和の大富豪',null,1],['🤡 ジョーカーズ','ジョーカーの向きで 次のカードを きめよう',null,1]].forEach(function(g,gi){var b=sEl('button','display:block;width:100%;margin-top:5px;min-height:0;height:auto;padding:5px 10px;font-size:14px;font-weight:bold;font-family:'+SFONT+';color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6)',g[0]);var ds=sEl('div','font-size:10px;line-height:1.2;font-weight:normal;color:#8a5a7a',g[1]);ds.className='cz-mdesc';b.append(ds);b.onclick=function(){if(g[3]){try{sfx('deny')}catch(e){}mb.textContent='まだ遊べないよ';return}g[2]()};b.className=g[3]?'cz-pop cz-fake':'cz-pop';if(g[2]===openMedal)b.style.gridColumn='1 / -1';b.style.animationDelay=(gi*.09)+'s';gw.appendChild(b)})}
   function openPet(msg){var OWK='miarina_td_allyown_v1',m=msg||'いらっしゃい！ かわいい子たちが まってるよ',P=[['D','犬','🐶','ボスにも戦いに行くよ'],['C','猫','🐱','弱いけど素早いよ（黒・三毛・虎・白）']];
  function ow(){try{var o=JSON.parse(localStorage.getItem(OWK)||'{}');return o&&typeof o==='object'?o:{}}catch(e){return{}}}
  function sv(o){try{localStorage.setItem(OWK,JSON.stringify(o))}catch(e){}}
@@ -12362,4 +12396,51 @@ drawEn2=wrapper;
 .czg.czg.czg.czg button.cz-fake[style]{background:linear-gradient(180deg,#e6e6e6,#b3b3b3)!important;border:2px solid #8c8c8c!important;outline:none!important;box-shadow:0 3px 0 #6a6a6a,inset 0 1px 0 #fff!important;color:#5e5e5e!important;filter:grayscale(1)!important;opacity:.9!important;cursor:not-allowed!important}
 .czg.czg.czg.czg button.cz-fake[style] *{color:#6e6e6e!important;text-shadow:none!important}
 </style>
+
+<script id="czReadable">
+(function(){
+  function lumRGB(a){return (0.299*a[0]+0.587*a[1]+0.114*a[2])/255}
+  function parseC(c){var m=c&&c.match(/[\d.]+/g);if(!m)return null;return {rgb:[+m[0],+m[1],+m[2]],a:m.length>3?+m[3]:1}}
+  function gradLum(img){var hx=img.match(/#[0-9a-fA-F]{6}/g);if(!hx||!hx.length)return null;var t=0;hx.forEach(function(h){t+=lumRGB([parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)])});return t/hx.length}
+  function bgLum(el){
+    var e=el;
+    while(e&&e!==document.body){
+      var cs=getComputedStyle(e);
+      var c=parseC(cs.backgroundColor);
+      if(c&&c.a>0.3) return lumRGB(c.rgb);
+      var gl=gradLum(cs.backgroundImage||'');
+      if(gl!==null) return gl;
+      e=e.parentElement;
+    }
+    return 0.1;
+  }
+  function fix(root){
+    var els=root.querySelectorAll('div,span,b,p,label,h2,h3');
+    for(var i=0;i<els.length;i++){
+      var el=els[i];
+      if(el.closest('button'))continue;
+      var txt=false;
+      for(var k=0;k<el.childNodes.length;k++){var n=el.childNodes[k];if(n.nodeType===3&&n.textContent.trim()){txt=true;break}}
+      if(!txt)continue;
+      var cs=getComputedStyle(el);
+      var c=parseC(cs.color);
+      if(!c)continue;
+      var fl=lumRGB(c.rgb);
+      var bl=bgLum(el);
+      if(bl<0.4 && fl<0.6){
+        el.style.setProperty('color','#fff6d6','important');
+        el.style.setProperty('text-shadow','0 1px 3px rgba(0,0,0,.85)','important');
+      }
+    }
+  }
+  var pending=false;
+  function run(){
+    pending=false;
+    var roots=document.querySelectorAll('.czg');
+    roots.forEach(function(r){fix(r)});
+  }
+  var mo=new MutationObserver(function(){if(!pending){pending=true;requestAnimationFrame(run)}});
+  mo.observe(document.body,{childList:true,subtree:true,characterData:true});
+})();
+</script>
 </body></html>
