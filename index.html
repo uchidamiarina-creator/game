@@ -3246,7 +3246,7 @@ function fin(msg,d,box,r0,extra){var r=aff(d,r0),up=d>0;msg.innerHTML='';msg.sty
  var c=tgBtn('とじる','padding:7px 24px;font-size:13px;margin-top:10px','linear-gradient(#ff9cc8,#ff6fa5)');c.onclick=closeGm;msg.appendChild(c)}
 function openTownGame(ty){if(gm)return;tgSty();
  gm=mk('div','position:absolute;inset:0;z-index:6;background:radial-gradient(circle at 50% 35%,rgba(255,190,225,.4),rgba(36,20,38,.62));display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box');
- var IC={j:['#ff8fb5','#ff5f9b'],a:['#7fd0ff','#4aa8ee'],o:['#ffd23f','#ffa31a'],q:['#b9a2ff','#8f72f0']},DS={j:'かてば なかよしに！まけると…',a:'あみだを えらぼう！当たりで なかよし♪',o:'ひいた おみくじで なかよし度が かわるよ',q:'このゲームの もんだい！5問中3問せいかいで なかよし♪'};
+ var IC={j:['#ff8fb5','#ff5f9b'],a:['#7fd0ff','#4aa8ee'],o:['#ffd23f','#ffa31a'],q:['#b9a2ff','#8f72f0']},DS={j:'かてば なかよしに！まけると…',a:'あみだを えらぼう！当たりで なかよし♪',o:'ひいた おみくじで なかよし度が かわるよ',q:'このゲームの もんだい！1問 せいかいで なかよし♪'};
  var bx=mk('div','position:relative;overflow:hidden;width:min(100%,310px);background:linear-gradient(180deg,#fffafc 0%,#ffeaf5 100%);border:3px solid #fff;outline:3px solid #f6a9cb;border-radius:24px;padding:14px 12px 12px;box-sizing:border-box;text-align:center;color:#8a3a6a;font-size:13px;box-shadow:0 8px 0 #e58fb6,0 16px 30px rgba(60,20,60,.4);animation:tgPop .35s ease-out');
  [['✨',4,26,0],['🌸',90,20,.6],['⭐',6,84,1.1],['🎀',88,90,.3],['✨',92,52,1.5]].forEach(function(d){bx.appendChild(mk('span','position:absolute;left:'+d[1]+'%;top:'+d[2]+'%;font-size:13px;opacity:.6;pointer-events:none;animation:tgTw 2.4s ease-in-out '+d[3]+'s infinite',d[0]))});
  var ct=mk('div','position:relative;z-index:2'),hd=mk('div','display:flex;align-items:center;gap:8px;margin:0 0 4px'),
@@ -3306,7 +3306,7 @@ function openTownGame(ty){if(gm)return;tgSty();
    ['「ブチアゲ」の フェーズ6に出る 最強ボスは？',['イエロ','ラフレシア','巨大スイカメ','パトカー'],0],
    ['「エクリプス」は 何分間 たえぬく バトル？',['3分','5分','10分','30分'],2],
    ['ペットショップの建物は 何の顔がモチーフ？',['犬','猫','うさぎ','くま'],0]],
-   pool=QS.slice().sort(function(){return Math.random()-.5}).slice(0,5),qi=0,sc=0,
+   pool=QS.slice().sort(function(){return Math.random()-.5}).slice(0,1),qi=0,sc=0,
    qh=mk('div','font-weight:900;font-size:12px;color:#7a5cff;margin-bottom:4px'),
    qt=mk('div','font-weight:bold;font-size:14px;color:#6a3a8a;background:#fff;border:2px solid #d8c8ff;border-radius:14px;padding:8px 10px;line-height:1.5;min-height:44px;display:flex;align-items:center;justify-content:center;margin-bottom:8px'),
    qa=mk('div','display:flex;flex-direction:column;gap:6px');
@@ -3318,7 +3318,7 @@ function openTownGame(ty){if(gm)return;tgSty();
       if(ok){sc++;msg.textContent='⭕ せいかい！';msg.style.color='#2f9e5a'}else{for(i2=0;i2<bs.length;i2++)if(bs[i2].textContent===q[1][q[2]])bs[i2].style.background='linear-gradient(#8fe3a8,#3fbf6a)';msg.textContent='❌ ざんねん…';msg.style.color='#d05a8a'}
       msg.style.fontSize='15px';try{sfx(ok?'clear':'deny')}catch(er){}
       gmT=setTimeout(function(){qi++;if(qi<pool.length){qShow();return}
-       ar.innerHTML='';var d=sc>=5?10:sc==4?6:sc==3?3:sc==2?-3:-6;fin(msg,d,bx,null,sc+' / '+pool.length+' もん せいかい'+(sc>=pool.length?'！ぜんぶ せいかい🎉':''))},1300)};
+       ar.innerHTML='';var d=sc>=1?6:-6;fin(msg,d,bx,null,sc+' / '+pool.length+' もん せいかい'+(sc>=pool.length?'！ぜんぶ せいかい🎉':''))},1300)};
      qa.appendChild(b)})};
    qShow()}
  else{var N=4,RW=7,rg=[],W9=240,H9=196,LC=['#ff9cc8','#8fd0ff','#ffd66b','#b9a2ff'],xs=function(i){return 30+i*60},win=Math.random()*N|0,sel=mk('div','display:flex;width:240px;margin:4px auto 2px'),cv9=mk('canvas','display:block;margin:0 auto;width:240px;height:196px'),k9;cv9.width=W9*2;cv9.height=H9*2;var c9=cv9.getContext('2d');c9.scale(2,2);
@@ -3339,7 +3339,7 @@ function openTownGame(ty){if(gm)return;tgSty();
    b3.onclick=function(){var bl=sel.querySelectorAll('button'),i1;for(i1=0;i1<bl.length;i1++)bl[i1].disabled=true;b3.style.background=LC[c0];b3.style.color='#fff';
     var col=c0,pts=[[xs(col),12]];for(var r=0;r<RW;r++){var y=24+r*20;pts.push([xs(col),y]);if(rg[r].indexOf(col)>=0){col++;pts.push([xs(col),y])}else if(rg[r].indexOf(col-1)>=0){col--;pts.push([xs(col),y])}}pts.push([xs(col),166]);
     var cum=[0],p0;for(p0=1;p0<pts.length;p0++)cum.push(cum[p0-1]+Math.hypot(pts[p0][0]-pts[p0-1][0],pts[p0][1]-pts[p0-1][1]));var tot=cum[cum.length-1],pr=0;
-    gmT=setInterval(function(){pr+=4;if(pr>=tot){clearInterval(gmT);dw(tot,pts,cum,true);fin(msg,col==win?8:-8,bx);return}dw(pr,pts,cum,false)},24)};
+    gmT=setInterval(function(){pr+=4;if(pr>=tot){clearInterval(gmT);dw(tot,pts,cum,true);var ex='',dd=0,pz=Math.random();if(pz<.25){try{if(window.rinGold(10000))ex='💰10000ゴールドゲット！'}catch(er){}}else if(pz<.5){try{var AW=[['ルビー',14],['サファイア',9],['ダイヤモンド',4],['全自動Pカード',10],['ライオンバス',10],['シャボン玉',10],['レベアゲZZ',10],['メカナオール',10],['猛毒コブラ',10],['穴埋めパズル',10],['メテオのかけら',10],['ハートのたね',10],['デリートボタン',5]],atot=0,ai,ax,apk=null;for(ai=0;ai<AW.length;ai++)atot+=AW[ai][1];ax=Math.random()*atot;for(ai=0;ai<AW.length;ai++){ax-=AW[ai][1];if(ax<0){apk=AW[ai][0];break}}var aids=window.rinIds(),ainf=window.rinInv(),aix=-1;for(ai=0;ai<ainf.length;ai++)if(ainf[ai].name===apk){aix=ai;break}if(aix>=0&&window.rinGrant(aids[aix],1))ex='🎒 ひみつ道具「'+apk+'」ゲット！'}catch(er){}}else if(pz<.75){dd=8;ex='なかよし度 アップ！'}else{dd=-8;ex='なかよし度 ダウン…'}fin(msg,dd,bx,null,ex);return}dw(pr,pts,cum,false)},24)};
    cell.appendChild(b3);sel.appendChild(cell)})(k9)}}
 var STL={walk:'さんぽ中',idle:'のんびり中',meet:'おしゃべり中',tobed:'ねどこへ向かってるよ',sleep:'ぐっすりねんね'};
  function hmF(h){var m=Math.round(h*60)%1440;return('0'+(m/60|0)).slice(-2)+':'+('0'+m%60).slice(-2)}
