@@ -11171,68 +11171,203 @@ loadAll();
 </script>
 
 <style id="cz-table-css">
-.cz-bet{background:radial-gradient(ellipse at 50% 35%,#2f9a5a 0%,#1d6e3f 70%,#154f2e 100%)!important;color:#fff8e1!important;border:3px solid #e8b53a!important;border-radius:16px!important;box-shadow:inset 0 0 14px rgba(0,0,0,.45),0 3px 0 #9a6b12!important;padding:8px 10px 10px!important;margin:8px 0!important;text-align:center!important;font-size:14px!important;text-shadow:0 1px 2px rgba(0,0,0,.5)!important}
-.cz-bet .cz-stacks{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin-top:6px;min-height:34px}
-.cz-stk{display:flex;flex-direction:column-reverse;align-items:center;animation:czChipIn .35s ease-out both}
-.cz-chipc{width:24px;height:7px;border-radius:50%;margin-top:-4px;box-shadow:0 2px 0 rgba(0,0,0,.35),inset 0 0 0 2px rgba(255,255,255,.55)}
-.cz-chipc:first-child{margin-top:0}
-.cz-ck1{background:#f7f7f7}.cz-ck5{background:#e0132a}.cz-ck10{background:#2f6fd6}.cz-ck50{background:#1fa35a}.cz-ck100{background:#161616;box-shadow:0 2px 0 rgba(0,0,0,.35),inset 0 0 0 2px #e8b53a}
-@keyframes czChipIn{0%{transform:translateY(-14px) scale(.8);opacity:0}100%{transform:none;opacity:1}}
-.cz-chip{width:52px!important;height:52px!important;min-width:0!important;padding:0!important;border-radius:50%!important;font-size:13px!important;font-weight:900!important;color:#fff!important;border:4px dashed rgba(255,255,255,.85)!important;outline:3px solid rgba(0,0,0,.25)!important;box-shadow:0 4px 0 rgba(0,0,0,.35),inset 0 -3px 0 rgba(0,0,0,.2)!important;text-shadow:0 1px 2px rgba(0,0,0,.6)!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;transition:transform .12s}
-.cz-chip:active{transform:translateY(3px) scale(.96)}
-.cz-chip-1{background:radial-gradient(circle,#ffffff 0%,#dcdcdc 100%)!important;color:#333!important;text-shadow:none!important;border-color:#c33!important}
-.cz-chip-5{background:radial-gradient(circle,#ff4d5e 0%,#c0132a 100%)!important}
-.cz-chip-10{background:radial-gradient(circle,#5a9bff 0%,#2250b8 100%)!important}
-.cz-chip-50{background:radial-gradient(circle,#4fd98a 0%,#178148 100%)!important}
-.cz-chip-100{background:radial-gradient(circle,#4a4a4a 0%,#111 100%)!important;color:#ffd84a!important}
-.cz-deal{background:linear-gradient(180deg,#ff5a6e 0%,#d0163a 100%)!important;color:#fff!important;border:3px solid #ffe27a!important;outline:2px solid #b3001f!important;box-shadow:0 4px 0 #7a0010,0 0 14px rgba(255,210,80,.8)!important;text-shadow:0 2px 0 #7a0010!important;font-size:18px!important;letter-spacing:.08em!important;border-radius:999px!important;animation:czGlow 1.6s ease-in-out infinite}
+#cz-fx{position:fixed;inset:0;pointer-events:none;z-index:2147483000;overflow:hidden}
+/* ---- ベットテーブル ---- */
+.czg .cz-bet.cz-bet{position:relative;background:radial-gradient(ellipse at 50% 30%,#2f9a5a 0%,#1d6e3f 70%,#154f2e 100%)!important;border:3px solid #e8b53a;border-radius:16px;box-shadow:inset 0 0 14px rgba(0,0,0,.45),0 3px 0 #9a6b12;padding:8px 10px 10px;margin:8px 0;text-align:center;overflow:visible}
+.cz-bet-hd{display:flex;align-items:baseline;justify-content:center;gap:6px;flex-wrap:wrap}
+.cz-bet-lb{font-size:11px;font-weight:900;letter-spacing:.15em;color:#fff;background:#b3001f;border:2px solid #ffd23f;border-radius:999px;padding:0 8px;align-self:center}
+.cz-betnum{display:inline-block;font-size:30px;font-weight:900;line-height:1.1;color:#ffd84a;text-shadow:0 2px 0 #7a4a00,0 0 10px rgba(255,216,74,.7);font-variant-numeric:tabular-nums}
+.cz-betnum.cz-pulse{animation:czNumPulse .35s ease-out}
+.cz-bet-un{font-size:12px;color:#fff3c4}
+.cz-bet-sd{font-size:12px;color:#fff3c4}
+.cz-stacks{display:flex;justify-content:center;align-items:flex-end;gap:12px;margin:8px auto 0;min-height:40px;padding:8px 18px 4px;border:2px dashed rgba(255,248,225,.45);border-radius:999px;width:max-content;max-width:100%;box-sizing:border-box}
+.cz-stk{display:flex;flex-direction:column;align-items:center}
+.cz-stk.cz-stkp{animation:czStkP .3s ease-out}
+.cz-stkw{position:relative;width:26px}
+.cz-stk-lb{font-size:10px;font-weight:bold;margin-top:3px;color:#ffe9a0}
+.cz-empty{font-size:12px;color:#fff3c4;opacity:.75;align-self:center;padding:6px 0}
+.cz-chipc{position:absolute;left:0;width:26px;height:9px;border-radius:50%;box-shadow:0 2px 0 rgba(0,0,0,.4),inset 0 0 0 2px rgba(255,255,255,.6)}
+.cz-ck1{background:#f4f4f4}.cz-ck5{background:#e0132a}.cz-ck10{background:#2f6fd6}.cz-ck50{background:#1fa35a}.cz-ck100{background:#161616;box-shadow:0 2px 0 rgba(0,0,0,.4),inset 0 0 0 2px #e8b53a}
+@keyframes czNumPulse{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1)}}
+@keyframes czStkP{0%{transform:translateY(0)}40%{transform:translateY(-6px) scale(1.08)}100%{transform:none}}
+/* ---- チップボタン ---- */
+.czg button.cz-chip.cz-chip{width:52px!important;height:52px!important;min-width:0!important;padding:0!important;border-radius:50%!important;font-size:13px!important;font-weight:900!important;color:#fff!important;border:4px dashed rgba(255,255,255,.85)!important;outline:3px solid rgba(0,0,0,.25)!important;box-shadow:0 4px 0 rgba(0,0,0,.35),inset 0 -3px 0 rgba(0,0,0,.2)!important;text-shadow:0 1px 2px rgba(0,0,0,.6)!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;transition:transform .12s}
+.czg button.cz-chip.cz-chip:active{transform:translateY(3px) scale(.94)!important}
+.czg button.cz-chip-1.cz-chip{background:radial-gradient(circle,#fff 0%,#d8d8d8 100%)!important;color:#333!important;text-shadow:none!important;border-color:#c33!important}
+.czg button.cz-chip-5.cz-chip{background:radial-gradient(circle,#ff4d5e 0%,#c0132a 100%)!important}
+.czg button.cz-chip-10.cz-chip{background:radial-gradient(circle,#5a9bff 0%,#2250b8 100%)!important}
+.czg button.cz-chip-50.cz-chip{background:radial-gradient(circle,#4fd98a 0%,#178148 100%)!important}
+.czg button.cz-chip-100.cz-chip{background:radial-gradient(circle,#4a4a4a 0%,#111 100%)!important;color:#ffd84a!important}
+.czg button.cz-chip-all.cz-chip{background:radial-gradient(circle,#ffe27a 0%,#e09a00 100%)!important;color:#7a1020!important;border-color:#fff!important;font-size:0!important;text-shadow:none!important}
+.czg button.cz-chip-all.cz-chip::before{content:"ALL\A IN";white-space:pre;font-size:12px;line-height:1.05;font-weight:900;text-align:center}
+.czg button.cz-deal.cz-deal{background:linear-gradient(180deg,#ff5a6e 0%,#d0163a 100%)!important;color:#fff!important;border:3px solid #ffe27a!important;box-shadow:0 4px 0 #7a0010,0 0 14px rgba(255,210,80,.8)!important;text-shadow:0 2px 0 #7a0010!important;font-size:18px!important;letter-spacing:.08em!important;border-radius:999px!important;animation:czGlow 1.6s ease-in-out infinite!important}
 @keyframes czGlow{0%,100%{box-shadow:0 4px 0 #7a0010,0 0 10px rgba(255,210,80,.5)}50%{box-shadow:0 4px 0 #7a0010,0 0 22px rgba(255,230,120,1)}}
+/* ---- 残高バッジ ---- */
+.czg .cz-bal.cz-bal{font-size:14px!important;padding:3px 12px!important;background:linear-gradient(180deg,#2a1a05,#4a2f08)!important;color:#ffd84a!important;border:2px solid #ffd23f!important;box-shadow:0 2px 0 rgba(0,0,0,.4)!important;text-shadow:0 1px 0 #000!important;font-variant-numeric:tabular-nums}
+.czg .cz-bal.cz-fup{animation:czBalUp .9s ease-out}
+.czg .cz-bal.cz-fdn{animation:czBalDn .6s ease-out}
+@keyframes czBalUp{0%{transform:scale(1)}30%{transform:scale(1.2);box-shadow:0 0 0 3px #8dffa6,0 0 18px #3dff7a}100%{transform:scale(1)}}
+@keyframes czBalDn{0%{transform:translateX(0)}20%{transform:translateX(-4px);box-shadow:0 0 0 3px #ff8a98,0 0 14px #ff2d55}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}100%{transform:translateX(0)}}
+/* ---- 飛ぶチップ・コイン・数字 ---- */
+.cz-tok{position:fixed;left:0;top:0;width:30px;height:30px;border-radius:50%;border:3px dashed rgba(255,255,255,.9);box-sizing:border-box;display:flex;align-items:center;justify-content:center;font:900 10px sans-serif;color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.4);pointer-events:none;will-change:transform,opacity}
+.cz-tok.cz-coin{border:0;box-shadow:none;font-size:24px;background:none}
+.cz-tk1{background:radial-gradient(circle,#fff,#d8d8d8);color:#333;border-color:#c33}
+.cz-tk5{background:radial-gradient(circle,#ff4d5e,#c0132a)}
+.cz-tk10{background:radial-gradient(circle,#5a9bff,#2250b8)}
+.cz-tk50{background:radial-gradient(circle,#4fd98a,#178148)}
+.cz-tk100{background:radial-gradient(circle,#4a4a4a,#111);color:#ffd84a;border-color:#ffd84a}
+.cz-flt{position:fixed;transform:translate(-50%,-50%);font-weight:900;font-size:24px;white-space:nowrap;paint-order:stroke fill;animation:czFlt 1.2s ease-out forwards;pointer-events:none}
+.cz-gd{color:#ffe27a;-webkit-text-stroke:6px #7a4a00}
+.cz-rm{color:#ffb0b8;-webkit-text-stroke:6px #6a0014}
+.cz-up{color:#8dffa6;-webkit-text-stroke:6px #0b5a2a}
+.cz-dn{color:#ff8a98;-webkit-text-stroke:6px #5a0010}
+@keyframes czFlt{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}15%{opacity:1;transform:translate(-50%,-60%) scale(1.15)}100%{opacity:0;transform:translate(-50%,-190%) scale(1)}}
+.cz-allin-b{position:fixed;transform:translate(-50%,-50%);font-weight:900;font-size:40px;color:#ffd84a;-webkit-text-stroke:8px #b3001f;paint-order:stroke fill;text-shadow:0 0 18px #ff9a00;letter-spacing:.06em;white-space:nowrap;animation:czAll 1.3s ease-out forwards;pointer-events:none}
+@keyframes czAll{0%{opacity:0;transform:translate(-50%,-50%) scale(.3) rotate(-8deg)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.25) rotate(3deg)}40%{transform:translate(-50%,-50%) scale(1) rotate(0)}85%{opacity:1}100%{opacity:0;transform:translate(-50%,-60%) scale(1.05)}}
 </style>
 <script>
 (function(){
- var DEN=[100,50,10,5,1];
- function stacks(n){
-  var row=document.createElement('div');row.className='cz-stacks';
-  var left=n;
-  DEN.forEach(function(d){
-   var c=Math.floor(left/d);left-=c*d;
-   if(c<=0)return;
-   var st=document.createElement('div');st.className='cz-stk';
-   var k=Math.min(c,6);
-   for(var i=0;i<k;i++){var ch=document.createElement('div');ch.className='cz-chipc cz-ck'+d;st.appendChild(ch)}
-   var lb=document.createElement('div');lb.style.cssText='font-size:10px;font-weight:bold;margin-top:3px;color:#ffe9a0';lb.textContent=d*c+'';
-   st.appendChild(lb);row.appendChild(st);
-  });
-  if(!row.childNodes.length){var e=document.createElement('div');e.style.cssText='font-size:12px;opacity:.7;align-self:center';e.textContent='テーブルに チップを おいてね';row.appendChild(e)}
-  return row;
- }
- function scan(){
-  var pops=document.querySelectorAll('div[style*="rgba(36,20,38,.55)"]');
-  for(var i=0;i<pops.length;i++){
-   var pop=pops[i];
-   var btns=pop.querySelectorAll('button');
-   for(var j=0;j<btns.length;j++){
-    var b=btns[j],t=(b.textContent||'').trim();
-    if(/^\+\d+$/.test(t)&&!b.classList.contains('cz-chip')){b.classList.add('cz-chip','cz-chip-'+t.slice(1))}
-    if(/ディール|スタート/.test(t)&&!b.classList.contains('cz-deal')){b.classList.add('cz-deal')}
-   }
-   var divs=pop.querySelectorAll('div');
-   for(var k=0;k<divs.length;k++){
-    var d=divs[k];
-    if(d.dataset.czbet)continue;
-    if(d.children.length===0&&/^かける数：/.test(d.textContent||'')){
-     d.dataset.czbet='1';
-     var m=/かける数：(\d+)/.exec(d.textContent);
-     var n=m?parseInt(m[1],10):0;
-     d.classList.add('cz-bet');
-     d.appendChild(stacks(n));
-    }
-   }
+ var DEN=[100,50,10,5,1],RM=false;
+ try{RM=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)}catch(e){}
+ var SEL='div[style*="rgba(36,20,38,.55)"]';
+ var S={bet:0,counts:{},bal:null,dealBet:0,dealCounts:{},tbl:null,click:null,fxTs:0};
+ var fx=null;
+ function mk(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+ function layer(){if(!fx||!fx.isConnected){fx=mk('div');fx.id='cz-fx';document.body.appendChild(fx)}return fx}
+ function cnt(n){var o={},l=n;DEN.forEach(function(d){o[d]=Math.floor(l/d);l-=o[d]*d});return o}
+ function fmtP(v){return '🪙 '+v+' リナコイン'}
+ function ctr(r){return{x:r.left+r.width/2,y:r.top+r.height/2}}
+ function tok(d){var e=d==='coin'?mk('div','cz-tok cz-coin','🪙'):mk('div','cz-tok cz-tk'+d,String(d));layer().appendChild(e);return e}
+ function pulse(el,cls){el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls)}
+ function cardOf(pop){return pop.querySelector(':scope > div:not(.czamb)')}
+ /* チップ／コインを (x0,y0) から (x1,y1) へ弧を描いて飛ばす */
+ function fly(d,x0,y0,x1,y1,o){o=o||{};
+  if(RM){if(o.done)o.done();return}
+  setTimeout(function(){
+   var e=tok(d),mx=(x0+x1)/2+(o.mx||0),my=Math.min(y0,y1)-(o.arc==null?50:o.arc),es=o.es||'.8,.3';
+   var kf=[{transform:'translate('+(x0-15)+'px,'+(y0-15)+'px) scale(1.2) rotate(0deg)',opacity:1},
+    {transform:'translate('+(mx-15)+'px,'+(my-15)+'px) scale(1.05) rotate(200deg)',opacity:1,offset:.55},
+    {transform:'translate('+(x1-15)+'px,'+(y1-15)+'px) scale('+es+') rotate(360deg)',opacity:o.fade?0:1}];
+   var a;try{a=e.animate(kf,{duration:o.dur||460,easing:'ease-in-out',fill:'forwards'})}catch(er){e.remove();if(o.done)o.done();return}
+   a.onfinish=function(){try{e.remove()}catch(er){}if(o.done)o.done()};
+  },o.delay||0)}
+ function flt(x,y,t,c){var e=mk('div','cz-flt '+c,t);e.style.left=x+'px';e.style.top=y+'px';layer().appendChild(e);setTimeout(function(){try{e.remove()}catch(er){}},1300)}
+ function num(el,a,b,fmt,ms){
+  if(RM||a===b){el.textContent=fmt(b);return}
+  var t0=performance.now();ms=ms||400;
+  (function st(now){var p=Math.max(0,Math.min(1,(now-t0)/ms)),e=1-Math.pow(1-p,3);
+   el.textContent=fmt(Math.round(a+(b-a)*e));
+   if(p<1&&el.isConnected)requestAnimationFrame(st);else el.textContent=fmt(b)})(t0)}
+ /* 残高バッジ：数字がカウントして、増減を浮かせて見せる */
+ function doPill(el,v){
+  el.classList.add('cz-bal');var p=S.bal;S.bal=v;
+  if(p===null||p===v||RM){el.textContent=fmtP(v);return}
+  el.textContent=fmtP(p);
+  num(el,p,v,fmtP,Math.min(900,350+Math.abs(v-p)*8));
+  el.classList.add(v>p?'cz-fup':'cz-fdn');
+  var r=el.getBoundingClientRect();
+  flt(r.left+r.width/2,r.top-4,(v>p?'+':'−')+Math.abs(v-p),v>p?'cz-up':'cz-dn')}
+ /* ベットテーブル */
+ function doBet(el,n,sd,pill,pv){
+  var pb=S.bet,pc=S.counts,old=S.tbl,ck=(S.click&&Date.now()-S.click.ts<900)?S.click:null;S.click=null;
+  var c=cnt(n),all=!!(ck&&ck.t==='all'&&n>pb);
+  el.textContent='';el.classList.add('cz-bet');
+  var hd=mk('div','cz-bet-hd'),nm=mk('span','cz-betnum',String(RM?n:pb));
+  hd.append(mk('span','cz-bet-lb','BET'),nm,mk('span','cz-bet-un','リナコイン'));
+  if(sd)hd.appendChild(mk('span','cz-bet-sd',sd));
+  var row=mk('div','cz-stacks'),stacks={},any=false;
+  DEN.forEach(function(d){var k=c[d];if(!k)return;any=true;
+   var st=mk('div','cz-stk'),v=Math.min(k,6),w=mk('div','cz-stkw'),ds=[];
+   w.style.height=(9+(v-1)*5)+'px';
+   for(var i=0;i<v;i++){var x=mk('div','cz-chipc cz-ck'+d);x.style.bottom=(i*5)+'px';w.appendChild(x);ds.push(x)}
+   st.append(w,mk('div','cz-stk-lb',String(d*k)));row.appendChild(st);stacks[d]={st:st,ds:ds,c:k}});
+  if(!any)row.appendChild(mk('div','cz-empty','ここに チップを おいてね'));
+  el.append(hd,row);
+  var r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  S.tbl={x:cx,y:cy};S.dealBet=n;S.dealCounts=c;S.bet=n;S.counts=c;
+  num(nm,pb,n,String,380);
+  if(n!==pb){pulse(nm,'cz-pulse');flt(cx,r.top+14,(n>pb?'+':'−')+Math.abs(n-pb),n>pb?'cz-gd':'cz-rm')}
+  if(pill)doPill(pill,pv-n);
+  if(RM)return;
+  if(n>pb){
+   var list=[];
+   DEN.forEach(function(d){var s=stacks[d];if(!s)return;var p=pc[d]||0;
+    if(all){s.ds.forEach(function(x){list.push([d,x])})}
+    else if(s.c>p){var nv=Math.min(s.c,6)-Math.min(p,6);if(nv<=0)pulse(s.st,'cz-stkp');
+     for(var i=s.ds.length-nv;i<s.ds.length;i++)if(i>=0)list.push([d,s.ds[i]])}});
+   var o=(ck&&(ck.t==='add'||ck.t==='all'))?{x:ck.x,y:ck.y}:{x:cx,y:r.top-70},played=false,gap=all?28:55;
+   list.forEach(function(p,i){var x=p[1];x.style.opacity='0';var q=x.getBoundingClientRect();
+    fly(p[0],o.x,o.y,q.left+q.width/2,q.top+q.height/2,{delay:i*gap,dur:440,done:function(){
+     x.style.opacity='1';try{x.animate([{transform:'translateY(-6px)'},{transform:'translateY(0)'}],{duration:150,easing:'ease-out'})}catch(er){}
+     if(!played){played=true;try{sfx('place')}catch(er){}}}})});
+   setTimeout(function(){list.forEach(function(p){p[1].style.opacity='1'})},list.length*gap+900);
+   if(all){
+    var b=mk('div','cz-allin-b','ALL IN!');b.style.left=cx+'px';b.style.top=cy+'px';layer().appendChild(b);setTimeout(function(){try{b.remove()}catch(er){}},1400);
+    var root=el.closest('.czg'),cd=root&&cardOf(root);
+    if(cd&&cd.animate)cd.animate([{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}],{duration:240,iterations:2})}
+  }else if(n<pb){
+   /* 引っこめたチップが残高へもどっていく */
+   var src=old||{x:cx,y:cy},tg=pill?ctr(pill.getBoundingClientRect()):{x:cx,y:cy-120},ch=[];
+   DEN.forEach(function(d){var k=Math.min(pc[d]||0,3);for(var i=0;i<k;i++)ch.push(d)});
+   ch.slice(0,10).forEach(function(d,i){fly(d,src.x+(Math.random()-.5)*50,src.y+(Math.random()-.5)*20,tg.x,tg.y,{delay:i*35,dur:520,fade:true,es:'.6',arc:60})})
   }
  }
- var t=null;
- new MutationObserver(function(){clearTimeout(t);t=setTimeout(scan,30)})
-  .observe(document.body,{childList:true,subtree:true,characterData:true});
+ function reset(full){S.bet=0;S.counts={};S.bal=null;if(full){S.dealBet=0;S.dealCounts={};S.tbl=null}}
+ function num0(t){return parseInt(/\d+/.exec(t)[0],10)}
+ function scan(){
+  var pops=document.querySelectorAll(SEL);
+  if(!pops.length){reset(true);return}
+  var pop=pops[pops.length-1];
+  if(!pop.classList.contains('czg')){reset(true);return}
+  /* ボタンをチップ風に */
+  var bs=pop.querySelectorAll('button');
+  for(var j=0;j<bs.length;j++){var b=bs[j];if(b.dataset.czb)continue;var t=(b.textContent||'').trim(),m=/^\+(\d+)$/.exec(t);
+   if(m){b.classList.add('cz-chip','cz-chip-'+m[1]);b.dataset.czb='1'}
+   else if(t==='ぜんぶ'){b.classList.add('cz-chip','cz-chip-all');b.dataset.czb='1'}
+   else if(/ディール|スタート|まわす/.test(t)){b.classList.add('cz-deal');b.dataset.czb='1'}}
+  var nb=null,np=null,hasBet=!!pop.querySelector('.cz-bet'),hasPill=!!pop.querySelector('.cz-bal'),ds=pop.querySelectorAll('div');
+  for(var i=0;i<ds.length;i++){var d=ds[i];if(d.children.length)continue;var tx=d.textContent||'';
+   if(!nb&&/^かける数：\d+ リナコイン/.test(tx))nb=d;
+   else if(!np&&!d.classList.contains('cz-bal')&&/^🪙 \d+ リナコイン$/.test(tx))np=d}
+  if(nb){var mm=/^かける数：(\d+) リナコイン(.*)$/.exec(nb.textContent);
+   if(mm){doBet(nb,parseInt(mm[1],10),mm[2],np,np?num0(np.textContent):null);return}}
+  if(!hasBet){S.bet=0;S.counts={}}
+  if(np){doPill(np,num0(np.textContent));return}
+  if(!hasBet&&!hasPill){var all=pop.textContent||'';if(/バカラ/.test(all)&&/ブラックジャック/.test(all)&&/ポーカー/.test(all))reset(true)}
+ }
+ /* ---- 勝ち・負けの演出 ---- */
+ function winFx(pop){
+  if(RM)return;
+  var p=pop.querySelector('.cz-bal'),t=S.tbl||{x:innerWidth/2,y:innerHeight/2},tg,cd=cardOf(pop);
+  if(p)tg=ctr(p.getBoundingClientRect());else if(cd){var r2=cd.getBoundingClientRect();tg={x:r2.right-30,y:r2.top+40}}else tg={x:t.x,y:t.y-150};
+  var list=[];DEN.forEach(function(d){var k=Math.min(S.dealCounts[d]||0,3);for(var i=0;i<k;i++)list.push(d)});
+  for(var i=0;i<14;i++)list.push('coin');
+  list.forEach(function(d,i){fly(d,t.x+(Math.random()-.5)*90,t.y+(Math.random()-.5)*50,tg.x,tg.y,{delay:i*45,dur:560+Math.random()*200,arc:60+Math.random()*80,mx:(Math.random()-.5)*120,es:d==='coin'?'.7':'.6',fade:true})});
+  if(p)setTimeout(function(){if(p.isConnected)pulse(p,'cz-fup')},520)}
+ function loseFx(pop){
+  var t=S.tbl||{x:innerWidth/2,y:innerHeight/2},p=pop.querySelector('.cz-bal'),amt=S.dealBet;
+  if(!RM){
+   var list=[];DEN.forEach(function(d){var k=Math.min(S.dealCounts[d]||0,4);for(var i=0;i<k;i++)list.push(d)});
+   list.slice(0,14).forEach(function(d,i){fly(d,t.x+(Math.random()-.5)*60,t.y+(Math.random()-.5)*24,t.x+(Math.random()-.5)*160,-50,{delay:i*40,dur:650,arc:10,fade:true,es:'.5'})});
+   flt(t.x,t.y,'−'+amt,'cz-dn');
+   if(p)pulse(p,'cz-fdn')}
+  S.dealBet=0;S.dealCounts={}}
+ function ev(k){
+  if(k!=='win'&&k!=='clear'&&k!=='star'&&k!=='lose')return;
+  var pops=document.querySelectorAll(SEL);if(!pops.length)return;
+  var pop=pops[pops.length-1];
+  if(!pop.classList.contains('czg')||pop.querySelector('.cz-bet')||S.dealBet<=0)return;
+  var now=Date.now();if(now-S.fxTs<600)return;S.fxTs=now;
+  if(k==='lose')loseFx(pop);else winFx(pop)}
+ var _s=window.sfx;
+ if(typeof _s==='function')window.sfx=function(k){var r=_s.apply(this,arguments);try{ev(k)}catch(e){}return r};
+ document.addEventListener('click',function(e){
+  var b=e.target&&e.target.closest?e.target.closest('button'):null;if(!b)return;
+  var t=(b.textContent||'').trim(),c=null,m=/^\+(\d+)$/.exec(t);
+  if(m)c={t:'add',v:+m[1]};else if(t==='ぜんぶ')c={t:'all'};else if(t==='クリア')c={t:'clear'};
+  if(c){var r=b.getBoundingClientRect();c.x=r.left+r.width/2;c.y=r.top+r.height/2;c.ts=Date.now();S.click=c}},true);
+ var tm=null;
+ new MutationObserver(function(){clearTimeout(tm);tm=setTimeout(scan,30)}).observe(document.body,{childList:true,subtree:true,characterData:true});
 })();
 </script>
 </body></html>
