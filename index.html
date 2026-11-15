@@ -3645,7 +3645,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
      function sb(t,f){var b=sEl('button','padding:4px 10px;font-size:12px',t);b.classList.add('bcb');b.onclick=f;return b}
      E.un=sb('↶ リセット',function(){if(phase!=='bet')return;var h=hist.pop();if(h)bets[h[0]]-=h[1];paint()});E.cl=sb('クリア',function(){if(phase==='play'||phase==='peek')return;if(phase==='result'){reset();return}bets=[0,0,0];hist=[];paint()});
      E.rb=sb('もういちど',function(){if(phase==='play'||phase==='peek')return;reset();if(sum(last)>0&&sum(last)<=cg())bets=last.slice();hist=[];paint()});
-     E.dl=gbtn('ディール','flex:1;min-width:96px;font-size:15px;padding:4px 14px');E.dl.classList.add('bcb');E.dl.onclick=deal;ctl.append(E.un,E.cl,E.rb,E.dl);
+     E.dl=gbtn('ディール','flex:1;min-width:96px;font-size:15px;padding:4px 14px');E.dl.classList.add('bcb');E.dl.onclick=deal;ctl.append(E.cl,E.rb,E.dl);
      E.cr=led('0','font-size:16px');E.net=sEl('div','font-weight:900;font-size:15px;min-width:84px;text-align:left');var cb=sEl('div','display:flex;align-items:center;gap:8px'),bt2=sEl('div','display:flex;gap:6px;margin-left:auto'),
       rl=sEl('div','display:none;position:absolute;inset:0;z-index:30;overflow-y:auto;font-size:13px;line-height:1.7;white-space:pre-line;background:rgba(0,22,10,.96);border:1px solid rgba(230,194,90,.6);border-radius:10px;padding:12px','【バカラの ルール】\n2まいの 合計の 1の位が「てん」です（A=1、10・J・Q・K=0）。9に ちかいほうの勝ち。\n8か9は「ナチュラル」で その場で 決着。それ以外は ルールで 3まいめが 配られます。\n当たると：プレイヤー 2倍 ／ バンカー 2倍 ／ タイ 10倍\n（プレイヤー・バンカーに かけた分は、タイのとき もどります）\nプレイヤー・バンカー・タイに 同時に かけられます。\n\n▼ タップして とじる');
      rl.onclick=function(){showR=false;rl.style.display='none'};
@@ -3799,7 +3799,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
         9:[[L,.1],[R,.1],[L,.37],[R,.37],[C,.5],[L,.63],[R,.63],[L,.9],[R,.9]],
         10:[[L,.1],[R,.1],[C,.23],[L,.37],[R,.37],[L,.63],[R,.63],[C,.77],[L,.9],[R,.9]]};
        if(n===1)pip(C,C,'30px');
-       else if(n>=11){pip(C,.12,'10px');pip(C,.5,'26px');var k=pa.lastChild;k.textContent=rk;pip(C,.88,'10px')}
+       else if(n>=11){pip(C,.5,'26px');var k=pa.lastChild;k.textContent=rk}
        else LY[n].forEach(function(p){pip(p[0],p[1],'11px')})}
      }
      return e}
@@ -11729,7 +11729,7 @@ document.querySelectorAll('.czg div').forEach(function(d){if(d.children.length)r
 document.querySelectorAll('.czg>div:not(.czamb):not([style*="pointer-events"])>div:first-child').forEach(function(h){var s=h.querySelector('.czhud');if(!s){s=document.createElement('span');s.className='czhud';h.insertBefore(s,h.lastElementChild)}var n=String(parseInt(localStorage.getItem(K)||'0',10)||0);if(s.getAttribute('data-n')!==n){s.setAttribute('data-n',n);s.textContent='';var c=document.createElement('span');c.className='czi';s.appendChild(c);s.appendChild(document.createTextNode(' '+n))}});
 document.querySelectorAll('.czg,div[style*="99999"]').forEach(icons);
 var clr=q('\u30af\u30ea\u30a2'),bd=document.querySelector('.czg .czbet');
-if(clr&&bd&&!document.querySelector('.czg .bcspot')&&!/ブラックジャック|ポーカー/.test((document.querySelector('.czg')||{}).textContent||'')){var m2=/(\d+)/.exec(bd.textContent||''),cur=m2?+m2[1]:0;
+if(false&&clr&&bd&&!document.querySelector('.czg .bcspot')&&!/ブラックジャック|ポーカー/.test((document.querySelector('.czg')||{}).textContent||'')){var m2=/(\d+)/.exec(bd.textContent||''),cur=m2?+m2[1]:0;
  if(sum(UH)!==cur){if(lastN!==null&&sum(UH)+lastN===cur)UH.push(lastN);else UH=greedy(cur)}lastN=null;
  var ub=clr.parentNode.querySelector('.czundo');if(!ub){ub=document.createElement('button');ub.className='czundo czutil';ub.textContent='\u21b6 \u30ea\u30bb\u30c3\u30c8';ub.onclick=undo;clr.parentNode.insertBefore(ub,clr)}ub.disabled=cur<1}
 }catch(e){}}
@@ -11818,4 +11818,43 @@ document.addEventListener('click',function(e){var b=e.target&&e.target.closest?e
 var tm;new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){var n=ms[i].target;if(!(n.closest&&n.closest('.dlr,.cz-fx'))){clearTimeout(tm);tm=setTimeout(scan,50);return}}}).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
-</body></html>
+<style id="fit-css">
+/* ===== ギャンブル画面：コンパクト化＆画面フィット ===== */
+html body .czg.czg.czg.czg>div:not(.czamb):not([style*="pointer-events"]){max-height:100%!important}
+html body .czg.czg.czg.czg>div:not(.czamb):not([style*="pointer-events"])>div:first-child{padding:calc(env(safe-area-inset-top,0px) + 6px) 12px 4px!important;font-size:14px!important;min-height:0!important}
+html body .czg.czg.czg.czg>div:not(.czamb):not([style*="pointer-events"])>div:first-child button{width:28px!important;height:28px!important;font-size:13px!important}
+html body .czg.czg.czg.czg>div:not(.czamb):not([style*="pointer-events"])>div:first-child .czhud{font-size:12px!important;padding:2px 8px!important}
+html body .czg.czg.czg.czg>div:not(.czamb):not([style*="pointer-events"])>div:last-child{padding:4px 10px calc(env(safe-area-inset-bottom,0px) + 10px)!important;overflow-x:hidden!important}
+html body .czg.czg.czg.czg .dlr,html body .czg.czg.czg.czg .dlr .dl-svg{height:54px!important}
+html body .czg.czg.czg.czg .dlr{margin:0 0 2px!important}
+html body .czg.czg.czg.czg .dlr::after{height:12px!important}
+html body .czg.czg.czg.czg .dl-bub{font-size:11px!important;padding:2px 8px!important}
+html body .czg.czg.czg.czg button:not(.sb-card){font-size:12px!important;min-height:26px!important;padding:3px 10px!important;letter-spacing:.02em!important;border-radius:6px!important;box-shadow:0 2px 0 #6b4a08!important}
+html body .czg.czg.czg.czg button.bcb:not(.sb-card){min-height:28px!important;padding:0 9px!important;font-size:12px!important}
+html body .czg.czg.czg.czg button.bcb.sb-go:not(.sb-card),html body .czg.czg.czg.czg button.sb-go:not(.sb-card){font-size:14px!important;min-height:32px!important}
+html body .czg.czg.czg.czg button.czchip[style]:not(.sb-card):not(.zz){width:42px!important;height:42px!important;font-size:12px!important;padding:0!important}
+html body .czg.czg.czg.czg .bcchip{width:34px!important;height:34px!important;font-size:11px!important}
+html body .czg.czg.czg.czg button.czundo{white-space:nowrap!important;min-width:0!important;padding:3px 8px!important;flex:none!important}
+html body .czg.czg.czg.czg .czbet{margin:4px auto!important;padding:3px 10px!important;font-size:13px!important}
+html body .czg.czg.czg.czg .czbet::before,html body .czg.czg.czg.czg .czbet::after{font-size:10px!important}
+html body .czg.czg.czg.czg>div:not(.czamb):not([style*="pointer-events"])>div:last-child>div[style*="ffeef6" i],html body .czg.czg.czg.czg>div:not(.czamb):not([style*="pointer-events"])>div:last-child>div[style*="255, 238, 246"]{padding:3px 8px!important;font-size:12px!important;margin-bottom:3px!important;line-height:1.25!important}
+html body .czg.czg.czg.czg div[style*="grid-template-columns"]{gap:6px!important;margin-top:4px!important}
+html body .czg.czg.czg.czg div[style*="grid-template-columns"]>button[style]:not(.sb-card){min-height:52px!important;font-size:14px!important;gap:2px!important}
+</style><script>
+(function(){
+var busy=0,tm=0;
+function panel(g){for(var i=0;i<g.children.length;i++){var c=g.children[i];if(!c.classList.contains('czamb')&&(c.getAttribute('style')||'').indexOf('pointer-events')<0&&c.children.length>=2)return c}return null}
+function fits(bd,z){return bd.scrollHeight<=bd.clientHeight+1}
+function fit(){busy=0;try{
+ var g=document.querySelector('.czg');if(!g)return;var p=panel(g);if(!p)return;var bd=p.lastElementChild;if(!bd)return;
+ var set=function(z){bd.style.setProperty('zoom',z,'important');bd.style.setProperty('max-width',z<1?(560/z)+'px':'560px','important')};
+ set(1);
+ if(!fits(bd,1)){var lo=.4,hi=1;for(var i=0;i<9;i++){var m=(lo+hi)/2;set(m);if(fits(bd,m))lo=m;else hi=m}set(lo)}
+ bd.style.setProperty('overflow-y','auto','important');
+}catch(e){}}
+function sched(){if(busy)return;busy=1;clearTimeout(tm);tm=setTimeout(fit,60)}
+new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){var t=ms[i].target;if(t.closest&&t.closest('.czg')&&!t.closest('.cz-fx')){sched();return}}if(document.querySelector('.czg'))sched()}).observe(document.body,{childList:true,subtree:true,characterData:true});
+window.addEventListener('resize',sched);window.addEventListener('orientationchange',sched);
+setInterval(function(){try{var g=document.querySelector('.czg');if(!g)return;var p=panel(g);if(!p)return;var bd=p.lastElementChild,z=parseFloat(bd.style.zoom)||1;if(!fits(bd,z))fit()}catch(e){}},700);
+})();
+</script></body></html>
