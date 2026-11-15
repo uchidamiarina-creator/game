@@ -3646,7 +3646,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
      w.append(ti,top,E.ban,E.msg,band,sp,tray,ctl,cb,ft,rl);bd.appendChild(w);reset();paint()}
     function bt(){build()}
    bt()}
-  function openBlackjack(msg){var RK='miarina_td_medal_v1',bet=0,cur=0,m=msg||'いらっしゃい！ 21に ちかづけたほうが 勝ちだよ',P,D,SU=['\u2660','\u2665','\u2666','\u2663'],rules=false;
+  function openBlackjack(msg){var RK='miarina_td_medal_v1',bet=0,cur=0,m=msg||'いらっしゃい！ 21に ちかづけたほうが 勝ちだよ',HS=[],ai=0,D,SU=['\u2660','\u2665','\u2666','\u2663'],rules=false;
    function cg(){try{return Math.max(0,parseInt(localStorage.getItem(RK)||'0',10)||0)}catch(e){return 0}}
    function cs(n){try{localStorage.setItem(RK,String(Math.max(0,n|0)))}catch(e){}}
    function dr(){return{r:1+Math.floor(Math.random()*13),s:Math.floor(Math.random()*4)}}
@@ -3667,37 +3667,45 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     var dl=gbtn('🃏 ディール！','display:block;width:100%;margin-top:10px;font-size:16px;padding:9px 12px');if(bet<1)dl.disabled=true;dl.onclick=deal;bd.appendChild(dl);
     var rb=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f',rules?'ルールを とじる':'📖 ブラックジャックのルール');rb.onclick=function(){rules=!rules;bt()};bd.appendChild(rb);
     var bk=sEl('button','display:block;margin:6px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk);
-    if(rules){var ru=sEl('div','font-size:11.5px;color:#8a3a6a;background:#fff;border:2px dashed #f0c8dc;border-radius:10px;padding:8px;margin-top:6px;line-height:1.6;white-space:pre-line','カードの数：2〜10はそのまま、J・Q・K=10、Aは1か11（ best なほう）。\n合計が 21に ちかい人の勝ち。21を こえたら「バースト」で まけ。\n「ヒット」でカードを1まい もらう／「スタンド」でやめる／「ダブル」は かけ金を 2ばいにして 1まいだけ もらうよ（さいしょの2まいのときだけ）。\nディーラーは 17いじょうに なるまで ひくよ。\n勝つと 2倍。さいしょの2まいで 21の「ブラックジャック」は 2.5倍。同点は かけ金が もどるよ。');bd.appendChild(ru)}}
+    if(rules){var ru=sEl('div','font-size:11.5px;color:#8a3a6a;background:#fff;border:2px dashed #f0c8dc;border-radius:10px;padding:8px;margin-top:6px;line-height:1.6;white-space:pre-line','カードの数：2〜10はそのまま、J・Q・K=10、Aは1か11（ best なほう）。\n合計が 21に ちかい人の勝ち。21を こえたら「バースト」で まけ。\n「ヒット」でカードを1まい もらう／「スタンド」でやめる／「ダブル」は かけ金を 2ばいにして 1まいだけ もらうよ（さいしょの2まいのときだけ）。「スプリット」は 同じ数の2まいを 2つの手に わけるよ（かけ金も もう1つぶん いるよ）。\nディーラーは 17いじょうに なるまで ひくよ。\n勝つと 2倍。21で 勝つと 3倍。さいしょの2まいで 21の「ブラックジャック」は 5倍！ ダブルや スプリットで 勝つと 実質 4倍（かけ金が 2つぶんに なるため）。同点は かけ金が もどるよ。');bd.appendChild(ru)}}
    function deal(){var have=cg();if(bet<1||bet>have){try{sfx('deny')}catch(er){}m='かけるメダルが たりないよ';bt();return}
-    cs(have-bet);cur=bet;P=[dr(),dr()];D=[dr(),dr()];try{sfx('place')}catch(er){}
-    if(isBJ(P)||isBJ(D))fin();else show()}
+    cs(have-bet);cur=bet;HS=[{c:[dr(),dr()],b:bet,dbl:0,sp:0}];ai=0;D=[dr(),dr()];try{sfx('place')}catch(er){}
+    if(isBJ(HS[0].c)||isBJ(D))fin();else show()}
    function row(h,hide,lab,col){var w=sEl('div','background:'+col+';border-radius:12px;padding:6px;margin-bottom:6px'),cc=sEl('div','display:flex;gap:4px;flex-wrap:wrap;justify-content:center;min-height:50px');h.forEach(function(c,i){cc.appendChild(cardEl(c,hide&&i===1))});
     w.append(sEl('div','text-align:center;font-size:12px;font-weight:bold;color:#7a3b2e;margin-bottom:4px',lab+(hide?'':'：'+hv(h)+'てん')),cc);return w}
-   function table(hide,bd){bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#8a3a6a;margin-bottom:6px','かけ金 '+cur+' メダル'));bd.appendChild(row(D,hide,'ディーラー','#ffeaf3'));bd.appendChild(row(P,false,'あなた','#eaf2ff'))}
-   function show(){var bd=shpBox('🃏 ブラックジャック'),ar=sEl('div','display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px');table(true,bd);
-    var h=gbtn('ヒット'),s=gbtn('スタンド'),d=gbtn('ダブル');
-    h.onclick=function(){P.push(dr());try{sfx('place')}catch(er){}if(hv(P)>=21)fin();else show()};
-    s.onclick=fin;
-    if(P.length>2||cg()<cur)d.disabled=true;d.onclick=function(){cs(cg()-cur);cur*=2;P.push(dr());try{sfx('place')}catch(er){}fin()};
-    ar.append(h,s,d);bd.appendChild(ar)}
-   function fin(){var bd=shpBox('🃏 ブラックジャック'),pv=hv(P),pb=isBJ(P),db=isBJ(D),ret,msg2;
-    if(pv<=21&&!pb&&!db)while(hv(D)<17)D.push(dr());
+   function table(hide,bd){bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#8a3a6a;margin-bottom:6px','かけ金 '+cur+' メダル'));bd.appendChild(row(D,hide,'ディーラー','#ffeaf3'));
+    HS.forEach(function(x,i){bd.appendChild(row(x.c,false,'あなた'+(HS.length>1?(i+1):'')+(x.dbl?'（ダブル）':'')+(hide&&i===ai&&HS.length>1?' 👈':''),'#eaf2ff'))})}
+   function nxt(){if(ai<HS.length-1){ai++;show()}else fin()}
+   function show(){var x=HS[ai];if(x.sp&&hv(x.c)>=21){nxt();return}
+    var bd=shpBox('🃏 ブラックジャック'),ar=sEl('div','display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px');table(true,bd);
+    var h=gbtn('ヒット'),s=gbtn('スタンド'),d=gbtn('ダブル'),p=gbtn('スプリット');
+    h.onclick=function(){x.c.push(dr());try{sfx('place')}catch(er){}if(hv(x.c)>=21)nxt();else show()};
+    s.onclick=nxt;
+    if(x.c.length>2||cg()<x.b)d.disabled=true;d.onclick=function(){cs(cg()-x.b);cur+=x.b;x.b*=2;x.dbl=1;x.c.push(dr());try{sfx('place')}catch(er){}nxt()};
+    if(x.c.length!==2||HS.length>=2||vl(x.c[0])!==vl(x.c[1])||cg()<x.b)p.disabled=true;
+    p.onclick=function(){cs(cg()-x.b);cur+=x.b;var c2=x.c.pop();x.c.push(dr());x.sp=1;HS.splice(ai+1,0,{c:[c2,dr()],b:x.b,dbl:0,sp:1});try{sfx('place')}catch(er){}show()};
+    ar.append(h,s,d,p);bd.appendChild(ar)}
+   function fin(){var bd=shpBox('🃏 ブラックジャック'),db=isBJ(D),ret=0,ms=[],dbl=false;ai=-1;
+    function nat(x){return !x.sp&&isBJ(x.c)}
+    if(!db&&HS.some(function(x){return hv(x.c)<=21&&!nat(x)}))while(hv(D)<17)D.push(dr());
     var dv=hv(D);
-    if(pv>21){ret=0;msg2='バースト… まけちゃった'}
-    else if(pb&&!db){ret=cur+Math.floor(cur*1.5);msg2='🎉 ブラックジャック！'}
-    else if(db&&!pb){ret=0;msg2='ディーラーが ブラックジャック…'}
-    else if(db&&pb){ret=cur;msg2='どっちも ブラックジャック（引き分け）'}
-    else if(dv>21){ret=cur*2;msg2='🎉 ディーラーが バースト！ あなたの勝ち'}
-    else if(pv>dv){ret=cur*2;msg2='🎉 あなたの勝ち！'}
-    else if(pv===dv){ret=cur;msg2='同点（引き分け）… かけ金は もどるよ'}
-    else{ret=0;msg2='ディーラーの勝ち…'}
+    HS.forEach(function(x,i){var pv=hv(x.c),n=nat(x),r,t,k;
+     if(pv>21){r=0;t='バースト… まけ'}
+     else if(n&&!db){r=x.b*5;t='🎉 ブラックジャック！ 5倍'}
+     else if(db&&!n){r=0;t='ディーラーが ブラックジャック…'}
+     else if(db&&n){r=x.b;t='どっちも ブラックジャック（引き分け）'}
+     else if(dv>21||pv>dv){k=pv===21?3:2;r=x.b*k;t='🎉 '+(dv>21?'ディーラーが バースト！ ':'')+(pv===21?'21で 勝ち！ ':'勝ち！ ')+k+'倍'}
+     else if(pv===dv){r=x.b;t='同点（引き分け）'}
+     else{r=0;t='ディーラーの勝ち…'}
+     if(x.dbl)dbl=true;ret+=r;ms.push((HS.length>1?'ハンド'+(i+1)+'：':'')+t+(x.dbl?'（ダブル）':''))});
+    var msg2=ms.join(' ／ ');if((HS.length>1||dbl)&&ret>0)msg2+='　元のかけ金の '+(Math.round(ret/bet*10)/10)+'倍！';
     cs(cg()+ret);var net=ret-cur;table(false,bd);
     bd.appendChild(sEl('div','text-align:center;font-weight:bold;font-size:15px;line-height:1.5;margin-top:4px;color:'+(net>0?'#d9327c':net<0?'#6a7a9a':'#2fa86a'),msg2+'（'+(net>0?'+':'')+net+' メダル）'));
     bd.appendChild(sEl('div','display:table;margin:4px 0 0 auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' メダル'));
     try{sfx(net>0?'clear':net<0?'lose':'pop')}catch(er){}
     bet=Math.min(bet,cg());bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🃏 ディール！',fn:function(){deal()}}]}))}
    bt()}
-  function openPoker(msg){var RK='miarina_td_medal_v1',bet=0,m=msg||'いらっしゃい！ カードを のこして チェンジしよう',deck,H,hold,rules=false,SU=['\u2660','\u2665','\u2666','\u2663'],PT=[['ロイヤルフラッシュ',250],['ストレートフラッシュ',50],['フォーカード',25],['フルハウス',9],['フラッシュ',6],['ストレート',4],['スリーカード',3],['ツーペア',2],['ワンペア',1]];
+  function openPoker(msg){var RK='miarina_td_medal_v1',bet=0,m=msg||'いらっしゃい！ カードを のこして チェンジしよう',deck,H,hold,rules=false,SU=['\u2660','\u2665','\u2666','\u2663'],PT=[['ロイヤルフラッシュ',100],['ストレートフラッシュ',60],['フォーカード',40],['フルハウス',20],['フラッシュ',12],['ストレート',8],['スリーカード',5],['ツーペア',3],['ワンペア',2]];
    function cg(){try{return Math.max(0,parseInt(localStorage.getItem(RK)||'0',10)||0)}catch(e){return 0}}
    function cs(n){try{localStorage.setItem(RK,String(Math.max(0,n|0)))}catch(e){}}
    function rn(c){return c.r===1?'A':c.r===11?'J':c.r===12?'Q':c.r===13?'K':String(c.r)}
