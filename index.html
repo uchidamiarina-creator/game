@@ -3530,6 +3530,24 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
  else if(/padding:4px 10px|padding:2px 8px/.test(c))k='sb-sub';
  e.className='sb '+k}
   function sEl(t,css,txt){var e=document.createElement(t);if(css)e.style.cssText=css;if(txt!=null)e.textContent=txt;if(t==='button')sbCls(e,css||'',txt);return e}
+  function qbBtn(txt,css){return sEl('button','flex:none;width:auto;min-height:0;height:auto;min-width:0;padding:6px 10px;font-size:13px;font-weight:bold;font-family:'+SFONT+';letter-spacing:.04em;color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6);'+(css||''),txt)}
+  /* 結果画面の下に、つぎのかけ金（数字ボタン）とつぎのアクションをまとめて出す */
+  function qbet(c){
+   var box=sEl('div','margin-top:8px;padding:6px;background:#fff;border:2px dashed #f0c8dc;border-radius:12px;box-sizing:border-box'),
+    lb=sEl('div','text-align:center;font-size:13px;font-weight:bold;color:#7a3b2e;margin-bottom:5px'),
+    cr=sEl('div','display:flex;flex-wrap:wrap;gap:5px;justify-content:center'),
+    ar=sEl('div','display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:6px'),
+    btns=[];
+   function paint(){var have=c.have(),b=Math.max(0,Math.min(c.get(),have));c.set(b);
+    lb.textContent='つぎの かけ：'+b+' メダル'+(have<=0?'（メダルが ないよ）':'');
+    btns.forEach(function(x){x.el.disabled=b<1})}
+   [1,5,10,100].forEach(function(n){var b=qbBtn('+'+n);b.onclick=function(){try{sfx('tap')}catch(er){}c.set(Math.min(c.have(),c.get()+n));paint()};cr.appendChild(b)});
+   var al=qbBtn('ぜんぶ');al.onclick=function(){try{sfx('tap')}catch(er){}c.set(c.have());paint()};
+   var cl=qbBtn('クリア','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');cl.onclick=function(){c.set(0);paint()};
+   cr.append(al,cl);
+   (c.acts||[]).forEach(function(a){var b=qbBtn(a.t,'font-size:15px;padding:8px 12px');b.onclick=function(){a.fn()};btns.push({el:b});ar.appendChild(b)});
+   var en=qbBtn('おしまい','color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');en.onclick=closeShp;ar.appendChild(en);
+   box.append(lb,cr,ar);paint();return box}
   function shpBox(title){closeShp();shp=sEl('div','position:absolute;inset:0;z-index:5;background:rgba(36,20,38,.55);display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box;font-family:'+SFONT+'');
    var bx=sEl('div','width:min(100%,340px);max-height:86%;display:flex;flex-direction:column;background:#fff8fb;border:3px solid #f0a8c8;border-radius:16px;padding:10px;box-sizing:border-box'),
     hd=sEl('div','display:flex;align-items:center;justify-content:space-between;margin:0 0 8px;font-weight:bold;color:#d05a8a;font-size:15px'),
@@ -3613,8 +3631,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     function done(){rs.textContent='';rs.append(sEl('div','font-size:13px;color:#8a3a6a',tm()),sEl('div','font-size:16px;color:'+(net>0?'#d9327c':net<0?'#6a7a9a':'#2fa86a'),fin));
      try{sfx(net>0?(o.w===2?'star':'clear'):net<0?'lose':'pop')}catch(er){}
      bd.appendChild(sEl('div','display:table;margin:4px 0 0 auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' メダル'));
-     var ar=sEl('div','display:flex;gap:8px;margin-top:8px'),ag=gbtn('もういっかい','flex:1;font-size:14px'),en=gbtn('おしまい','flex:1;font-size:14px;color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');
-     ag.onclick=function(){m=net>0?'ナイス！ もういっかい いってみる？':'つぎは どうかな？ もういっかい あそぶ？';if(bet>cg())bet=cg();bt()};en.onclick=closeShp;ar.append(ag,en);bd.appendChild(ar)}
+     bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🃏 ディール！',fn:function(){deal()}}]}))}
     function step(k){if(!bd.isConnected){toast=6;tmsg=fin;return}
      if(k>=ord.length){setTimeout(function(){if(!bd.isConnected){toast=6;tmsg=fin;return}done()},500);return}
      var o2=ord[k],c=(o2[0]==='p'?r.p:r.b)[o2[1]];(o2[0]==='p'?pc:bc).appendChild(cardEl(c));try{sfx('place')}catch(er){}
@@ -3673,8 +3690,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     bd.appendChild(sEl('div','text-align:center;font-weight:bold;font-size:15px;line-height:1.5;margin-top:4px;color:'+(net>0?'#d9327c':net<0?'#6a7a9a':'#2fa86a'),msg2+'（'+(net>0?'+':'')+net+' メダル）'));
     bd.appendChild(sEl('div','display:table;margin:4px 0 0 auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' メダル'));
     try{sfx(net>0?'clear':net<0?'lose':'pop')}catch(er){}
-    var ar=sEl('div','display:flex;gap:8px;margin-top:8px'),ag=gbtn('もういっかい','flex:1;font-size:14px'),en=gbtn('おしまい','flex:1;font-size:14px;color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');
-    bet=Math.min(bet,cg());ag.onclick=function(){m='つぎは どうかな？';bt()};en.onclick=closeShp;ar.append(ag,en);bd.appendChild(ar)}
+    bet=Math.min(bet,cg());bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🃏 ディール！',fn:function(){deal()}}]}))}
    bt()}
   function openPoker(msg){var RK='miarina_td_medal_v1',bet=0,m=msg||'いらっしゃい！ カードを のこして チェンジしよう',deck,H,hold,rules=false,SU=['\u2660','\u2665','\u2666','\u2663'],PT=[['ロイヤルフラッシュ',250],['ストレートフラッシュ',50],['フォーカード',25],['フルハウス',9],['フラッシュ',6],['ストレート',4],['スリーカード',3],['ツーペア',2],['ワンペア',1]];
    function cg(){try{return Math.max(0,parseInt(localStorage.getItem(RK)||'0',10)||0)}catch(e){return 0}}
@@ -3710,8 +3726,7 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     var ret=r>=0?bet*PT[r][1]:0,net=ret-bet;
     bd.appendChild(sEl('div','text-align:center;font-weight:bold;font-size:15px;line-height:1.5;margin-top:8px;color:'+(net>0?'#d9327c':net<0?'#6a7a9a':'#2fa86a'),(r>=0?(r<=3?'🎉 ':'')+PT[r][0]+'！ '+PT[r][1]+'倍':'やくなし…')+'（'+(net>0?'+':'')+net+' メダル）'));
     bd.appendChild(sEl('div','display:table;margin:4px 0 0 auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+cg()+' メダル'));
-    var ar=sEl('div','display:flex;gap:8px;margin-top:8px'),ag=gbtn('もういっかい','flex:1;font-size:14px'),en=gbtn('おしまい','flex:1;font-size:14px;color:#8a5a7a;background:#fff;outline-color:#f0c8dc;box-shadow:0 3px 0 #f0c8dc');
-    ag.onclick=function(){m='つぎは どうかな？';bt()};en.onclick=closeShp;ar.append(ag,en);bd.appendChild(ar)}
+    bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🃏 ディール！',fn:function(){deal()}}]}))}
    /* あたりやすく：チェンジで2通りの引き方をためして、強いほうの手を選ぶ */
    function smartDraw(){var idx=[],best=null,bs=99,t,q,j,x,d,h2,sc;hold.forEach(function(h,i){if(!h)idx.push(i)});if(!idx.length)return;
     for(t=0;t<2;t++){d=deck.slice();for(q=d.length-1;q>0;q--){j=Math.floor(Math.random()*(q+1));x=d[q];d[q]=d[j];d[j]=x}
@@ -3751,8 +3766,13 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
    function guess(d){var nx=dr();last=nx;
     if(nx.r===cur.r){m='同じ数字！ かけ金は そのまま';cur=nx;show();return}
     if((nx.r>cur.r?1:-1)===d){pot*=2;cur=nx;try{sfx('win')}catch(er){}m='あたり！ 払い戻しが 2ばい！ つぎは？';show()}
-    else{try{sfx('lose')}catch(er){}m='はずれ… メダルを うしなったよ';st='bet';bet=0;cur=null;last=nx;bt();setTimeout(function(){},0)}}
-   function cashout(){cs(cg()+pot);try{sfx('clear')}catch(er){}m='回収！ +'+(pot-orig)+' メダル';bet=0;st='bet';cur=null;last=null;bt()}
+    else{try{sfx('lose')}catch(er){}m='はずれ… メダルを うしなったよ';st='bet';bet=0;cur=null;last=nx;res()}}
+   function res(){var bd=shpBox(TT);head(bd);
+     if(last){var lr=sEl('div','display:flex;justify-content:center;margin:8px 0');lr.appendChild(czc(cardEl(last)));bd.appendChild(lr)}
+     bet=Math.min(orig,cg());
+     bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'🔼 スタート！',fn:function(){start()}}]}));
+     var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
+   function cashout(){cs(cg()+pot);try{sfx('clear')}catch(er){}m='回収！ +'+(pot-orig)+' メダル';bet=0;st='bet';cur=null;last=null;res()}
    if(cg()<=0)m='メダルが ないよ… カジノの 交換所で メダルを 買ってね';
    bt()}
   function openChohan(msg){var RK='miarina_td_medal_v1',bet=0,m=msg||'いらっしゃい！ 丁（ぞろめ・偶数）か 半（奇数）か あてよう',TT='🎲 丁半博打',SHOW=null;
@@ -3777,12 +3797,12 @@ function openQ(){closeGm();var k=gToday(),back=mk('div','position:fixed;inset:0;
     setTimeout(function(){
      if(win){cs(cg()+bet*2);try{sfx('win')}catch(er){}m=(res?'半':'丁')+'！ 当たり +'+bet+' メダル'}
      else{try{sfx('lose')}catch(er){}m=(res?'半':'丁')+'… はずれ（−'+bet+' メダル）'}
-     SHOW={a:a,b:b,sum:sum,res:res};bet=0;show()},600);
+     SHOW={a:a,b:b,sum:sum,res:res};show()},600);
     var bd=shpBox(TT);head(bd);czRollDice(bd,600);}
    function show(){var bd=shpBox(TT);head(bd);
     var row=sEl('div','display:flex;gap:12px;justify-content:center;margin:10px 0');row.append(czc(die(SHOW.a)),czc(die(SHOW.b)));bd.appendChild(row);
     bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#7a3b2e;margin-bottom:6px','合計 '+SHOW.sum+'（'+(SHOW.res?'半（奇数）':'丁（偶数）')+'）'));
-    var ag=gbtn('🎲 もう一回','display:block;width:100%;margin-top:8px;font-size:15px;padding:9px 12px');ag.onclick=function(){SHOW=null;bt()};bd.appendChild(ag);
+    bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'丁（ちょう）',fn:function(){play(0)}},{t:'半（はん）',fn:function(){play(1)}}]}));
     var bk=sEl('button','display:block;margin:8px auto 0;width:auto;min-height:0;height:auto;padding:4px 10px;font-size:12px;font-family:'+SFONT+';border-radius:999px;border:2px solid #f0a8c8;background:#fff;color:#c0456f','↩ ゲームを えらびなおす');bk.onclick=function(){openCasino()};bd.appendChild(bk)}
    if(cg()<=0)m='メダルが ないよ… カジノの 交換所で メダルを 買ってね';
    bt()}
@@ -3840,7 +3860,7 @@ var _sfx0=sfx;sfx=function(k){_sfx0(k);try{if(!czOn)return;if(k==='win'||k==='cl
      else{try{sfx('lose')}catch(er){}m=r.msg+'（−'+b+' メダル）'}
      res(b,r)},700)}
    function res(b,r){var bd=shpBox(TT);head(bd);r.view(bd);
-    var ag=gbtn('🔁 もう一回','display:block;width:100%;margin-top:8px;font-size:15px;padding:9px 12px');ag.onclick=function(){bet=b;bt()};bd.appendChild(ag);back(bd)}
+    bet=b;bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:o.choices.map(function(c){return{t:c.t,fn:function(){play(c.v)}}})}));back(bd)}
    if(cg()<=0)m='メダルが ないよ… カジノの 交換所で メダルを 買ってね';
    bt()}
   function bigBox(t,fill,col){return sEl('div','width:64px;height:64px;box-sizing:border-box;border:3px solid #fff;outline:2px solid #ffc94d;border-radius:14px;background:'+fill+';color:'+col+';display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:30px;box-shadow:0 3px 0 rgba(0,0,0,.12)',t)}
@@ -3916,8 +3936,8 @@ var _sfx0=sfx;sfx=function(k){_sfx0(k);try{if(!czOn)return;if(k==='win'||k==='cl
     var bd=shpBox(TT);head(bd);
     bd.appendChild(sEl('div','text-align:center;font-size:13px;color:#7a3b2e;line-height:1.7','ナポレオン：'+NM[N]+'　副官：'+(PT>=0?NM[PT]:'なし')+'<br>切り札 '+SU[T]+'　目標 '+TG+'まい　→　ナポレオン側は '+got+'まい'));
     if(win){cs(cg()+bet*2);try{sfx('win')}catch(e){}m='あたり！ +'+bet+' メダル'}else{try{sfx('lose')}catch(e){}m='はずれ…（−'+bet+' メダル）'}
-    bet=0;head(bd);
-    var ag=gbtn('🔁 もう一回','display:block;width:100%;margin-top:10px;font-size:15px;padding:9px 12px');ag.onclick=function(){showBet()};bd.appendChild(ag);back(bd)}
+    head(bd);
+    bd.appendChild(qbet({have:cg,get:function(){return bet},set:function(v){bet=v},acts:[{t:'👑 ナポレオン側',fn:function(){side=0;startRound()}},{t:'🛡 連合側',fn:function(){side=1;startRound()}}]}));back(bd)}
    if(cg()<=0)m='メダルが ないよ… カジノの 交換所で メダルを 買ってね';
    showBet()}
     var MD_KEY='miarina_td_medal_v1',MD_BUY=10,MD_SELL=9;
