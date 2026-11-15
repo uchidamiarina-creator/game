@@ -1598,10 +1598,11 @@ btn.onclick=()=>{if(document.getElementById('vtq'))return;try{sfx('tap')}catch(e
  const show=()=>{const o=cur();info.textContent='💰 手持ち '+gp()+'　🔐 金庫 '+o.bal;fe.textContent='今月の引き出し '+o.n+'/'+FREE+'回（無料）'+(o.n>=FREE?'　いまの手数料 '+FEE+'G':'　超えると手数料 '+FEE+'G')};
  const say=(t,ok)=>{msg.style.color=ok?'#2e9e5b':'#e0103a';msg.textContent=t;show()};
  const val=()=>Math.floor(Number(inp.value)||0);
+  const lucky=()=>{const t=String(inp.value||'').trim();if(!/^7{2,16}$/.test(t))return 0;const n=Number(t);if(!Number.isSafeInteger(n))return 0;inp.value='';try{sfx('up')}catch(e){}if(!sg(gp()+n)){say('この端末では保存できなかったよ');return -1}say('🎰 7のゾロ目ボーナス！ '+n+'G もらったよ',1);return 1};
  const dep=a=>{a=Math.floor(a);if(!(a>0)){say('金額を入れてね');return}if(a>gp()){say('手持ちがたりないよ');return}const o=cur();o.bal+=a;if(!wv(o)||!sg(gp()-a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 預けたよ',1)};
  const wd=a=>{a=Math.floor(a);if(!(a>0)){say('金額がたりないよ');return}const o=cur(),fee=o.n>=FREE?FEE:0;if(a+fee>o.bal){say(fee?'手数料'+FEE+'Gこみで金庫がたりないよ':'金庫がたりないよ');return}o.bal-=a+fee;o.n++;if(!wv(o)||!sg(gp()+a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 引き出したよ'+(fee?'（手数料 '+fee+'G）':''),1)};
  const r1=mkRow(),r2=mkRow();
- r1.append(mkB('預ける',()=>dep(val())),mkB('引き出す',()=>wd(val())));
+ r1.append(mkB('預ける',()=>dep(val())),mkB('引き出す',()=>{if(lucky())return;wd(val())}));
  r2.append(mkB('ぜんぶ預ける',()=>dep(gp())),mkB('ぜんぶ引き出す',()=>{const o=cur(),fee=o.n>=FREE?FEE:0;wd(o.bal-fee)}));
  const cl=mkB('とじる',()=>q.remove());cl.style.flex='none';cl.style.width='100%';
  bx.append(h,info,fe,inp,r1,r2,msg,cl);q.append(bx);q.onclick=e=>{if(e.target===q)q.remove()};document.body.append(q);show()}})();
@@ -4173,7 +4174,7 @@ var _sfx0=sfx;sfx=function(k){_sfx0(k);try{if(!czOn)return;if(k==='win'||k==='cl
   function openCasino(msg){var bd=shpBox('🃁 カジノ'),mb=sEl('div','font-size:12px;color:#8a3a6a;background:#ffeef6;border-radius:10px;padding:6px 8px;margin-bottom:6px;line-height:1.4',msg||(mdl()<=0?'いらっしゃい！ まずは 交換所で チップを 買ってね':'いらっしゃい！ どのゲームで あそぶ？'));bd.appendChild(mb);
    bd.appendChild(sEl('div','display:table;margin:0 0 4px auto;font-size:11px;font-weight:bold;color:#b93a0a;background:#fff3c4;border-radius:999px;padding:1px 8px','🪙 '+mdl()+' チップ'));
    var gw=sEl('div','display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:4px');bd.appendChild(gw);
-   [['🏅 チップ交換所','ゴールドで チップを 買う・換金する',openMedal],['✧ バカラ','プレイヤーか バンカーか タイを よそう',openBaccarat],['🃏 ブラックジャック','21に ちかづけて ディーラーに 勝とう',openBlackjack],['♠ ポーカー','カードを のこして やくを つくろう',openPoker],['🔼 ハイ＆ロー','つぎのカードが 上か 下か あてよう',openHiLo],['🎲 丁半博打','サイコロの目が 丁（偶数）か 半（奇数）か あてよう',openChohan],['🐉 ドラゴンタイガー','バカラをシンプルにした スピード勝負',null,1],['💘 ときめきルーレット','回せ回せ！ 恋愛ときめきルーレット',null,1],['🎰 地獄スロット666','毎月6のつく日は 設定6',null,1],['🎡 マネーホイール','円盤を回す 運ゲーだよ！',null,1],['🎲 クラップス7','7つのサイコロを ふろう',null,1],['👑 令和の大富豪','オンラインで戦う 令和の大富豪',null,1],['🤡 ジョーカーズ','ジョーカーの向きで 次のカードを きめよう',null,1]].forEach(function(g,gi){var b=sEl('button','display:block;width:100%;margin-top:5px;min-height:0;height:auto;padding:5px 10px;font-size:14px;font-weight:bold;font-family:'+SFONT+';color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6)',g[0]);var ds=sEl('div','font-size:10px;line-height:1.2;font-weight:normal;color:#8a5a7a',g[1]);ds.className='cz-mdesc';b.append(ds);b.onclick=function(){if(g[3]){try{sfx('deny')}catch(e){}mb.textContent='まだ遊べないよ';return}g[2]()};b.className=g[3]?'cz-pop cz-fake':'cz-pop';if(g[2]===openMedal)b.style.gridColumn='1 / -1';b.style.animationDelay=(gi*.09)+'s';gw.appendChild(b)})}
+   [['🏅 チップ交換所','ゴールドで チップを 買う・換金する',openMedal],['✧ バカラ','プレイヤーか バンカーか タイを よそう',openBaccarat],['🃏 ブラックジャック','21に ちかづけて ディーラーに 勝とう',openBlackjack,1],['♠ ポーカー','カードを のこして やくを つくろう',openPoker],['🔼 ハイ＆ロー','つぎのカードが 上か 下か あてよう',openHiLo],['🎲 丁半博打','サイコロの目が 丁（偶数）か 半（奇数）か あてよう',openChohan],['🐉 ドラゴンタイガー','バカラをシンプルにした スピード勝負',null,1],['💘 ときめきルーレット','回せ回せ！ 恋愛ときめきルーレット',null,1],['🎰 地獄スロット666','毎月6のつく日は 設定6',null,1],['🎡 マネーホイール','円盤を回す 運ゲーだよ！',null,1],['🎲 クラップス7','7つのサイコロを ふろう',null,1],['👑 令和の大富豪','オンラインで戦う 令和の大富豪',null,1],['🤡 ジョーカーズ','ジョーカーの向きで 次のカードを きめよう',null,1]].forEach(function(g,gi){var b=sEl('button','display:block;width:100%;margin-top:5px;min-height:0;height:auto;padding:5px 10px;font-size:14px;font-weight:bold;font-family:'+SFONT+';color:#e0457f;background:linear-gradient(180deg,#fffbe0 0%,#ffe27a 100%);border:3px solid #fff;outline:2px solid #ffc94d;border-radius:999px;box-shadow:0 3px 0 #e8a92a,0 0 8px rgba(255,210,80,.6)',g[0]);var ds=sEl('div','font-size:10px;line-height:1.2;font-weight:normal;color:#8a5a7a',g[1]);ds.className='cz-mdesc';b.append(ds);b.onclick=function(){if(g[3]){try{sfx('deny')}catch(e){}mb.textContent='まだ遊べないよ';return}g[2]()};b.className=g[3]?'cz-pop cz-fake':'cz-pop';if(g[2]===openMedal)b.style.gridColumn='1 / -1';b.style.animationDelay=(gi*.09)+'s';gw.appendChild(b)})}
   function openPet(msg){var OWK='miarina_td_allyown_v1',m=msg||'いらっしゃい！ かわいい子たちが まってるよ',P=[['D','犬','🐶','ボスにも戦いに行くよ'],['C','猫','🐱','弱いけど素早いよ（黒・三毛・虎・白）']];
  function ow(){try{var o=JSON.parse(localStorage.getItem(OWK)||'{}');return o&&typeof o==='object'?o:{}}catch(e){return{}}}
  function sv(o){try{localStorage.setItem(OWK,JSON.stringify(o))}catch(e){}}
@@ -7211,10 +7212,82 @@ var RCK='miarina_td_rinacoin_v1';
 function rcPrice(off){var d=new Date();d.setDate(d.getDate()-(off|0));var h=(d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate())*2654435761>>>0;h^=h>>>15;h=Math.imul(h,2246822519)>>>0;h^=h>>>13;h=Math.imul(h,3266489917)>>>0;h^=h>>>16;return 1+(h>>>0)%199}
 function rcGet(){try{return Math.max(0,parseInt(localStorage.getItem(RCK)||'0',10)||0)}catch(e){return 0}}
 function rcSet(n){try{localStorage.setItem(RCK,String(Math.max(0,n|0)))}catch(e){}}
-function rcTrade(t,n,buy){var p=rcPrice(0),have=rcGet(),say=function(m,c){G.fx.push({x:t.x,y:t.y-24,txt:m,t:1.4,c:c||'#ff4d6d'})};
+function rcTrade(t,n,buy){var p=rcNow(),have=rcGet(),say=function(m,c){G.fx.push({x:t.x,y:t.y-24,txt:m,t:1.4,c:c||'#ff4d6d'})};
  if(buy){n=Math.min(n,Math.floor(G.gold/p));if(n<=0){sfx('deny');say('お金たりない');return}G.gold-=p*n;rcSet(have+n);sfx('up');say('🪙 '+n+'枚 買った（−'+p*n+'G）','#2e9e5b')}
  else{n=Math.min(n,have);if(n<=0){sfx('deny');say('リナコインがないよ');return}G.gold+=p*n;rcSet(have-n);sfx('up');say('🪙 '+n+'枚 売った（+'+p*n+'G）','#2e9e5b')}
  hud();panel()}
+/* ===== リナコイン：リアルタイム相場・チャート・レバレッジ（バイナリー風）===== */
+var RCP={t:[],p:[]},RCPK='miarina_td_rcpx_v1',RCF=.0015,RCSV=0;
+function rcRnd(){return (Math.random()+Math.random()+Math.random()+Math.random()-2)*1.732}
+function rcStep(p){var s=1.6*rcRnd();if(Math.random()<.005)s+=(Math.random()<.5?-1:1)*(4+Math.random()*4);p=p+s-.002*(p-100);if(p<1)p=2-p;if(p>199)p=398-p;return Math.max(1,Math.min(199,p))}
+function rcSync(){var now=Date.now()/1000,L=RCP.t.length;
+ if(!L){var st=null;try{st=JSON.parse(localStorage.getItem(RCPK)||'null')}catch(e){}
+  if(st&&st.p>=1&&st.p<=199&&st.t<=now&&now-st.t<21600){RCP.t=[st.t];RCP.p=[st.p]}else{RCP.t=[now-120];RCP.p=[60+Math.random()*80]}L=1}
+ var lt=RCP.t[L-1],lp=RCP.p[L-1],n=Math.floor((now-lt)/.5);if(n>43200){lt=now-43200*.5;n=43200}
+ if(n>0){for(var i=0;i<n;i++){lp=rcStep(lp);lt+=.5;RCP.t.push(lt);RCP.p.push(lp)}
+  if(RCP.t.length>700){RCP.t=RCP.t.slice(-700);RCP.p=RCP.p.slice(-700)}
+  if(now-RCSV>5){RCSV=now;try{localStorage.setItem(RCPK,JSON.stringify({t:lt,p:lp}))}catch(e){}}}}
+function rcIdx(t){var a=RCP.t,lo=0,hi=a.length-1;while(lo<hi){var m=(lo+hi+1)>>1;if(a[m]<=t)lo=m;else hi=m-1}return lo}
+function rcPxAt(t){var a=RCP.t,P=RCP.p,n=a.length;if(t>=a[n-1])return P[n-1];if(t<=a[0])return P[0];var i=rcIdx(t),f=(t-a[i])/(a[i+1]-a[i]);return P[i]+(P[i+1]-P[i])*f}
+function rcNow(){rcSync();return Math.max(1,Math.round(RCP.p[RCP.p.length-1]))}
+var RCS={m:500,l:5,e:30};
+function rcFx(txt,c,t){var b=null;try{b=G.tw.find(function(o){return o.k=='X'})}catch(e){}G.fx.push({x:b?b.x:180,y:b?b.y-24:200,txt:txt,t:t||1.6,c:c||'#ff4d6d'})}
+function rcNet(p,px){return Math.max(-p.M,Math.min(.9*p.M,p.d*(px-p.en)/p.en*p.M*p.L))-p.fee}
+function rcEval(p,now){var end=p.t0+p.e,T=RCP.t,lt=T[T.length-1];
+ if(now>=end&&lt>=end){var px=rcPxAt(end),pay=Math.max(0,Math.round(p.M+rcNet(p,px)));return{done:1,liq:pay<=0?1:0,pay:pay,px:px}}
+ var cx=rcPxAt(Math.min(now,lt));return{done:0,px:cx,est:Math.max(0,Math.round(p.M+rcNet(p,cx)))}}
+function rcMar(){return RCS.m<0?Math.floor(G.gold):Math.min(RCS.m,Math.floor(G.gold))}
+function rcOpen(d){if(!G||G.over)return;G.rcPos=G.rcPos||[];
+ if(G.rcPos.length>=5){sfx('deny');rcFx('同時に5つまで');return}
+ var M=rcMar(),L=RCS.l;if(M<10){sfx('deny');rcFx('お金たりない（10G〜）');return}
+ rcSync();var t0=RCP.t[RCP.t.length-1],p={d:d,M:M,L:L,e:RCS.e,t0:t0,en:RCP.p[RCP.p.length-1],fee:Math.round(M*L*RCF)};
+ G.gold-=M;G.rcPos.push(p);sfx('up');rcFx((d>0?'▲ HIGH':'▼ LOW')+' ×'+L+'  証拠金 '+M+'G','#7a5cff',1.4);hud();panel()}
+function rcDone(p,r){G.gold+=r.pay;var net=r.pay-p.M;
+ if(r.liq){sfx('deny');rcFx('💥 全損 −'+p.M+'G','#e0103a',2)}
+ else if(net>0){sfx('up');rcFx((p.d>0?'▲':'▼')+' 勝ち！ +'+net+'G','#2e9e5b',2)}
+ else{sfx('deny');rcFx((p.d>0?'▲':'▼')+' 負け −'+(-net)+'G','#e0103a',2)}}
+function rcTick(){try{rcSync();if(typeof G==='undefined'||!G||!G.rcPos||!G.rcPos.length)return;var now=Date.now()/1000,keep=[];
+ G.rcPos.forEach(function(p){var r=rcEval(p,now);if(!r.done){keep.push(p);return}rcDone(p,r)});
+ if(keep.length!==G.rcPos.length){G.rcPos=keep;hud();panel()}}catch(e){}}
+function rcPosHTML(){if(!G||!G.rcPos||!G.rcPos.length)return'<span style="color:#999">ポジションなし</span>';var now=Date.now()/1000;
+ return G.rcPos.map(function(p){var r=rcEval(p,now),left=Math.max(0,Math.ceil(p.t0+p.e-now)),est=r.done?0:r.est,d=est-p.M;
+  return'<div style="color:'+(d>=0?'#2e9e5b':'#e0103a')+'">'+(p.d>0?'▲':'▼')+' ×'+p.L+'　'+p.M+'G　のこり'+left+'秒　'+(d>=0?'+':'')+d+'G</div>'}).join('')}
+function rcPxText(){var now=Date.now()/1000,p=rcNow(),b=Math.round(rcPxAt(now-10)),df=p-b,h=rcGet();
+ return'🪙 リナコイン <b style="font-size:16px">'+p+'G</b> <span style="color:'+(df>0?'#2e9e5b':df<0?'#e0103a':'#888')+'">'+(df>0?'▲+'+df:df<0?'▼'+df:'→0')+'</span>（10秒前比）<br>もってる '+h+'枚（評価 '+(h*p)+'G）'}
+function rcTopHTML(){return'<canvas id="rcch" width="600" height="200" style="width:300px;height:100px;border-radius:10px;background:#fff8f0;border:2px solid #ffc2d9"></canvas><div id="rcpx" style="width:100%;text-align:center;font-size:12px;line-height:1.5">'+rcPxText()+'</div>'}
+function rcBOHTML(){var on=function(a,b){return a===b?';box-shadow:0 0 0 3px #ff6fa5 inset;font-weight:bold':''},st='padding:4px 8px;font-size:12px',h='<div style="width:100%;border-top:1px dashed #d9a;margin-top:4px;padding-top:4px;text-align:center;font-size:12px"><b>⚡ バイナリー取引（レバレッジ）</b><br>';
+ h+='満期 ';[15,30,60].forEach(function(v){h+='<button class="rcc" data-k="e" data-v="'+v+'" style="'+st+on(RCS.e,v)+'">'+v+'秒</button> '});
+ h+='<br>レバ ';[1,3,5,10,25,50].forEach(function(v){h+='<button class="rcc" data-k="l" data-v="'+v+'" style="'+st+on(RCS.l,v)+'">×'+v+'</button> '});
+ h+='<br>証拠金 ';[100,500,1000,5000,-1].forEach(function(v){h+='<button class="rcc" data-k="m" data-v="'+v+'" style="'+st+on(RCS.m,v)+'">'+(v<0?'ぜんぶ':v)+'</button> '});
+ var M=G?rcMar():0,px=rcNow();
+ h+='<br><span style="color:#777">±'+(px/RCS.l).toFixed(1)+'G動くと全損／上限（勝ちは最大+90%） ／ 手数料 '+Math.round(M*RCS.l*RCF)+'G ／ 証拠金 '+M+'G</span><br>';
+ h+='<button id="rcup" style="background:#2e9e5b;color:#fff">▲ HIGH（上がる）</button> <button id="rcdn" style="background:#e0103a;color:#fff">▼ LOW（下がる）</button>';
+ h+='<div id="rcpos" style="margin-top:4px;line-height:1.5">'+rcPosHTML()+'</div></div>';return h}
+function rcWire(t){var wp=document.getElementById('wpop');if(!wp)return;
+ [].forEach.call(wp.querySelectorAll('.rcc'),function(b){b.onclick=function(){RCS[b.getAttribute('data-k')]=+b.getAttribute('data-v');sfx('tap');panel()}});
+ var u=document.getElementById('rcup'),d=document.getElementById('rcdn');if(u)u.onclick=function(){rcOpen(1)};if(d)d.onclick=function(){rcOpen(-1)}}
+function rcDraw(){var c=document.getElementById('rcch');if(!c)return;var x=c.getContext('2d'),W=c.width,H=c.height,now=Date.now()/1000,T0=now-75,T1=now+15,v=[],lo=1e9,hi=-1e9,i,pos=(G&&G.rcPos)||[];
+ for(i=0;i<=150;i++){var q=rcPxAt(T0+i*.5);v.push(q);if(q<lo)lo=q;if(q>hi)hi=q}
+ pos.forEach(function(p){lo=Math.min(lo,p.en);hi=Math.max(hi,p.en)});lo-=3;hi+=3;if(hi-lo<14){var m=(hi+lo)/2;lo=m-7;hi=m+7}
+ var X=function(t){return(t-T0)/(T1-T0)*W},Y=function(p){return H-6-(p-lo)/(hi-lo)*(H-26)};
+ x.clearRect(0,0,W,H);x.font='bold 16px sans-serif';x.textBaseline='middle';
+ x.strokeStyle='rgba(217,153,170,.35)';x.lineWidth=1;x.fillStyle='#b88';
+ for(i=0;i<4;i++){var g=lo+(hi-lo)*i/3,gy=Y(g);x.beginPath();x.moveTo(0,gy);x.lineTo(W,gy);x.stroke();x.textAlign='left';x.fillText(Math.round(g),4,gy-8)}
+ x.setLineDash([4,6]);x.beginPath();x.moveTo(X(now),0);x.lineTo(X(now),H);x.stroke();x.setLineDash([]);
+ var up=v[v.length-1]>=v[0],col=up?'#2e9e5b':'#e0103a';
+ x.beginPath();for(i=0;i<v.length;i++){var px=X(T0+i*.5),py=Y(v[i]);i?x.lineTo(px,py):x.moveTo(px,py)}
+ x.strokeStyle=col;x.lineWidth=3;x.lineJoin='round';x.stroke();
+ x.lineTo(X(now),H);x.lineTo(0,H);x.closePath();x.fillStyle=up?'rgba(46,158,91,.12)':'rgba(224,16,58,.12)';x.fill();
+ pos.forEach(function(p){var ey=Y(p.en),c2=p.d>0?'#2e9e5b':'#e0103a',ex=X(p.t0),xe=X(p.t0+p.e);x.strokeStyle=c2;x.lineWidth=2;x.setLineDash([8,5]);
+  x.beginPath();x.moveTo(Math.max(0,ex),ey);x.lineTo(Math.min(W,Math.max(xe,ex)),ey);x.stroke();x.setLineDash([]);
+  if(xe<=W){x.beginPath();x.moveTo(xe,0);x.lineTo(xe,H);x.stroke()}
+  x.fillStyle=c2;x.beginPath();x.arc(ex,ey,5,0,7);x.fill();x.textAlign='left';x.fillText((p.d>0?'▲':'▼')+Math.max(0,Math.ceil(p.t0+p.e-now))+'s',Math.min(W-70,Math.max(6,ex+8)),ey+(p.d>0?14:-14))});
+ var cy=Y(v[v.length-1]);x.fillStyle=col;x.beginPath();x.arc(X(now),cy,6,0,7);x.fill();
+ x.textAlign='right';x.fillStyle='#fff';x.strokeStyle=col;x.lineWidth=4;var lb=Math.round(v[v.length-1])+'G';x.strokeText(lb,W-6,Math.max(14,Math.min(H-14,cy-16)));x.fillText(lb,W-6,Math.max(14,Math.min(H-14,cy-16)))}
+function rcLive(){try{if(typeof G==='undefined'||!G||!G.sel||G.sel.k!=='X'||!D||!D.ec)return;rcDraw();var a=document.getElementById('rcpx'),b=document.getElementById('rcpos');if(a)a.innerHTML=rcPxText();if(b)b.innerHTML=rcPosHTML()}catch(e){}}
+setInterval(function(){rcTick();rcLive()},200);
+var _e3=end;end=function(win){try{if(G&&G.rcPos&&G.rcPos.length&&!G.over){rcSync();var now=Date.now()/1000;G.rcPos.forEach(function(p){var r=rcEval(p,now);if(!r.done)r={pay:r.est,liq:0};G.gold+=r.pay});G.rcPos=[]}}catch(e){console.error(e)}return _e3.apply(this,arguments)};
+
 var _pb=panel;
 panel=function(){
  _pb();
@@ -7224,11 +7297,12 @@ panel=function(){
   var wp=document.getElementById('wpop');if(!wp)return;
   var t=G.sel;
   wp.style.display='flex';
-  wp.innerHTML='<b style="width:100%;text-align:center;font-size:13px">銀行　借金 '+(G.debt|0)+'G（'+(G.loans|0)+'/10回）</b><button id="bkb">借りる</button><button id="bk1">返す 5000</button><button id="bka">ぜんぶ返す</button>'+(D&&D.ec?(function(){var p=rcPrice(0),y=rcPrice(1),df=p-y;return'<div style="width:100%;text-align:center;font-size:12px;line-height:1.5;border-top:1px dashed #d9a;padding-top:4px">🪙 リナコイン 今日 <b>'+p+'G</b>（きのう '+y+'G '+(df>0?'▲'+df:df<0?'▼'+(-df):'→')+'）<br>もってる '+rcGet()+'枚（相場は毎日かわるよ 1〜199G）</div><button id="rcb1">買う ×1</button><button id="rcb10">買う ×10</button><button id="rcs1">売る ×1</button><button id="rcsa">ぜんぶ売る</button><div style="width:100%;display:flex;gap:6px;justify-content:center;align-items:center;margin-top:4px"><input id="rcn" type="number" inputmode="numeric" min="1" placeholder="数を入力" style="width:110px;padding:6px;font-size:14px;border:2px solid #ff9ec4;border-radius:10px;background:#fff8f0;color:#e9772e;font-weight:bold"><button id="rcbn">入力した数で買う</button></div>'})():'')+'<button id="bkx">✕</button>';
-  document.getElementById('bkb').onclick=function(){_bl(t);saveD()};
+  wp.innerHTML='<b style="width:100%;text-align:center;font-size:13px">銀行　借金 '+(G.debt|0)+'G（'+(G.loans|0)+'/10回）</b><button id="bkln">借りる</button><button id="bk1">返す 5000</button><button id="bka">ぜんぶ返す</button>'+(D&&D.ec?(function(){return rcTopHTML()+'<button id="rcb1">買う ×1</button><button id="rcb10">買う ×10</button><button id="rcs1">売る ×1</button><button id="rcsa">ぜんぶ売る</button><div style="width:100%;display:flex;gap:6px;justify-content:center;align-items:center;margin-top:4px"><input id="rcn" type="number" inputmode="numeric" min="1" placeholder="数を入力" style="width:110px;padding:6px;font-size:14px;border:2px solid #ff9ec4;border-radius:10px;background:#fff8f0;color:#e9772e;font-weight:bold"><button id="rcbn">入力した数で買う</button></div>'+rcBOHTML()})():'')+'<button id="bkx">✕</button>';
+  document.getElementById('bkln').onclick=function(){_bl(t);saveD()};
   document.getElementById('bk1').onclick=function(){repay(t,false)};
   document.getElementById('bka').onclick=function(){repay(t,true)};
   if(D&&D.ec){document.getElementById('rcb1').onclick=function(){rcTrade(t,1,true)};document.getElementById('rcb10').onclick=function(){rcTrade(t,10,true)};document.getElementById('rcs1').onclick=function(){rcTrade(t,1,false)};document.getElementById('rcsa').onclick=function(){rcTrade(t,rcGet(),false)};var rbn=document.getElementById('rcbn');if(rbn)rbn.onclick=function(){var v=parseInt((document.getElementById('rcn')||{}).value,10);if(!(v>0)){sfx('deny');G.fx.push({x:t.x,y:t.y-24,txt:'数を入力してね',t:1.4,c:'#ff4d6d'});return}rcTrade(t,v,true)}}
+  if(D&&D.ec)try{rcWire(t)}catch(e){console.error(e)}
   document.getElementById('bkx').onclick=function(){G.sel=null;hud();panel()};
    wp.style.cssText='position:absolute;left:0;top:0;transform:none;z-index:6;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:5px;padding:6px 8px;background:var(--card);color:var(--ink);border:3px solid var(--accent);border-radius:16px;box-shadow:0 6px 16px rgba(255,111,165,.45);width:max-content;max-width:calc(100% - 8px)';
    var wrp=document.getElementById('wrap'),cr2=cv.getBoundingClientRect(),wr2=wrp.getBoundingClientRect();
