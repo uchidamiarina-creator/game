@@ -11943,7 +11943,7 @@ function chipFly(btn){var fx=fxl();if(!fx)return;var m=/\d+/.exec(btn.dataset.v|
 function inject(){var g=q('.czg');if(!g||q('.dlr',g))return;var p=g.firstElementChild;while(p&&p.classList.contains('czamb'))p=p.nextElementSibling;if(!p||p.children.length<2)return;var el=document.createElement('div');el.className='dlr';el.innerHTML=html();p.insertBefore(el,p.lastElementChild);fxl();apply()}
 function scan(){try{var g=q('.czg');if(!g){lastRes='';return}inject();var t=g.textContent||'',k=/ひきわけ|引き分け/.test(t)?'draw':/ディーラーの(かち|勝ち)|はずれ|没収|うしなった|負け…/.test(t)?'lose':/あなたの かち|🎉|ゲット|当たり！|回収！/.test(t)?'win':'';if(k&&k!==lastRes){setAct(k,2600);if(k==='win')chips(0,6);else if(k==='lose')chips(1,5)}lastRes=k;if(/くばって|とりかえて/.test(t)&&now()-lastDeal>1500){lastDeal=now();setAct('deal',1100);dealCards(3)}}catch(e){}}
 document.addEventListener('click',function(e){var b=e.target&&e.target.closest?e.target.closest('.czg button,.czg .bcchip'):null;if(!b)return;var t=(b.textContent||'').trim();if(/^\+\d+$/.test(t)||b.classList.contains('bcchip')){chipFly(b);setAct('chip',700);return}if(/もどる|えらびなおす|ルール|とじる|クリア|リセット/.test(t))return;setAct('deal',1100);dealCards(3)},true);
-var tm;new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){var n=ms[i].target;if(!(n.closest&&n.closest('.dlr,.cz-fx'))){clearTimeout(tm);tm=setTimeout(scan,50);return}}}).observe(document.body,{childList:true,subtree:true});
+var tm;new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){var n=ms[i].target;if(!(n.closest&&n.closest('.dlr,.cz-fx'))){try{inject()}catch(er){}clearTimeout(tm);tm=setTimeout(scan,50);return}}}).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 <style id="fit-css">
