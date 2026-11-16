@@ -5046,7 +5046,7 @@ function openBook(){
     lay.appendChild(sp)}});
    body.appendChild(lay)}
  function render(){
-  var P=pages[cur];body.innerHTML='';body.scrollTop=0;
+  var P=pages[cur];body.innerHTML='';body.scrollTop=0;body.style.overflow='auto';var _sn=document.getElementById('secNav');if(_sn)_sn.remove();
   if(dir){body.style.transition='none';body.style.opacity='0';body.style.transform='translateX('+(dir*28)+'px)';requestAnimationFrame(function(){requestAnimationFrame(function(){body.style.transition='transform .22s ease,opacity .22s ease';body.style.opacity='1';body.style.transform='none'})})}
   pg.textContent=(cur+1)+' / '+pages.length;
   tocb.style.visibility=cur>=2?'visible':'hidden';
@@ -5251,11 +5251,14 @@ function openBook(){
      ['📖 味方の説明','味方パネルで キャラの行を タップすると、せつめいが 上の電光けいじばんに 流れるよ。買う前じゃなくても 読めるから 強化の前に チェック'],
      ['👾 モンスター図鑑','図鑑の モンスターを タップすると ふきだしで ヒントが 出るよ。ボスの 弱点も ここに のっているよ'],
      ['📚 ヒントを ぜんぶ読む','まだ 見つけていない ヒントも、攻略本の表紙の「全部読む」で まとめて 読めるようになるよ']];
+    var SCK='miarina_td_guide_scratch_v1',SCD=[];try{var _a=JSON.parse(localStorage.getItem(SCK)||'[]');if(Array.isArray(_a))SCD=_a}catch(e){}
+    function scDone(t){if(SCD.indexOf(t)<0){SCD.push(t);try{localStorage.setItem(SCK,JSON.stringify(SCD))}catch(e){}}}
     SECRETS.forEach(function(S,ix){
      var cd=para('position:relative;margin:10px 0;border:2px solid #ecd3a0;border-radius:12px;background:#fffdf5;overflow:hidden','');
      var in1=para('padding:10px 12px','');
      in1.append(para('font-size:13px;font-weight:900;color:#c97a1e;margin-bottom:4px',S[0]),para('font-size:12.5px;line-height:1.6;font-weight:700;color:#4a2e14',S[1]));
      cd.appendChild(in1);
+     if(SCD.indexOf(S[0])>=0){body.appendChild(cd);return}
      var cv=document.createElement('canvas');cv.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;touch-action:none;cursor:crosshair;border:0;box-shadow:none;border-radius:0;transition:opacity .4s';
      cd.appendChild(cv);body.appendChild(cd);
      var dpr=Math.min(2,window.devicePixelRatio||1),X2=null,done=false,tries=0;
@@ -5276,7 +5279,7 @@ function openBook(){
      function check(){
       if(!X2||done)return;
       try{var d=X2.getImageData(0,0,cv.width,cv.height).data,n=0,t=0;for(var i=3;i<d.length;i+=64){t++;if(d[i]<40)n++}
-       if(t&&n/t>.55){done=true;cv.style.opacity='0';cv.style.pointerEvents='none';setTimeout(function(){cv.remove()},450);try{sfx('up')}catch(e){}}}catch(e){}
+       if(t&&n/t>.55){done=true;scDone(S[0]);cv.style.opacity='0';cv.style.pointerEvents='none';setTimeout(function(){cv.remove()},450);try{sfx('up')}catch(e){}}}catch(e){}
      }
      ['touchstart','touchend','pointerdown','pointerup','click'].forEach(function(n){cv.addEventListener(n,function(e){e.stopPropagation()},{passive:true})});
      cv.addEventListener('pointerdown',function(e){down=true;try{cv.setPointerCapture(e.pointerId)}catch(er){}var p=pos(e);lx=p[0];ly=p[1];cut(p,[p[0]+.1,p[1]+.1]);mv=0;e.preventDefault()});
@@ -5284,7 +5287,16 @@ function openBook(){
      var up=function(){if(!down)return;down=false;check()};
      cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
     });
-    body.appendChild(para('margin-top:10px;font-size:11px;line-height:1.6;color:#9a7048','※ ページを とじると また 銀色に もどるよ'));
+    body.appendChild(para('margin-top:10px;font-size:11px;line-height:1.6;color:#9a7048','※ 一度けずったところは そのまま のこるよ'));
+    body.style.overflow='hidden';
+    card.style.position='relative';
+    var sn=document.createElement('div');sn.id='secNav';sn.style.cssText='position:absolute;right:6px;z-index:6;display:flex;flex-direction:column;gap:8px';
+    var ub=navBtn('▲'),db=navBtn('▼');ub.setAttribute('aria-label','上へ');db.setAttribute('aria-label','下へ');
+    function stepS(d){var h=Math.max(80,body.clientHeight*.6);body.scrollTo({top:body.scrollTop+d*h,behavior:'smooth'});try{sfx('tap')}catch(e){}}
+    ub.onclick=function(){stepS(-1)};db.onclick=function(){stepS(1)};
+    sn.append(ub,db);card.appendChild(sn);
+    requestAnimationFrame(function(){sn.style.top=(body.offsetTop+body.offsetHeight/2-45)+'px'});
+    
    }else if(P.k==='credit'){
    body.appendChild(head('🎬 クレジット','18px'));
    var CRL=[['Executive producer','Mia Uchida'],['Assistant manager','Rina Uchida'],['Character designer','Lil Kaname'],['Sound creator','Yero'],['Associate coordinator','Emu Ai'],['Special appearance','Afuo Tanaka'],['Special thanks',null],['Developed by','Karaage Records']],pnm='';
