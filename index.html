@@ -1589,7 +1589,7 @@ btn.onclick=()=>{if(document.getElementById('vtq'))return;try{sfx('tap')}catch(e
  const h=document.createElement('h2');h.textContent='🔐 金庫';h.style.margin='0 0 6px';
  const info=document.createElement('div');info.style.cssText='font-size:15px;font-weight:800';
  const fe=document.createElement('div');fe.style.cssText='font-size:12px;color:#7a6a78';
- const inp=document.createElement('input');inp.type='number';inp.min='0';inp.setAttribute('inputmode','numeric');inp.placeholder='ゴールド';inp.style.cssText='width:100%;box-sizing:border-box;padding:8px;margin:10px 0 8px;text-align:center';
+ const inp=document.createElement('input');inp.type='text';inp.setAttribute('inputmode','numeric');inp.placeholder='ゴールド';inp.style.cssText='width:100%;box-sizing:border-box;padding:8px;margin:0;text-align:center;flex:1;min-width:0';
  const mkRow=()=>{const r=document.createElement('div');r.style.cssText='display:flex;gap:6px;margin-bottom:6px';return r};
  const mkB=(t,f)=>{const b=document.createElement('button');b.textContent=t;b.style.flex='1';b.onclick=f;return b};
  const msg=document.createElement('div');msg.style.cssText='min-height:1.5em;color:#e0103a;font-size:13px;margin:4px 0 8px';
@@ -1599,13 +1599,17 @@ btn.onclick=()=>{if(document.getElementById('vtq'))return;try{sfx('tap')}catch(e
   const lucky=()=>{const t=String(inp.value||'').trim();if(!/^7{2,16}$/.test(t))return 0;const n=Number(t);if(!Number.isSafeInteger(n))return 0;inp.value='';try{sfx('up')}catch(e){}if(!sg(gp()+n)){say('この端末では保存できなかったよ');return -1}say('🎰 7のゾロ目ボーナス！ '+n+'G もらったよ',1);return 1};
  const dep=a=>{a=Math.floor(a);if(!(a>0)){say('金額を入れてね');return}if(a>gp()){say('手持ちがたりないよ');return}const o=cur();o.bal+=a;if(!wv(o)||!sg(gp()-a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 預けたよ',1)};
  const wd=a=>{a=Math.floor(a);if(!(a>0)){say('金額がたりないよ');return}const o=cur(),fee=o.n>=FREE?FEE:0;if(a+fee>o.bal){say(fee?'手数料'+FEE+'Gこみで金庫がたりないよ':'金庫がたりないよ');return}o.bal-=a+fee;o.n++;if(!wv(o)||!sg(gp()+a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 引き出したよ'+(fee?'（手数料 '+fee+'G）':''),1)};
- const secret=()=>{const h=(window.__vaultCodes||{})[String(inp.value||'').trim()];if(!h)return false;let m='';try{m=h()}catch(e){console.error(e)}if(!m)return false;inp.value='';try{sfx('up')}catch(e){}say(m,1);return true};
+ const secret=()=>{const h=(window.__vaultCodes||{})[String(inp.value||'').normalize('NFKC').trim().toLowerCase().replace(/[\u30a1-\u30f6]/g,c=>String.fromCharCode(c.charCodeAt(0)-96))];if(!h)return false;let m='';try{m=h()}catch(e){console.error(e)}if(!m)return false;inp.value='';try{sfx('up')}catch(e){}say(m,1);return true};
   (window.__vaultCodes=window.__vaultCodes||{})['5678']=()=>{const KY=365*24*3600*1000,TKY='miarina_town_v1';let o=null;try{o=JSON.parse(localStorage.getItem(TKY)||'null')}catch(e){}if(!o||!o.pot||typeof o.pot.t!=='number')return '';const t=Date.now()-KY;if(o.pot.t<=t)return '';o.pot.t=t;try{localStorage.setItem(TKY,JSON.stringify(o))}catch(e){return ''}try{window.__potSync&&window.__potSync(t)}catch(e){}return '🌸 闇鍋の花が ぐんぐん育って 立派に咲いたよ'};
+  (function(){const f=()=>{let on=false;try{on=localStorage.getItem('miarina_td_castle_v1')==='1'}catch(e){}if(on)return '🏯 大江戸未亜利奈城は もう ケロケロ不動産屋に ならんでるよ';try{localStorage.setItem('miarina_td_castle_v1','1')}catch(e){return ''}return '🏯 ケロケロ不動産屋に「大江戸未亜利奈城」が ならんだよ'},V=(window.__vaultCodes=window.__vaultCodes||{});V['みありな']=f;V['miarina']=f})();
   const r1=mkRow(),r2=mkRow();
  r1.append(mkB('預ける',()=>dep(val())),mkB('引き出す',()=>{if(secret())return;if(lucky())return;wd(val())}));
  r2.append(mkB('ぜんぶ預ける',()=>dep(gp())),mkB('ぜんぶ引き出す',()=>{const o=cur(),fee=o.n>=FREE?FEE:0;wd(o.bal-fee)}));
  const cl=mkB('とじる',()=>q.remove());cl.style.flex='none';cl.style.width='100%';
- bx.append(h,info,fe,inp,r1,r2,msg,cl);q.append(bx);q.onclick=e=>{if(e.target===q)q.remove()};document.body.append(q);show()}})();
+ const ir=document.createElement('div');ir.style.cssText='display:flex;gap:6px;align-items:center;margin:10px 0 8px';
+  const kb=mkB('あ',()=>{const t=inp.getAttribute('inputmode')==='numeric';inp.setAttribute('inputmode',t?'text':'numeric');kb.textContent=t?'123':'あ';inp.blur();setTimeout(()=>inp.focus(),30)});kb.style.flex='none';kb.style.width='auto';kb.style.minWidth='44px';kb.setAttribute('aria-label','キーボードを切りかえる');
+  ir.append(inp,kb);
+  bx.append(h,info,fe,ir,r1,r2,msg,cl);q.append(bx);q.onclick=e=>{if(e.target===q)q.remove()};document.body.append(q);show()}})();
 const _endc=end;end=function(win){const r=_endc.apply(this,arguments);try{if(win){let sv=readSave();if(!sv){try{sv=snapshot()}catch(e){sv=null}}if(sv&&(sv.lv|0)===lv){sv.cleared=1;sv.gold=G.gold;sv.ts=Date.now();localStorage.setItem(SAVE_KEY,JSON.stringify(sv));refreshCont()}}}catch(e){}return r};
 </script>
 <script>
@@ -3049,9 +3053,10 @@ function keroShop(g,x,y,w){var cx=x+w/2;shopShadow(g,x,y,w);
  ['マンション','🏢',120000,['ケロケロタワー','スカイレジデンス','シティヒルズ','ベイサイド','パークタワー','グランメゾン','リバーサイド','ムーンライト','サンライズ','ロイヤルコート','ガーデンヒルズ','ブルーレジデンス','ミッドタウンハイツ','プレミアムタワー','アクアマンション','シャングリラ','ドリームタワー','パールレジデンス','ファーストコート','ステラマンション']],
  ['アパート','🏘️',60000,['ひなたハイツ','コーポ緑','メゾン桜','ハイツ青葉','コーポひまわり','パレスひかり','ハイツ月見','メゾンかえる','コーポ夕焼け','ハイツ南風','コーポ小鳥','メゾン雪うさぎ','ハイツ朝露','コーポ栗','ハイツ銀杏','メゾンあおぞら','コーポ海風','ハイツ星屑','コーポ若葉','メゾン虹']],
  ['お店','🏪',80000,['パン屋さん','お花屋さん','ケーキ屋さん','たこ焼き屋さん','古本屋さん','カフェ','おもちゃ屋さん','文房具屋さん','ラーメン屋さん','雑貨屋さん','クレープ屋さん','八百屋さん','和菓子屋さん','ゲームショップ','洋服屋さん','アイス屋さん','ペンギン書店','うどん屋さん','喫茶ひだまり','駄菓子屋さん']],
- ['団地','🏗️',200000,['さくら団地','みどり団地','ひかり団地','あさひ団地','つばめ団地','もみじ団地','ほし団地','なみき団地','わかば団地','かぜ団地','やまびこ団地','ことり団地','みなと団地','ひまわり団地','にじ団地','つき団地','ふじ団地','せせらぎ団地','しらさぎ団地','おおぞら団地']]],KZP=null;
+ ['団地','🏗️',200000,['さくら団地','みどり団地','ひかり団地','あさひ団地','つばめ団地','もみじ団地','ほし団地','なみき団地','わかば団地','かぜ団地','やまびこ団地','ことり団地','みなと団地','ひまわり団地','にじ団地','つき団地','ふじ団地','せせらぎ団地','しらさぎ団地','おおぞら団地']]],KZP=null,KZC={id:100,type:'お城',ic:'🏯',name:'大江戸未亜利奈城',price:1000000000,inc:10000000};
+function kzCastleOn(){try{return localStorage.getItem('miarina_td_castle_v1')==='1'}catch(e){return false}}
 function kzMix2(k){var x=hsh(k);x^=x>>>15;x=Math.imul(x,2246822519)>>>0;x^=x>>>13;x=Math.imul(x,3266489917)>>>0;return(x^(x>>>16))>>>0}
-function kzAll(){if(KZP)return KZP;KZP=[];KZT.forEach(function(t,ti){t[3].forEach(function(n,k){var id=ti*20+k,pr=Math.round(t[2]*(.45+kzMix2('kzp:'+id)%1000/1000*1.2)/100)*100,rt=.025+kzMix2('kzr:'+id)%1000/1000*.02;KZP.push({id:id,type:t[0],ic:t[1],name:n,price:pr,inc:Math.max(10,Math.round(pr*rt/10)*10)})})});return KZP}
+function kzAll(){if(KZP){if(KZP.length<=100&&kzCastleOn())KZP.push(KZC);return KZP}KZP=[];KZT.forEach(function(t,ti){t[3].forEach(function(n,k){var id=ti*20+k,pr=Math.round(t[2]*(.45+kzMix2('kzp:'+id)%1000/1000*1.2)/100)*100,rt=.025+kzMix2('kzr:'+id)%1000/1000*.02;KZP.push({id:id,type:t[0],ic:t[1],name:n,price:pr,inc:Math.max(10,Math.round(pr*rt/10)*10)})})});if(kzCastleOn())KZP.push(KZC);return KZP}
 function kzMix(id){var x=hsh(sgDay()+':kero:'+id+':'+id*7919);x^=x>>>15;x=Math.imul(x,2246822519)>>>0;x^=x>>>13;x=Math.imul(x,3266489917)>>>0;return(x^(x>>>16))>>>0}
 function kzOffers(){var all=kzAll().slice().sort(function(a,b){return kzMix(a.id)-kzMix(b.id)}),out=[],seen={};all.forEach(function(p){if(!seen[p.type]){seen[p.type]=1;out.push(p)}});all.forEach(function(p){if(out.length<6&&out.indexOf(p)<0)out.push(p)});return out}
 function kzLoad(){try{var o=JSON.parse(localStorage.getItem(KZK)||'null');if(o&&Array.isArray(o.own))return o}catch(e){}return{own:[],last:Date.now()}}
@@ -4998,8 +5003,7 @@ function openBook(){
  var passN=pages.length+1;pages.push({k:'pass'});
  var cheatN=pages.length+1;pages.push({k:'cheat'});
  var secretN=pages.length+1;pages.push({k:'secret'});
- var creditN=pages.length+1;pages.push({k:'credit'});
- pages[1]={k:'toc',G:G,gStart:gStart,gIndex:gIndex,favN:favN,allyN:allyN,helpN:helpN,monN:monN,hintN:hintN,passN:passN,cheatN:cheatN,secretN:secretN,creditN:creditN};
+ pages[1]={k:'toc',G:G,gStart:gStart,gIndex:gIndex,favN:favN,allyN:allyN,helpN:helpN,monN:monN,hintN:hintN,passN:passN,cheatN:cheatN,secretN:secretN};
 
  var ov=document.createElement('div');ov.id='bookov';
  ov.style.cssText='position:fixed;inset:0;z-index:90;background:rgba(60,30,50,.55);display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box';
@@ -5114,8 +5118,7 @@ function openBook(){
     cr.append(para('','🛠 改造コード集'),para('font-size:12px;color:#c97a1e','p.'+P.cheatN));cr.onclick=function(){go(P.cheatN-1)};box.appendChild(cr);
     var sr2=para(rowCss+';cursor:pointer','');
      sr2.append(para('','ひみつの裏技（けずって読む）'),para('font-size:12px;color:#c97a1e','p.'+P.secretN));sr2.onclick=function(){go(P.secretN-1)};box.appendChild(sr2);
-     var cdr=para(rowCss+';cursor:pointer','');
-    cdr.append(para('','🎬 クレジット'),para('font-size:12px;color:#c97a1e','p.'+P.creditN));cdr.onclick=function(){go(P.creditN-1)};box.appendChild(cdr);
+     
     if(!unlocked)box.appendChild(para('margin-top:12px;font-size:11px;line-height:1.6;color:#9a7048','※ まだ見つけていないヒントは、表紙の「全部読む」で読めるようになるよ'));
    }
    inp.oninput=drawToc;drawToc();
@@ -5242,15 +5245,12 @@ function openBook(){
     var SECRETS=[
      ['🔐 金庫「1234」','金庫に 1234 と入れて「引き出す」を押すと、チャルメラ屋台が その日だけ 昼でも街に来るよ。すでに来ているときは ふつうに 1234G 引き出そうとするよ'],
      ['🔐 金庫「5678」','金庫に 5678 と入れて「引き出す」を押すと、街の闇鍋の花が 最終段階まで 一気に育つよ（花がないとき・育ちきっているときは ふつうの引き出し）'],
-     ['🎰 7のゾロ目ボーナス','金庫に 77 や 7777 のように 7だけを 2〜16こ ならべて「引き出す」を押すと、入れた数ぶんの ゴールドが もらえるよ'],
-     ['💸 金庫の手数料','金庫の引き出しは 1か月に 10回まで 無料。それをこえると 1回ごとに 手数料 200G かかるよ。まとめて 引き出すのが おとく'],
      ['🍜 ラーメン屋台','屋台は ふだん 夕方〜深夜だけ。ラーメンは 1日1杯まで。しょうゆ・しお・とんこつは 食べてから 24時間 効果が続いて、みそだけは 街の住人に はたらくよ'],
      ['👆 クレジットの出しかた','タイトル画面の「📱 iPhone / Android 対応」の文字を 2回 すばやくタップ！ なまえを決めて、モンスターを作ったあとに 見られるよ'],
-     ['🛠 改造コード集','この攻略本の「改造コード集」では、なまえの変更・街の名前の変更・ルナティック解放・味方の数2倍など 本当に ゲームを 改造できるよ'],
-     ['🦸 味方の出撃','バトル中に ゴールの絵を タップすると 味方パネルが ひらくよ。「出撃」ボタンで 1体ずつ 出せて、全自動バトルのときは じどうで 出撃するよ'],
-     ['📖 味方の説明','味方パネルで キャラの行を タップすると、せつめいが 上の電光けいじばんに 流れるよ。買う前じゃなくても 読めるから 強化の前に チェック'],
-     ['👾 モンスター図鑑','図鑑の モンスターを タップすると ふきだしで ヒントが 出るよ。ボスの 弱点も ここに のっているよ'],
-     ['📚 ヒントを ぜんぶ読む','まだ 見つけていない ヒントも、攻略本の表紙の「全部読む」で まとめて 読めるようになるよ']];
+     ['🆘 エクリプスでSOSボタン','難易度エクリプスで SOSボタンを置いてタップすると、ふつうの「フェーズスキップ」ではなく 💰1000で あいているマスぜんぶに ピンクアローが ずらっと 並ぶよ（敵は消えないよ）。バトルがはじまってから 押してね。お金が たりないときや あいているマスが ないときは 何も おきないよ'],
+     ['🪢 エクリプスでかいてんムチ','難易度エクリプスで かいてんムチを タップして 手動で まわすと（1回💰1000・フェーズ中だけ）、はんいの中の敵が ラスボスも ふくめて 味方になって ほかの敵と たたかってくれるよ（いちどに 40体まで）。自動で たたくだけの ときは 味方にならないよ'],
+     ['💗 未亜をレベル5（MAX）に','未亜のレベルアップは Lv4→5が 💰20000（難易度で ねだんが かわるよ）。Lv5になると 頭に「レベルMAX」が キラキラ光って、バトル中に 敵がいると 約18秒後から 22〜34秒ごとに 必殺技「ミラクルスターバースト！」が 発動するよ。画面の敵ぜんぶに ケタちがいの大ダメージが入るよ'],
+     ['🏯 金庫「みありな」','金庫に「みありな」（ひらがな・カタカナ・ローマ字のどれでもOK）と入れて「引き出す」を押すと、ケロケロ不動産屋に お城「大江戸未亜利奈城」が ならぶよ。ねだんは めちゃくちゃ高い 💰10億G！ 買えば 毎月20日に 月 +1000万G が 入るよ。ほかの物件と おなじで 3軒まで しか もてないよ']];
     var SCK='miarina_td_guide_scratch_v1',SCD=[];try{var _a=JSON.parse(localStorage.getItem(SCK)||'[]');if(Array.isArray(_a))SCD=_a}catch(e){}
     function scDone(t){if(SCD.indexOf(t)<0){SCD.push(t);try{localStorage.setItem(SCK,JSON.stringify(SCD))}catch(e){}}}
     SECRETS.forEach(function(S,ix){
