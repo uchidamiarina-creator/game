@@ -3066,6 +3066,31 @@ function kzSettle(){var o=kzLoad(),now=Date.now(),got=0,n=0;
   while(c.getTime()<=now&&n<60){var ct=c.getTime();o.own.forEach(function(w){var pp=kzAll()[w.id];if(pp&&w.t<ct)got+=pp.inc});c.setMonth(c.getMonth()+1);n++}}
  o.last=now;kzSave(o);if(got>0)sgSet(sgGet()+got);return got}
 function kzNext(){var d=new Date(),c=new Date(d.getFullYear(),d.getMonth(),20);if(c.getTime()<=d.getTime())c.setMonth(c.getMonth()+1);return(c.getMonth()+1)+'月20日'}
+/* 遠くの山の稜線に、買った不動産をぼんやり表示 */
+function kzRidge(x){var P=[[0,290,80,230,200,270,260,250],[260,250,310,236,340,260,360,255]],best=290,bd=1e9;P.forEach(function(p){for(var i=0;i<=40;i++){var t=i/40,u=1-t,X=u*u*u*p[0]+3*u*u*t*p[2]+3*u*t*t*p[4]+t*t*t*p[6],Y=u*u*u*p[1]+3*u*u*t*p[3]+3*u*t*t*p[5]+t*t*t*p[7],d=Math.abs(X-x);if(d<bd){bd=d;best=Y}}});return best}
+var KZH={t:-9,l:[]};
+function kzHorizon(g,TD,s){
+ if(s-KZH.t>1||s<KZH.t){KZH.t=s;var o=kzLoad(),a=kzAll(),l=[];o.own.forEach(function(w){var p=a[w.id];if(p)l.push(p)});KZH.l=l}
+ if(!KZH.l.length)return;
+ var k=TD.k,night=k=='N'||k=='X',rgb=night?'36,44,96':(k=='E'||k=='R')?'150,112,150':'140,156,204',al=night?.5:.36,SL=[30,112,250,340],n=0;
+ g.save();
+ KZH.l.forEach(function(p){
+  var cas=p.type=='お城',x=cas?150:SL[n++];if(x===undefined)return;
+  var y=kzRidge(x)+3,H0=cas?40:p.type=='マンション'?27:p.type=='アパート'?16:p.type=='団地'?19:p.type=='お店'?15:15;
+  var gr=g.createLinearGradient(0,y-H0,0,y);gr.addColorStop(0,'rgba('+rgb+','+al+')');gr.addColorStop(1,'rgba('+rgb+','+al*.3+')');g.fillStyle=gr;
+  var wins=[];
+  function R(a,b,w,h){g.fillRect(a,b,w,h)}
+  function T(x0,y0,x1,y1,x2,y2){g.beginPath();g.moveTo(x0,y0);g.lineTo(x1,y1);g.lineTo(x2,y2);g.closePath();g.fill()}
+  if(cas){R(x-18,y-12,36,12);R(x-12,y-22,24,10);R(x-7,y-30,14,8);T(x-21,y-12,x,y-17,x+21,y-12);T(x-15,y-22,x,y-27,x+15,y-22);T(x-10,y-30,x,y-40,x+10,y-30);wins=[[x-3,y-8],[x-12,y-8],[x+8,y-8],[x-3,y-18],[x-3,y-27]]}
+  else if(p.type=='マンション'){R(x-6,y-26,12,26);R(x-3,y-29,6,3);wins=[[x-4,y-22],[x+1,y-22],[x-4,y-15],[x+1,y-15],[x-4,y-8],[x+1,y-8]]}
+  else if(p.type=='アパート'){R(x-9,y-15,18,15);wins=[[x-6,y-11],[x+2,y-11],[x-6,y-5],[x+2,y-5]]}
+  else if(p.type=='団地'){R(x-11,y-18,9,18);R(x+2,y-14,9,14);wins=[[x-9,y-14],[x-6,y-14],[x-9,y-8],[x-6,y-8],[x+4,y-10],[x+7,y-10]]}
+  else if(p.type=='お店'){R(x-8,y-9,16,9);R(x-10,y-12,20,4);wins=[[x-5,y-6]]}
+  else{R(x-7,y-8,14,8);T(x-9,y-8,x,y-15,x+9,y-8);wins=[[x-2,y-5]]}
+  if(night){g.fillStyle='rgba(255,224,130,.75)';wins.forEach(function(w){g.fillRect(w[0],w[1],2,2)})}
+ });
+ g.restore()}
+
 function drawLots(g){for(var i=0;i<LOTS.length;i++){var L=LOTS[i],sc=L.s||1,X=L.s?-31:L.x,Y=L.s?0:L.y,W=L.s?62:L.w;
   if(L.s){g.save();g.translate(L.x+L.w/2,L.y);g.scale(sc,sc)}
   if(BLD[i]==='pet')petShop(g,X,Y,W);else if(BLD[i]==='sushi')sushiShop(g,X,Y,W);else if(BLD[i]==='otasuke')otasukeShop(g,X,Y,W);else if(BLD[i]==='rinacoin')coinShop(g,X,Y,W);else if(BLD[i]==='mikata')mikataShop(g,X,Y,W);else if(BLD[i]==='casino')casinoShop(g,X,Y,W);else if(BLD[i]==='mamekichi')mamekichiShop(g,X,Y,W);else if(BLD[i]==='kuroi')kuroiShop(g,X,Y,W);else if(BLD[i]==='kero')keroShop(g,X,Y,W);else vacant(g,{x:X,y:Y,w:W});
@@ -3189,7 +3214,7 @@ function openTown2(TN){
  try{var kg=kzSettle();if(kg>0){toast=7;tmsg='🐸 ケロケロ不動産から 不動産収入 +'+kg+'G'}}catch(er){}
  function say(r,t,d){r.bub=mood(r);r.bt=d||2.6}
  function frame(now){if(!alive)return;raf=requestAnimationFrame(frame);var dt=Math.min(.05,(now-last)/1000);last=now;var s=(now-T0)/1000;
-  g.setTransform(DPR,0,0,DPR,0,0);g.clearRect(0,0,W,H);var TD=todState();var wk0=todWeather().k;if(TD.k!==lk||wk0!==lw){lk=TD.k;lw=wk0;ttl.textContent=TN+' '+ICO[lk]+' '+todWeather().i;setClouds()}skyDraw(g,TD);g.drawImage(bg,0,0,W,H);drawWin(g,TD);lotFx(g,s);try{drawPotFlower(g,s)}catch(er){}
+  g.setTransform(DPR,0,0,DPR,0,0);g.clearRect(0,0,W,H);var TD=todState();var wk0=todWeather().k;if(TD.k!==lk||wk0!==lw){lk=TD.k;lw=wk0;ttl.textContent=TN+' '+ICO[lk]+' '+todWeather().i;setClouds()}skyDraw(g,TD);g.drawImage(bg,0,0,W,H);drawWin(g,TD);try{kzHorizon(g,TD,s)}catch(er){}lotFx(g,s);try{drawPotFlower(g,s)}catch(er){}
   for(var i=0;i<clouds.length;i++){var c=clouds[i];c.x+=dt*(4+c.s*3);if(c.x>W+60)c.x=-60;g.fillStyle=clc(TD.cl);g.beginPath();g.arc(c.x,c.y,13*c.s,0,7);g.arc(c.x+14*c.s,c.y+3,10*c.s,0,7);g.arc(c.x-14*c.s,c.y+4,9*c.s,0,7);g.arc(c.x+4*c.s,c.y-8*c.s,10*c.s,0,7);g.fill()}
   g.strokeStyle='#8a6a8a';g.lineWidth=1;g.beginPath();g.moveTo(0,10);g.quadraticCurveTo(180,34,360,10);g.stroke();var fl=['#ff7eb6','#ffd23f','#7fd0ff','#9be39b','#c0a0ff'];for(i=0;i<14;i++){var u=(i+.5)/14,fx=u*360,fy=10+4*Math.sin(u*Math.PI)*6*1+Math.sin(u*Math.PI)*17+Math.sin(s*2+i)*1.2;g.fillStyle=fl[i%5];g.beginPath();g.moveTo(fx-6,fy);g.lineTo(fx+6,fy);g.lineTo(fx,fy+12);g.closePath();g.fill()}
   for(i=0;i<2;i++){var cx=(i?236:84),cy=290;for(var k=0;k<3;k++){var uu=(s*.3+k*.33+i*.17)%1;g.fillStyle='rgba(255,255,255,'+(.5*(1-uu))+')';g.beginPath();g.arc(cx+uu*14,cy-uu*30,3+uu*6,0,7);g.fill()}}
@@ -5050,7 +5075,7 @@ function openBook(){
     lay.appendChild(sp)}});
    body.appendChild(lay)}
  function render(){
-  var P=pages[cur];body.innerHTML='';body.scrollTop=0;body.style.overflow='auto';var _sn=document.getElementById('secNav');if(_sn)_sn.remove();
+  var P=pages[cur];body.innerHTML='';body.scrollTop=0;body.style.overflow='auto';document.querySelectorAll('.secNavB').forEach(function(b){b.remove()});
   if(dir){body.style.transition='none';body.style.opacity='0';body.style.transform='translateX('+(dir*28)+'px)';requestAnimationFrame(function(){requestAnimationFrame(function(){body.style.transition='transform .22s ease,opacity .22s ease';body.style.opacity='1';body.style.transform='none'})})}
   pg.textContent=(cur+1)+' / '+pages.length;
   tocb.style.visibility=cur>=2?'visible':'hidden';
@@ -5240,7 +5265,7 @@ function openBook(){
    body.appendChild(para('margin-top:10px;font-size:11.5px;line-height:1.6;color:#9a7048','※ 機種変更の前に、かならず いまの機種で発行してね'));
   }else if(P.k==='secret'){
     body.appendChild(head('ひみつの裏技','18px'));
-    body.appendChild(para('text-align:center;font-size:12px;line-height:1.6;color:#9a7048;margin-bottom:6px','銀色の部分を 指でこすって けずると 読めるよ\n（スクロールは 銀色の そとがわで やってね）'));
+    body.appendChild(para('text-align:center;font-size:12px;line-height:1.6;color:#9a7048;margin-bottom:6px','銀色の部分を 指でこすって けずると 読めるよ\n（銀色いがいの ところを さわると スクロールできるよ）'));
     body.lastChild.style.whiteSpace='pre-line';
     var SECRETS=[
      ['🔐 金庫「1234」','金庫に 1234 と入れて「引き出す」を押すと、チャルメラ屋台が その日だけ 昼でも街に来るよ。すでに来ているときは ふつうに 1234G 引き出そうとするよ'],
@@ -5250,7 +5275,8 @@ function openBook(){
      ['🆘 エクリプスでSOSボタン','難易度エクリプスで SOSボタンを置いてタップすると、ふつうの「フェーズスキップ」ではなく 💰1000で あいているマスぜんぶに ピンクアローが ずらっと 並ぶよ（敵は消えないよ）。バトルがはじまってから 押してね。お金が たりないときや あいているマスが ないときは 何も おきないよ'],
      ['🪢 エクリプスでかいてんムチ','難易度エクリプスで かいてんムチを タップして 手動で まわすと（1回💰1000・フェーズ中だけ）、はんいの中の敵が ラスボスも ふくめて 味方になって ほかの敵と たたかってくれるよ（いちどに 40体まで）。自動で たたくだけの ときは 味方にならないよ'],
      ['💗 未亜をレベル5（MAX）に','未亜のレベルアップは Lv4→5が 💰20000（難易度で ねだんが かわるよ）。Lv5になると 頭に「レベルMAX」が キラキラ光って、バトル中に 敵がいると 約18秒後から 22〜34秒ごとに 必殺技「ミラクルスターバースト！」が 発動するよ。画面の敵ぜんぶに ケタちがいの大ダメージが入るよ'],
-     ['🏯 金庫「みありな」','金庫に「みありな」（ひらがな・カタカナ・ローマ字のどれでもOK）と入れて「引き出す」を押すと、ケロケロ不動産屋に お城「大江戸未亜利奈城」が ならぶよ。ねだんは めちゃくちゃ高い 💰10億G！ 買えば 毎月20日に 月 +1000万G が 入るよ。ほかの物件と おなじで 3軒まで しか もてないよ']];
+     ['🏯 金庫「みありな」','金庫に「みありな」（ひらがな・カタカナ・ローマ字のどれでもOK）と入れて「引き出す」を押すと、ケロケロ不動産屋に お城「大江戸未亜利奈城」が ならぶよ。ねだんは めちゃくちゃ高い 💰10億G！ 買えば 毎月20日に 月 +1000万G が 入るよ。ほかの物件と おなじで 3軒まで しか もてないよ'],
+     ['🔎 まだまだあるよ！','これ以外にも沢山の裏技があるよ探してみよう！']];
     var SCK='miarina_td_guide_scratch_v1',SCD=[];try{var _a=JSON.parse(localStorage.getItem(SCK)||'[]');if(Array.isArray(_a))SCD=_a}catch(e){}
     function scDone(t){if(SCD.indexOf(t)<0){SCD.push(t);try{localStorage.setItem(SCK,JSON.stringify(SCD))}catch(e){}}}
     SECRETS.forEach(function(S,ix){
@@ -5259,7 +5285,7 @@ function openBook(){
      in1.append(para('font-size:13px;font-weight:900;color:#c97a1e;margin-bottom:4px',S[0]),para('font-size:12.5px;line-height:1.6;font-weight:700;color:#4a2e14',S[1]));
      cd.appendChild(in1);
      if(SCD.indexOf(S[0])>=0){body.appendChild(cd);return}
-     var cv=document.createElement('canvas');cv.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;touch-action:none;cursor:crosshair;border:0;box-shadow:none;border-radius:0;transition:opacity .4s';
+     var cv=document.createElement('canvas');cv.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;border:0;box-shadow:none;border-radius:0;transition:opacity .4s';
      cd.appendChild(cv);body.appendChild(cd);
      var dpr=Math.min(2,window.devicePixelRatio||1),X2=null,done=false,tries=0;
      function setup(){
@@ -5281,21 +5307,28 @@ function openBook(){
       try{var d=X2.getImageData(0,0,cv.width,cv.height).data,n=0,t=0;for(var i=3;i<d.length;i+=64){t++;if(d[i]<40)n++}
        if(t&&n/t>.55){done=true;scDone(S[0]);cv.style.opacity='0';cv.style.pointerEvents='none';setTimeout(function(){cv.remove()},450);try{sfx('up')}catch(e){}}}catch(e){}
      }
-     ['touchstart','touchend','pointerdown','pointerup','click'].forEach(function(n){cv.addEventListener(n,function(e){e.stopPropagation()},{passive:true})});
-     cv.addEventListener('pointerdown',function(e){down=true;try{cv.setPointerCapture(e.pointerId)}catch(er){}var p=pos(e);lx=p[0];ly=p[1];cut(p,[p[0]+.1,p[1]+.1]);mv=0;e.preventDefault()});
-     cv.addEventListener('pointermove',function(e){if(!down)return;var p=pos(e);cut([lx,ly],p);lx=p[0];ly=p[1];if(++mv%12===0)check();e.preventDefault()});
+     function sPos(c){var r=cv.getBoundingClientRect();return[(c.clientX-r.left)*(cv.width/r.width)/dpr,(c.clientY-r.top)*(cv.height/r.height)/dpr]}
+     function silver(p){if(!X2||done)return false;try{var x=Math.round(p[0]*dpr),y=Math.round(p[1]*dpr);if(x<0||y<0||x>=cv.width||y>=cv.height)return false;return X2.getImageData(x,y,1,1).data[3]>=40}catch(e){return false}}
+     function begin(c){var p=sPos(c);if(!silver(p))return false;down=true;lx=p[0];ly=p[1];cut(p,[p[0]+.1,p[1]+.1]);mv=0;return true}
+     function move(c){if(!down)return;var p=sPos(c);cut([lx,ly],p);lx=p[0];ly=p[1];if(++mv%12===0)check()}
      var up=function(){if(!down)return;down=false;check()};
-     cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+     /* 銀色の上だけ「けずる」。それ以外をさわったときは ふつうにスクロール */
+     cd.addEventListener('touchstart',function(e){if(e.touches.length===1&&begin(e.touches[0])){e.stopPropagation();e.preventDefault()}},{passive:false});
+     cd.addEventListener('touchmove',function(e){if(down){move(e.touches[0]);e.stopPropagation();e.preventDefault()}},{passive:false});
+     cd.addEventListener('touchend',function(e){if(down){e.stopPropagation();up()}},{passive:false});
+     cd.addEventListener('touchcancel',function(){up()});
+     cd.addEventListener('pointerdown',function(e){if(e.pointerType==='touch')return;if(begin(e)){e.stopPropagation();e.preventDefault();try{cd.setPointerCapture(e.pointerId)}catch(er){}}});
+     cd.addEventListener('pointermove',function(e){if(e.pointerType==='touch'||!down)return;move(e);e.preventDefault()});
+     cd.addEventListener('pointerup',function(e){if(e.pointerType!=='touch')up()});
+     cd.addEventListener('pointercancel',function(e){if(e.pointerType!=='touch')up()});
     });
     body.appendChild(para('margin-top:10px;font-size:11px;line-height:1.6;color:#9a7048','※ 一度けずったところは そのまま のこるよ'));
-    body.style.overflow='hidden';
     card.style.position='relative';
-    var sn=document.createElement('div');sn.id='secNav';sn.style.cssText='position:absolute;right:6px;z-index:6;display:flex;flex-direction:column;gap:8px';
-    var ub=navBtn('▲'),db=navBtn('▼');ub.setAttribute('aria-label','上へ');db.setAttribute('aria-label','下へ');
+    var ub=navBtn('▲'),db=navBtn('▼');[ub,db].forEach(function(b){b.classList.add('secNavB');b.style.width='38px';b.style.height='30px';b.style.flex='none';b.style.fontSize='14px'});
+    ub.setAttribute('aria-label','上へ');db.setAttribute('aria-label','下へ');
     function stepS(d){var h=Math.max(80,body.clientHeight*.6);body.scrollTo({top:body.scrollTop+d*h,behavior:'smooth'});try{sfx('tap')}catch(e){}}
     ub.onclick=function(){stepS(-1)};db.onclick=function(){stepS(1)};
-    sn.append(ub,db);card.appendChild(sn);
-    requestAnimationFrame(function(){sn.style.top=(body.offsetTop+body.offsetHeight/2-45)+'px'});
+    foot.insertBefore(ub,pg);foot.insertBefore(db,nx);
     
    }else if(P.k==='credit'){
    body.appendChild(head('🎬 クレジット','18px'));
