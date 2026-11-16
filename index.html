@@ -5388,8 +5388,8 @@ function openBook(){
     {t:'ルナティック かいほう',d:'いちばん むずかしい ルナティックが 遊べるようになるよ',c:['110010011101001','010111000110'],run:function(){LS('miarina_td_lunatic_v1','1');return 'ルナティックが かいほうされたよ！'},reload:1},
      {t:'味方の数 2倍',d:'味方を 持てる数が 2倍になるよ（横綱とくちびるは 1体のまま）。もういちど 決定すると もとにもどるよ',c:['101100110101001011','0110100011101'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_allyx2_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_allyx2_v1')}catch(e){}return '味方の数が もとにもどったよ'}LS('miarina_td_allyx2_v1','1');return '味方の数が 2倍に なったよ！'},reload:1},
      {t:'たからもの 全消し',d:'宝物図鑑の「たからもの」が ぜんぶ きえて ゼロにもどるよ。もとには もどせないから 気をつけてね！（ひみつ道具は のこるよ）',c:['001011101100100110','1100010110011'],run:function(){try{localStorage.removeItem('miarina_td_treasure_v1')}catch(e){}return 'たからものが ぜんぶ きえたよ…'},reload:1},
-     {t:'オコジョが おしゃべり',d:'オコジョが「ボスだー！」いがいも しゃべりはじめるよ。もういちど 決定すると もとにもどるよ',c:['110101001011010011','0011101001101'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_ermtalk_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_ermtalk_v1')}catch(e){}return 'オコジョは もとどおり ボスのときだけ しゃべるよ'}LS('miarina_td_ermtalk_v1','1');return 'オコジョが おしゃべりに なったよ！'},reload:1},
-     {t:'オコジョが 出なくなる',d:'ゲーム中に オコジョが 顔を出さなくなるよ。もういちど 決定すると もとにもどるよ',c:['010011011010110101','1011001001011'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_noerm_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_noerm_v1')}catch(e){}return 'オコジョが また出てくるよ！'}LS('miarina_td_noerm_v1','1');return 'オコジョは もう出てこないよ'},reload:1},
+     {t:'オコジョが おしゃべり',d:'オコジョが「ボスだー！」いがいも しゃべりはじめるよ。もういちど 決定すると もとにもどるよ',c:['110101001011010011','0011101001101'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_ermtalk_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_ermtalk_v1')}catch(e){}return 'オコジョは もとどおり ボスのときだけ しゃべるよ'}LS('miarina_td_ermtalk_v1','1');try{localStorage.removeItem('miarina_td_noerm_v1')}catch(e){}return 'オコジョが おしゃべりに なったよ！'},reload:1},
+     {t:'オコジョが 出なくなる',d:'ゲーム中に オコジョが 顔を出さなくなるよ。もういちど 決定すると もとにもどるよ',c:['010011011010110101','1011001001011'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_noerm_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_noerm_v1')}catch(e){}return 'オコジョが また出てくるよ！'}LS('miarina_td_noerm_v1','1');try{localStorage.removeItem('miarina_td_ermtalk_v1')}catch(e){}return 'オコジョは もう出てこないよ'},reload:1},
      {t:'キリンが 出なくなる',d:'ゲーム中に キリンさんが 出てこなくなるよ（攻略本の表紙には のこるよ）。もういちど 決定すると もとにもどるよ',c:['100110101101001010','0101101100110'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_nokiri_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_nokiri_v1')}catch(e){}return 'キリンさんが また出てくるよ！'}LS('miarina_td_nokiri_v1','1');return 'キリンさんは もう出てこないよ'},reload:1}];
    CODES.forEach(function(C){
     var card=para('margin:10px 0;padding:10px;border:2px solid #ecd3a0;border-radius:12px;background:#fffdf5','');
@@ -6525,7 +6525,7 @@ P.measureText=function(t){t=String(t);if(!has(t))return _meas.call(this,t);const
   /* 改造コード「オコジョが おしゃべり」：ボス以外でも ときどき しゃべる */
   var TALK=false;try{TALK=localStorage.getItem('miarina_td_ermtalk_v1')==='1'}catch(e){}
   if(TALK){
-   var LN=['がんばれー！','いいかんじだよ！','タワー ふやそう！','お金 たまってる？','強化も わすれずに！','ふわぁ…ねむい','もうすこしだよ！','空の敵に きをつけて','ゴールを まもってね','いいぞいいぞー！','おやつ たべたい','ぼく 見てるよ！','ドキドキするね','味方も よんでみて！','宝箱 ねらってね','だいじょうぶ！','わあ すごい！','ぼくも たたかうよ！'],lastL=-1,nextT=Date.now()+15000;
+   var LN=['がんばれー！','いいかんじだよ！','タワー ふやそう！','お金 たまってる？','強化も わすれずに！','ふわぁ…ねむい','もうすこしだよ！','空の敵に きをつけて','ゴールを まもってね','いいぞいいぞー！','おやつ たべたい','ぼく 見てるよ！','ドキドキするね','味方も よんでみて！','宝箱 ねらってね','だいじょうぶ！','わあ すごい！','ぼくも たたかうよ！'],lastL=-1,nextT=Date.now()+6000;
    var vis2=function(id){var e=document.getElementById(id);return !!e&&getComputedStyle(e).display!=='none'};
    setInterval(function(){
     try{
@@ -6534,7 +6534,7 @@ P.measureText=function(t){t=String(t);if(!has(t))return _meas.call(this,t);const
      if(['ov','pz','ap','mp','pf','pc','rk'].some(vis2))return;
      if(Date.now()<nextT)return;
      var i;do{i=Math.random()*LN.length|0}while(i===lastL);lastL=i;
-     show(LN[i]);nextT=Date.now()+(18+Math.random()*22)*1000;
+     show(LN[i]);nextT=Date.now()+(12+Math.random()*14)*1000;
     }catch(er){}
    },1000);
   }
