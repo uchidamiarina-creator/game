@@ -1,4 +1,10 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><script>try{if((window.devicePixelRatio||1)<2&&matchMedia('(hover:hover) and (pointer:fine) and (min-width:720px)').matches)Object.defineProperty(window,'devicePixelRatio',{configurable:true,get:function(){return 2}})}catch(e){}</script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="shpui-css">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><script>try{if((window.devicePixelRatio||1)<2&&matchMedia('(hover:hover) and (pointer:fine) and (min-width:720px)').matches)Object.defineProperty(window,'devicePixelRatio',{configurable:true,get:function(){return 2}})}catch(e){}</script><script>/* 所持上限: ゴールド99999999999 / リナコイン999999999 / チップ99999999 / ブヒポ9999 */
+(function(){try{var LIM={'miarina_td_gold_v1':99999999999,'miarina_td_rinacoin_v1':999999999,'miarina_td_medal_v1':99999999},PT=9999,SP=Storage.prototype,gi=SP.getItem,si=SP.setItem;
+function cl(k,v){if(v==null)return v;if(k in LIM){var n=Number(v);if(isFinite(n)&&n>LIM[k])return String(LIM[k]);return v}
+if(k==='buhipo_v1'){try{var o=JSON.parse(v),LM=(o&&(o.sv||o.gd))?99999:PT;if(o&&typeof o==='object'&&o.pt>LM){o.pt=LM;return JSON.stringify(o)}}catch(e){}}return v}
+SP.getItem=function(k){return cl(k,gi.call(this,k))};
+SP.setItem=function(k,v){return si.call(this,k,cl(k,v))}}catch(e){}})();
+</script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="shpui-css">
 button.sb.sb:not(.sb-card){font-family:inherit!important;color:#000!important;font-weight:800!important;-webkit-text-stroke:3px #fff!important;paint-order:stroke fill!important;text-shadow:1px 0 #fff,-1px 0 #fff,0 1px #fff,0 -1px #fff!important;border-radius:12px!important;min-height:38px!important;height:auto!important;box-sizing:border-box!important;outline:none!important;line-height:1.2!important;animation:none!important;cursor:pointer;position:relative}
 button.sb.sb-opt:not(.sb-card){background:#eceef5!important;border:3px solid #9aa0b4!important;box-shadow:0 3px 0 #9aa0b4!important}
 button.sb.sb-on:not(.sb-card){background:#ffd93d!important;border:4px solid #e0245e!important;box-shadow:0 0 0 3px #fff,0 4px 0 3px #e0245e!important}
@@ -199,23 +205,24 @@ body{width:100%;margin:0;overflow:hidden;
 <script>(function(){function f(){document.body.classList.add("ld")}if(document.body)f();else document.addEventListener("DOMContentLoaded",f)})()</script><div id="ld" style="position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;background:#fff1f5;color:#ff6fa5;font:bold 18px sans-serif">読み込み中…</div>
 <div id="tt"><button id="bkb" aria-label="みありなタワーディフェンス攻略法" title="みありなタワーディフェンス攻略法" style="position:fixed;right:12px;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:5;width:44px;height:44px;padding:0;font-size:26px;line-height:1;background:transparent;border:none;box-shadow:none;cursor:pointer">📖</button><button id="rkb4" aria-label="ランキング" title="ランキング" style="position:fixed;right:60px;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:5;width:44px;height:44px;padding:0;font-size:26px;line-height:1;background:transparent;border:none;box-shadow:none;cursor:pointer">🏆</button><div id="tcr" style="position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 6px);text-align:center;font-size:10px;line-height:1.3;color:#ff8a00;letter-spacing:.02em;pointer-events:none;z-index:2">©2026 MiaRina, Karaage Records, All rights reserved.</div><style id="ttl-pop">
 /* タイトルロゴ：ポップ＆キュート＆リッチ（大きさ・配置はそのまま） */
-#tt .tin h2{isolation:isolate;background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:transparent;position:relative;
+#tt .tin h2{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:transparent;position:relative;
  filter:drop-shadow(1.6px 0 0 #fff) drop-shadow(-1.6px 0 0 #fff) drop-shadow(0 1.6px 0 #fff) drop-shadow(0 -1.6px 0 #fff) drop-shadow(0 3.5px 0 #b02a70) drop-shadow(0 8px 9px rgba(255,79,147,.5))!important}
 #tt .tin h2 .tl{display:inline-block;color:transparent;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;background-repeat:no-repeat;background-size:260% 100%,100% 100%;background-position:160% 0,0 0;animation:ttshine 4.2s ease-in-out infinite}
 #tt .tin h2 .t1{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#fff3b0 0%,#ffc2dc 28%,#ff6aa8 62%,#ff3f8e 100%)}
 #tt .tin h2 .t2{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#ffd9ec 0%,#ff8fc0 38%,#ee4f9c 70%,#c93a9e 100%);animation-delay:.25s}
 #tt .tin h2 .t3{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#e6d9ff 0%,#a98bff 45%,#6a4cf0 100%);animation-delay:.5s}
-#tt .tin h2 .dx{font-size:1.1em;background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#fffbc2 0%,#ffd43b 45%,#ff9a1f 100%);animation-delay:.65s}
-#tt .tin h2 .tsp{position:absolute;z-index:-1;font-style:normal;font-family:sans-serif;line-height:1;pointer-events:none;animation:ttw 2.6s ease-in-out infinite}
-#tt .tin h2 .tsp.a{left:2%;top:0;font-size:.62em;color:#ffe27a;-webkit-text-fill-color:#ffe27a}
-#tt .tin h2 .tsp.b{right:4%;top:2%;font-size:.55em;color:#ff7eb6;-webkit-text-fill-color:#ff7eb6;animation-delay:.7s}
-#tt .tin h2 .tsp.c{left:6%;bottom:6%;font-size:.5em;color:#ffd23f;-webkit-text-fill-color:#ffd23f;animation-delay:1.3s}
-#tt .tin h2 .tsp.d{right:2%;bottom:4%;font-size:.6em;color:#fff;-webkit-text-fill-color:#fff;animation-delay:1.9s}
+#tt .tin h2 .tdeco{display:inline-block;color:#ff6fa5;-webkit-text-fill-color:#ff6fa5;background:none;animation:ttfloat 2.2s ease-in-out infinite;margin:0 2px}#tt .tin h2 .tdeco:nth-of-type(2){animation-delay:.6s}#tt .tin h2 .t1{letter-spacing:.02em}#tt .tin h2 .dx{font-size:1.1em;background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#fffbc2 0%,#ffd43b 45%,#ff9a1f 100%);animation-delay:.65s}
 @keyframes ttshine{0%,55%{background-position:160% 0,0 0}100%{background-position:-60% 0,0 0}}
-@keyframes ttw{0%,100%{transform:scale(.55) rotate(0);opacity:.35}50%{transform:scale(1.15) rotate(25deg);opacity:1}}
-@media (prefers-reduced-motion:reduce){#tt .tin h2 .tl,#tt .tin h2 .tsp{animation:none!important}#tt .tin h2 .tsp{opacity:.9}}
+@media (prefers-reduced-motion:reduce){#tt .tin h2 .tl,
+/* 見やすさ改善：大きく・白＋濃い紫のふち取り・濃いめの色 */
+#tt #thd h2{font-size:clamp(18px,6.2vw,26px);font-weight:900;letter-spacing:.02em;line-height:1.25}
+#tt .tin h2{filter:drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff) drop-shadow(2px 0 0 #6a2373) drop-shadow(-2px 0 0 #6a2373) drop-shadow(0 2px 0 #6a2373) drop-shadow(0 -2px 0 #6a2373) drop-shadow(0 4px 0 #6a2373) drop-shadow(0 8px 8px rgba(255,79,147,.4))!important}
+#tt .tin h2 .t1{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.35) 50%,transparent 58%),linear-gradient(180deg,#ff8ec0 0%,#ff4f9d 55%,#e0247a 100%)}
+#tt .tin h2 .t2{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.35) 50%,transparent 58%),linear-gradient(180deg,#ff7fb8 0%,#f0409a 55%,#c42a9a 100%)}
+#tt .tin h2 .t3{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.35) 50%,transparent 58%),linear-gradient(180deg,#a98bff 0%,#7a55ee 55%,#5236d6 100%)}
+#tt .tin h2 .dx{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.35) 50%,transparent 58%),linear-gradient(180deg,#ffe45c 0%,#ffb000 55%,#ff7a00 100%)}
 </style>
-<div class="tin"><div id="thd"><img id="tmia" alt="未亜" width="60" height="60"><h2><span class="tl t1">みありな</span><br><span class="tl t2">タワーディフェンス</span><br><span class="tl t3">ウルトラ</span><span class="tl dx">DX</span><i class="tsp a" aria-hidden="true">✦</i><i class="tsp b" aria-hidden="true">♥</i><i class="tsp c" aria-hidden="true">★</i><i class="tsp d" aria-hidden="true">✧</i></h2><img id="trin" alt="利奈" width="60" height="56"></div><div style="font-size:10px;color:var(--mute);text-align:center;margin:-2px 0 8px;letter-spacing:.04em">- 最終完全ちょっとバグってるファイナル Ultimate Version -</div><input id="pn" maxlength="8" placeholder="なまえ（8文字まで）" style="font:inherit;font-size:15px;text-align:center;padding:9px;border-radius:14px;border:3px solid var(--line);background:var(--card);color:var(--ink);width:70%;margin:0 0 6px"><div id="dan" style="font-size:13px;color:var(--accent2);min-height:18px;margin:0 0 8px;text-align:center"></div><div id="df"></div><div id="dsc" style="display:none"></div><button class="go" id="cnb" style="display:none;margin:0 auto 8px;line-height:1.35"></button><button class="go" id="stb">はじめる</button><div style="margin-top:10px"><button id="rkb" hidden style="padding:8px 22px;font-size:14px">🏆 ランキング</button> <button id="pcb" style="padding:8px 22px;font-size:14px">🔑 パスコード</button></div><div style="margin-top:8px"><button id="pfb" style="padding:8px 22px;font-size:14px">👤 プロフィール</button> <button id="vtb" style="padding:8px 22px;font-size:14px">🔐 金庫</button></div><div id="crTap" style="margin-top:12px;font-size:11px;color:var(--mute);letter-spacing:.04em">📱 iPhone / Android 対応</div><ul style="display:none">強化・売却</li><li id="cli">30フェーズ守りきればクリア</li></ul></div></div>
+<div class="tin"><div id="thd"><img id="tmia" alt="未亜" width="60" height="60"><h2><span class="tl t1">みありな</span><br><span class="tl t2">タワーディフェンス</span><br><span class="tl t3">ウルトラ</span><span class="tl dx">DX</span></h2><img id="trin" alt="利奈" width="60" height="56"></div><div style="font-size:10.5px;font-weight:700;color:var(--ink);text-align:center;margin:-2px 0 8px;letter-spacing:.01em">- 最終完全ちょっとバグってるファイナル Ultimate Version -</div><input id="pn" maxlength="8" placeholder="なまえ（8文字まで）" style="font:inherit;font-size:15px;text-align:center;padding:9px;border-radius:14px;border:3px solid var(--line);background:var(--card);color:var(--ink);width:70%;margin:0 0 6px"><div id="dan" style="font-size:13px;color:var(--accent2);min-height:18px;margin:0 0 8px;text-align:center"></div><div id="df"></div><div id="dsc" style="display:none"></div><button class="go" id="cnb" style="display:none;margin:0 auto 8px;line-height:1.35"></button><button class="go" id="stb">はじめる</button><div style="margin-top:10px"><button id="rkb" hidden style="padding:8px 22px;font-size:14px">🏆 ランキング</button> <button id="pcb" style="padding:8px 22px;font-size:14px">🔑 パスコード</button></div><div style="margin-top:8px"><button id="pfb" style="padding:8px 22px;font-size:14px">👤 プロフィール</button> <button id="vtb" style="padding:8px 22px;font-size:14px">🔐 金庫</button></div><div id="crTap" style="margin-top:12px;font-size:11px;color:var(--mute);letter-spacing:.04em">📱 iPhone / Android 対応</div><ul style="display:none">強化・売却</li><li id="cli">30フェーズ守りきればクリア</li></ul></div></div>
 <h1>みありなタワーディフェンス ウルトラDX</h1>
 <div id="wrap">
 <div id="stats"><span id="sg"></span><span id="sl"></span><span id="sw" style="display:none"></span><span id="stm" style="display:none"></span></div>
@@ -1538,7 +1545,7 @@ function loadGame(){
  init();
  Object.assign(G,{gold:sv.gold,lives:sv.lives,wave:sv.wave,speed:sv.speed||1,setup:false,starts:sv.starts||[],goal:sv.goal||null,xr:sv.xr||[],pits:sv.pits||[],loans:sv.loans|0,debt:sv.debt|0,candy:sv.candy|0,hi:sv.hi||{z:0,zz:0},own:sv.own||{},alv:sv.alv||{},ml:sv.ml||1,sf:sv.sf||1,cnt:sv.cnt|0,tc:sv.tc|0,fc:sv.fc|0});
  if(D.ec){const _ecf=EC_SEC/(+sv.ecS||3600);G.ecT=Math.min(EC_SEC-1,Math.max(0,(+sv.ecT||0)*_ecf));G.ecBs=Array.isArray(sv.ecBs)?sv.ecBs.map(function(b){return b&&typeof b==='object'?Object.assign({},b,{t:(+b.t||0)*_ecf}):b}):null;G._ecR={en:Array.isArray(sv.ecEn)?sv.ecEn:[],q:Array.isArray(sv.ecQ)?sv.ecQ:[]}}
- if(Number.isInteger(sv.th)&&sv.th>=0&&sv.th<39){G.th=sv.th;window.NZ={t0:performance.now(),n:THN[G.th]}}
+ if(Number.isInteger(sv.th)&&sv.th>=0&&(sv.th<39||sv.th===40)){G.th=sv.th;window.NZ={t0:performance.now(),n:THN[G.th]}}
  road=new Set(sv.road);R=sv.R.map(o=>({P:o.P,segs:[],tot:0,cs:new Set(o.cs)}));
  G.rv=(G.rv||1)+1;G.rc=[];G._pk=undefined;G._pv=undefined;
  G.tw=sv.tw.map(t=>Object.assign({cd:0},t));G.t0=performance.now();build='A';G.sel=null;
@@ -7264,7 +7271,7 @@ function bz(id,key,name,ds,msg,fn,can,extra){sv(id,name,'buhi_'+key,ds,msg,fn,ca
 bz('buhi_man','man','ブヒマン','つかうと 味方のブヒマン（ブタのスーパーマン）がバトルに参戦！ そのゲームのあいだ 毎フェーズ出撃するよ（ブヒポで交換）','ブヒブヒ〜！',
  function(){if(!live()||G.buhiman)return 0;G.buhiman=1;try{window.__buhiAddBM&&window.__buhiAddBM(true)}catch(e){}return 1},
  function(){return live()&&!G.buhiman});
-bz('buhi_nikuman','nikuman','豚まん','食べるとライフが 50 回復する（ライフは最大99まで／ブヒポで交換）','ほかほか〜！',heal(50),canHeal,{max:5});
+bz('buhi_nikuman','nikuman','豚まん','食べるとライフが 50 回復する（ライフは最大99まで／ブヒポで交換）','ほかほか〜！',heal(50),canHeal,{max:1});
 bz('buhi_beam','beam','ブヒビーム','もっていると 武器に「ブヒビーム」がふえる！ 豚鼻を敵に投げて、投げられた敵はみんな豚の敵キャラに！（ずっと使えるよ／ブヒポで交換）','',
  function(){return 0},function(){return false},{max:1,own:1});
 bz('buhi_x','x','ブヒエナX','ジュース。のむと マップ上の全ての武器が レベルMAXになる（ブヒポで交換）','ゴクゴク！ ブヒエナX！',
@@ -12851,17 +12858,24 @@ drawEn2=wrapper;
  var SV=function(){return window.__buhiSVG||{}};
  /* 交換できるグッズ（ひみつ道具5つ） */
  var GOODS=[
-  {id:'buhi_man',key:'man',name:'ブヒマン',cost:8,max:3,ds:'使うと 味方のブヒマン（ブタのスーパーマン）がバトルに参戦'},
-  {id:'buhi_nikuman',key:'nikuman',name:'豚まん',cost:3,max:5,ds:'食べるとライフ50回復'},
+  {id:'buhi_man',key:'man',name:'ブヒマン',cost:3000,max:3,ds:'使うと 味方のブヒマン（ブタのスーパーマン）がバトルに参戦'},
+  {id:'buhi_nikuman',key:'nikuman',name:'豚まん',cost:3,max:1,ds:'食べるとライフ50回復'},
   {id:'buhi_beam',key:'beam',name:'ブヒビーム',cost:20,max:1,ds:'オリジナル武器。豚鼻を投げて、あたった敵は豚の敵キャラに'},
-  {id:'buhi_x',key:'x',name:'ブヒエナX',cost:12,max:3,ds:'ジュース。のむとマップ上の武器がぜんぶレベルMAX'},
+  {id:'buhi_x',key:'x',name:'ブヒエナX',cost:5000,max:3,ds:'ジュース。のむとマップ上の武器がぜんぶレベルMAX'},
   {id:'seal',key:'seal',name:'豚シール',cost:5,max:1,ds:'プロフィールのボタンのアイコンが 豚鼻のイラストに'}
  ];
  /* ---- ポイントのデータ ---- */
- function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'{}')||{};return{pt:Math.max(0,o.pt|0),rem:Math.max(0,o.rem|0),seal:o.seal?1:0,vis:Math.max(0,o.vis|0)}}catch(e){return{pt:0,rem:0,seal:0,vis:0}}}
- function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'{}')||{},r={pt:Math.max(0,o.pt|0),rem:Math.max(0,o.rem|0),seal:o.seal?1:0,vis:Math.max(0,o.vis|0),sv:o.sv?1:0,gd:o.gd?1:0};if(r.gd)r.sv=1;return r}catch(e){return{pt:0,rem:0,seal:0,vis:0,sv:0,gd:0}}}
+ /* ランク：9999pt ためるとシルバー（上限99999）／シルバーで99999pt ためるとゴールド（ブヒブヒ王国マップかいほう） */
+ function rankOf(s){return s.gd?2:s.sv?1:0}
+ function ptMax(s){return(s.sv||s.gd)?99999:9999}
+ var rkNote='';
+ function rankMsg(r){rkNote=r===2?'👑 ゴールドランクに なったよ！ ブヒブヒ王国マップが かいほうされたよ（バトルでたまに登場）':'✨ シルバーランクに なったよ！ ポイントの上限が 99999 に アップ！';try{flash(r===2?'👑 ゴールドランク！':'✨ シルバーランク！')}catch(e){}}
+ function save(s){try{var a=s.pt;if(!s.sv&&a>=9999){s.sv=1;rankMsg(1)}s.pt=Math.min(a,ptMax(s));if(s.sv&&!s.gd&&s.pt>=99999){s.gd=1;rankMsg(2)}localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ window.__buhiRank=function(){try{return rankOf(load())}catch(e){return 0}};
+ function rkBtn(s0){if(!btnEl)return;if(btnEl._bg0==null)btnEl._bg0=btnEl.style.background;var r=rankOf(s0);btnEl.style.background=r===2?'linear-gradient(135deg,#fff2a8,#ffc83d)':r===1?'linear-gradient(135deg,#f6f8fc,#aab4c6)':btnEl._bg0}
  var btnEl=null,modalEl=null,rerender=null;
- function refresh(){try{if(btnEl){var p=btnEl.querySelector('.bp');if(p)p.textContent=load().pt+'pt'}if(rerender)rerender()}catch(e){}}
+ function refresh(){try{if(btnEl){var s0=load(),p=btnEl.querySelector('.bp');if(p)p.textContent=s0.pt+'pt';rkBtn(s0)}if(rerender)rerender()}catch(e){}}
  function flash(txt){try{
   var r=btnEl?{left:parseFloat(btnEl.style.left)||10,top:parseFloat(btnEl.style.top)||300}:{left:10,top:300};
   var d=document.createElement('div');d.textContent=txt;
@@ -12903,16 +12917,19 @@ drawEn2=wrapper;
   (host||document.body).appendChild(m);modalEl=m;
   var msg='';
   function render(){
-   var s=load();box.innerHTML='';
-   var card=mk('div','position:relative;overflow:hidden;border-radius:16px;padding:12px 14px;background:linear-gradient(135deg,#ffc9dc 0%,#ff8fb5 100%);color:#fff;box-shadow:0 3px 0 #e0457f');
+   var s=load();box.innerHTML='';if(rkNote){msg=rkNote;rkNote=''}
+   var rk=rankOf(s),P=rk===2?{bg:'linear-gradient(135deg,#fff6bf 0%,#ffd04a 55%,#f2a900 100%)',sh:'#b87400',nm:'GOLD RANK'}:rk===1?{bg:'linear-gradient(135deg,#fafbfd 0%,#c4ccda 55%,#8f9bb0 100%)',sh:'#68748a',nm:'SILVER RANK'}:{bg:'linear-gradient(135deg,#ffc9dc 0%,#ff8fb5 100%)',sh:'#e0457f',nm:''};
+   var card=mk('div','position:relative;overflow:hidden;border-radius:16px;padding:12px 14px;background:'+P.bg+';color:#fff;box-shadow:0 3px 0 '+P.sh+'');
    var nz=mk('div','position:absolute;right:-8px;top:-2px;width:118px;height:118px;opacity:.95');nz.innerHTML=SV().nose||'';
    var sv=nz.firstChild;if(sv){sv.style.width='100%';sv.style.height='100%'}
    card.appendChild(nz);
-   card.appendChild(mk('div','position:relative;font-size:10px;letter-spacing:.25em;opacity:.9','POINT CARD'));
-   card.appendChild(mk('div','position:relative;font-size:28px;font-weight:bold;text-shadow:0 2px 0 #e0457f;margin-top:2px','ブヒポ'));
+   if(rk)card.appendChild(mk('div','position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.6) 50%,transparent 62%);pointer-events:none'));
+   card.appendChild(mk('div','position:relative;font-size:10px;letter-spacing:.25em;opacity:.9','POINT CARD'+(P.nm?'　★ '+P.nm+' ★':'')));
+   card.appendChild(mk('div','position:relative;font-size:28px;font-weight:bold;text-shadow:0 2px 0 '+P.sh+';margin-top:2px','ブヒポ'));
    var pr=mk('div','position:relative;margin-top:8px;font-size:12px','いまの ポイント');card.appendChild(pr);
-   var pp=mk('div','position:relative;font-size:32px;font-weight:bold;text-shadow:0 2px 0 #e0457f;line-height:1.1');pp.appendChild(document.createTextNode(String(s.pt)));pp.appendChild(mk('span','font-size:14px;margin-left:3px','pt'));card.appendChild(pp);
+   var pp=mk('div','position:relative;font-size:32px;font-weight:bold;text-shadow:0 2px 0 '+P.sh+';line-height:1.1');pp.appendChild(document.createTextNode(String(s.pt)));pp.appendChild(mk('span','font-size:14px;margin-left:3px','pt'));card.appendChild(pp);
    card.appendChild(mk('div','position:relative;margin-top:6px;font-size:10px;opacity:.95','お店に入る 1回 = 1pt　／　ゴールド 200G つかう = 1pt（つぎまで あと '+(PER-s.rem)+'G）'));
+   card.appendChild(mk('div','position:relative;margin-top:3px;font-size:10px;font-weight:bold;opacity:.97',rk===2?'👑 ブヒブヒ王国マップ かいほう中！（バトルでたまに登場）／上限 99999pt':rk===1?'✨ 上限 99999pt ／ 99999pt ためると ゴールドランク！':'上限 9999pt ／ 9999pt ためると シルバーランク！'));
    box.appendChild(card);
    if(msg)box.appendChild(mk('div','margin:8px 0 0;padding:6px 8px;border-radius:10px;background:#ffeef6;color:#c0456f;font-size:12px;line-height:1.4',msg));
    box.appendChild(mk('div','margin:10px 2px 2px;font-size:12px;font-weight:bold;color:#c0456f','ブヒブヒグッズと こうかん'));
@@ -12953,7 +12970,7 @@ drawEn2=wrapper;
   var tx=mk('span','display:block');
   tx.appendChild(mk('span','display:block;font-size:11px;font-weight:bold;text-shadow:0 1px 0 #e0457f','ブヒポ'));
   var p=mk('span','display:block;font-size:14px;font-weight:bold;text-shadow:0 1px 0 #e0457f',load().pt+'pt');p.className='bp';tx.appendChild(p);
-  b.appendChild(ic);b.appendChild(tx);ov.appendChild(b);btnEl=b;
+  b.appendChild(ic);b.appendChild(tx);ov.appendChild(b);btnEl=b;try{rkBtn(load())}catch(e){}
   b.addEventListener('click',function(e){e.stopPropagation();try{sfx('tap')}catch(er){}openCard(ov)});
   var iv=0;function place(){if(!document.body.contains(ov)){clearInterval(iv);window.removeEventListener('resize',place);if(btnEl===b)btnEl=null;closeModal();return}
    var r=cn.getBoundingClientRect();b.style.left=(r.left+8)+'px';b.style.top=(r.bottom-b.offsetHeight-8)+'px';b.style.transition='transform .25s';b.style.transform=(ov.querySelector('[data-shp]')||document.querySelector('.mkbox'))?'translateX(-160%)':'none'}
@@ -13236,6 +13253,114 @@ drawEn2=wrapper;
    }catch(er){console.error('burning cross draw',er)}
   };
  }catch(er){console.error('ramen: burning cross setup',er)}
+})();
+</script>
+<script>
+/* ===== ブヒブヒ王国マップ（ブヒポカード ゴールドランク限定・バトルでたまに登場） ===== */
+(function(){
+ try{
+  var BH=40,BTR=[0,2,3,4,5,6,7,8],bgc=null;
+  THN[BH]='ブヒブヒ王国';
+  TH[BH]={bg:'#ffd6e8',ck:'#ffcce2',r1:'#f0a0b8',r2:'#fff6e6',dot:'#ff6fa5'};
+  VT[BH]=[255,120,170,.1];
+  try{window.MC[BH]='#ffb3d9'}catch(e){}
+  function heart(c,px,py,sz,col){c.fillStyle=col;c.beginPath();c.moveTo(px,py+sz*.35);c.bezierCurveTo(px-sz,py-sz*.3,px-sz*.5,py-sz,px,py-sz*.45);c.bezierCurveTo(px+sz*.5,py-sz,px+sz,py-sz*.3,px,py+sz*.35);c.fill()}
+  function pig(c,px,py,r){
+   c.save();c.translate(px,py);c.lineJoin='round';c.strokeStyle='rgba(138,42,85,.7)';c.lineWidth=1;
+   c.fillStyle='#ff9fc0';
+   [-1,1].forEach(function(sd){c.beginPath();c.moveTo(sd*r*.3,-r*.75);c.lineTo(sd*r*.95,-r*1.2);c.lineTo(sd*r*.95,-r*.25);c.closePath();c.fill();c.stroke()});
+   c.fillStyle='#ffb8cf';c.beginPath();c.arc(0,0,r,0,7);c.fill();c.stroke();
+   c.fillStyle='#4a2740';c.beginPath();c.arc(-r*.4,-r*.15,r*.13,0,7);c.arc(r*.4,-r*.15,r*.13,0,7);c.fill();
+   c.fillStyle='rgba(255,90,140,.35)';c.beginPath();c.arc(-r*.7,r*.15,r*.16,0,7);c.arc(r*.7,r*.15,r*.16,0,7);c.fill();
+   c.fillStyle='#ffd0df';c.beginPath();c.ellipse(0,r*.3,r*.5,r*.36,0,0,7);c.fill();c.stroke();
+   c.fillStyle='#a83a68';c.beginPath();c.ellipse(-r*.18,r*.3,r*.09,r*.15,0,0,7);c.ellipse(r*.18,r*.3,r*.09,r*.15,0,0,7);c.fill();
+   c.restore()}
+  /* 背景：ピンクのお空・にじ・雲・ブヒブヒ城 */
+  function bhBG(){
+   if(bgc)return bgc;
+   var s=Math.min(2,Math.max(1,window.devicePixelRatio||1)),c=document.createElement('canvas');
+   c.width=360*s;c.height=440*s;
+   var g=c.getContext('2d');g.scale(s,s);
+   var seed=7;function r(){seed=(seed*16807)%2147483647;return seed/2147483647}
+   var gr=g.createLinearGradient(0,0,0,440);gr.addColorStop(0,'#ffe9f4');gr.addColorStop(.55,'#ffd3e6');gr.addColorStop(1,'#ffc4db');
+   g.fillStyle=gr;g.fillRect(0,0,360,440);
+   var i,rc=['#ff8fa8','#ffb67a','#ffe27a','#9be39b','#8fd0ff','#c0a2ff'];
+   g.globalAlpha=.3;g.lineWidth=7;
+   for(i=0;i<6;i++){g.strokeStyle=rc[i];g.beginPath();g.arc(300,450,150-i*7,Math.PI,Math.PI*2);g.stroke()}
+   g.globalAlpha=1;
+   for(i=0;i<5;i++){var cx=30+r()*300,cy=30+r()*380;g.fillStyle='rgba(255,255,255,.55)';
+    [[0,0,16],[16,4,12],[-15,5,11],[6,-7,11]].forEach(function(o){g.beginPath();g.arc(cx+o[0],cy+o[1],o[2],0,7);g.fill()})}
+   for(i=0;i<46;i++){g.globalAlpha=.22+r()*.22;if(i%3===0)heart(g,r()*360,r()*440,4+r()*5,'#ff7fae');else{g.fillStyle='#fff';g.beginPath();g.arc(r()*360,r()*440,1.5+r()*3,0,7);g.fill()}}
+   g.globalAlpha=.42;g.lineJoin='round';g.strokeStyle='#d86a98';g.lineWidth=1.2;
+   g.fillStyle='#ffb3cf';g.fillRect(288,34,52,38);g.strokeRect(288,34,52,38);
+   [[282,16,22,50],[326,16,22,50]].forEach(function(t){g.fillStyle='#ffa3c4';g.fillRect(t[0],t[3]-22,18,40);g.strokeRect(t[0],t[3]-22,18,40);g.fillStyle='#ff6fa5';g.beginPath();g.moveTo(t[0]-3,t[3]-22);g.lineTo(t[0]+9,t[3]-40);g.lineTo(t[0]+21,t[3]-22);g.closePath();g.fill();g.stroke()});
+   g.fillStyle='#fff';g.beginPath();g.arc(314,62,7,Math.PI,Math.PI*2);g.lineTo(321,72);g.lineTo(307,72);g.closePath();g.fill();
+   g.globalAlpha=1;
+   return bgc=c}
+  var _rbg=window.richBG;
+  window.richBG=function(th){return th===BH?bhBG():_rbg(th)};
+  /* 地面の飾り：ぶたさん・お花・ハート・どろんこ */
+  var _dec=decor;
+  decor=function(i,j,th){
+   if(th!==BH)return _dec(i,j,th);
+   try{
+    var h=(i*73+j*151+i*j*7)%13,px=i*C+20,py=j*C+20,t=performance.now()/1000,k;
+    if(h===0||h===7){pig(x,px,py+Math.sin(t*2.2+i+j)*1.6,9)}
+    else if(h===1||h===8){
+     x.fillStyle='#fff';for(k=0;k<5;k++){x.beginPath();x.arc(px+Math.cos(k*1.2566)*5,py+Math.sin(k*1.2566)*5,3.3,0,7);x.fill()}
+     x.fillStyle='#ffd23f';x.beginPath();x.arc(px,py,2.8,0,7);x.fill()}
+    else if(h===2){heart(x,px,py,7+Math.sin(t*3+i)*1,'rgba(255,100,155,.8)')}
+    else if(h===3||h===9){
+     x.fillStyle='rgba(176,112,84,.5)';x.beginPath();x.ellipse(px,py+3,13,6,0,0,7);x.fill();
+     x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.ellipse(px-3,py+1.5,4,1.6,0,0,7);x.fill()}
+    else if(h===4){
+     var a=.45+.45*Math.sin(t*3+i*2+j);x.fillStyle='rgba(255,214,70,'+a+')';x.beginPath();
+     x.moveTo(px,py-7);x.lineTo(px+2,py-2);x.lineTo(px+7,py);x.lineTo(px+2,py+2);x.lineTo(px,py+7);x.lineTo(px-2,py+2);x.lineTo(px-7,py);x.lineTo(px-2,py-2);x.closePath();x.fill()}
+    else if(h===5){
+     x.fillStyle='#ff5a6e';x.beginPath();x.arc(px,py+1,6,0,7);x.fill();
+     x.fillStyle='#6fcf6f';x.beginPath();x.ellipse(px+3,py-6,3.5,1.8,-.6,0,7);x.fill()}
+   }catch(e){}
+  };
+  /* 空気：のぼっていくハートとキラキラ */
+  var _damb=drawAmb;
+  drawAmb=function(t){
+   if(!G||G.th!==BH)return _damb(t);
+   try{
+    var s=t/1000,k,ph,px,py,a;
+    x.save();
+    for(k=0;k<14;k++){
+     ph=(s*.055+k*.0714)%1;px=((k*97)%360)+Math.sin(s*.9+k)*12;py=440-ph*470;a=Math.sin(ph*Math.PI)*.65;
+     heart(x,px,py,4+(k%3)*2,'rgba(255,110,165,'+a+')')}
+    x.globalCompositeOperation='lighter';
+    for(k=0;k<10;k++){
+     px=((k*131)%360)+Math.sin(s*.7+k*2)*8;py=((k*173+s*8)%440);a=.25+.25*Math.sin(s*2.4+k);
+     x.fillStyle='rgba(255,236,150,'+a+')';x.fillRect(px,py,2,2)}
+    x.restore();
+   }catch(e){}
+  };
+  var _dg=drawGim;drawGim=function(t){if(G&&G.th===BH)return;return _dg(t)};
+  var _gm=gim;gim=function(dt){if(G&&G.th===BH)return;return _gm.apply(this,arguments)};
+  /* BGMは毎回ランダム（ゲーム開始時に決定） */
+  var _trk=trk;
+  trk=function(){
+   if(G&&G.th===BH){if(G.bhBgm==null)G.bhBgm=BTR[Math.random()*BTR.length|0];return G.bhBgm}
+   return _trk()};
+  /* ゴールドランクなら、たまに（約10%）ブヒブヒ王国で開始 */
+  var _init=init;
+  init=function(){
+   _init.apply(this,arguments);
+   try{
+    if(D&&D.ec)return;
+    var rk=window.__buhiRank?window.__buhiRank():0;
+    if(rk===2&&!window.__resume&&Math.random()<.1){
+     G.th=BH;G.bhBgm=BTR[Math.random()*BTR.length|0];
+     window.NZ={t0:performance.now(),n:THN[BH]};
+     G.fx.push({x:180,y:200,txt:'🐷 ブヒブヒ王国へ ようこそ！',t:2.4,c:'#ff4f93'});
+     hud();panel();
+    }
+   }catch(e){console.error('buhi kingdom',e)}
+  };
+ }catch(e){console.error('buhi kingdom setup',e)}
 })();
 </script>
 </body></html>
