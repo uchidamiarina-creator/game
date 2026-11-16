@@ -13409,4 +13409,69 @@ drawEn2=wrapper;
  }catch(e){console.error('title book setup',e)}
 })();
 </script>
+<script>
+/* ===== タイトルに戻ったあと、ときどき「ゲームのやりすぎに注意」：真っ暗な画面を未亜か利奈がとことこ歩いてくる ===== */
+(function(){
+ var P=0.3,                               /* 出現確率（0〜1）。1にすると毎回出ます。URL末尾に #aw を付けて開いても毎回出ます（テスト用） */
+     MSG='ゲームのやりすぎに\n注意しようね？',
+     IN=3200,STAY=2600,OUT=3000,          /* 歩いてくる／立ち止まる／去っていく（ミリ秒） */
+     busy=false;
+ function shown(t){try{return getComputedStyle(t).display!=='none'}catch(e){return false}}
+ function chance(){return /[?#&]aw\b/.test(location.search+location.hash)?1:P}
+ function addCss(){
+  if(document.getElementById('awst'))return;
+  var s=document.createElement('style');s.id='awst';
+  s.textContent=[
+   '#awov{position:fixed;inset:0;z-index:100000;background:#000;opacity:1;transition:opacity .6s ease;touch-action:none;-webkit-user-select:none;user-select:none}',
+   '#awov.fo{opacity:0;pointer-events:none}',
+   '#awov .awc{position:absolute;left:0;top:50%;margin-top:calc(var(--aw)*-.3);will-change:transform}',
+   '#awov .awk{animation:awbob .46s ease-in-out infinite}',
+   '#awov .awk.st{animation:none}',
+   '#awov .awi{display:block;width:var(--aw);height:auto;filter:drop-shadow(0 0 14px rgba(255,170,215,.55))}',
+   '#awov .awi.fl{transform:scaleX(-1)}',
+   '#awov .awb{position:absolute;left:50%;bottom:100%;margin-bottom:14px;padding:8px 12px;background:#fff;color:#3a2540;border:3px solid #ff6fa5;border-radius:14px;font-size:13px;line-height:1.5;font-weight:bold;text-align:center;white-space:pre;box-shadow:0 3px 12px rgba(255,111,165,.45);opacity:0;transform:translateX(-50%) scale(.6);transform-origin:50% 100%}',
+   '#awov .awb::after{content:"";position:absolute;left:50%;bottom:-9px;width:12px;height:12px;background:#fff;border-right:3px solid #ff6fa5;border-bottom:3px solid #ff6fa5;transform:translateX(-50%) rotate(45deg)}',
+   '#awov .awb.sh{animation:awpop .32s cubic-bezier(.3,1.5,.5,1) forwards}',
+   '#awov .awb.ho{animation:awout .2s ease forwards}',
+   '@keyframes awbob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-9px) rotate(4deg)}}',
+   '@keyframes awpop{from{opacity:0;transform:translateX(-50%) scale(.6)}to{opacity:1;transform:translateX(-50%) scale(1)}}',
+   '@keyframes awout{from{opacity:1;transform:translateX(-50%) scale(1)}to{opacity:0;transform:translateX(-50%) scale(.6)}}'
+  ].join('');
+  document.head.appendChild(s)}
+ function run(){
+  var el=document.getElementById(Math.random()<.5?'tmia':'trin'),src=el&&el.getAttribute('src');
+  if(!src)return;
+  busy=true;addCss();
+  var vw=window.innerWidth||document.documentElement.clientWidth||360,
+      w=Math.round(Math.max(88,Math.min(132,vw*.3))),
+      ov=document.createElement('div');
+  ov.id='awov';ov.style.setProperty('--aw',w+'px');
+  ov.innerHTML='<div class="awc"><div class="awb"></div><div class="awk"><img class="awi" alt=""></div></div>';
+  var c=ov.firstChild,b=c.firstChild,k=c.lastChild,im=k.firstChild,T=[];
+  b.textContent=MSG;im.src=src;im.style.borderRadius=el.id==='tmia'?'50%':'12px';
+  document.body.appendChild(ov);
+  var a=-w-20,m=Math.round((vw-w)/2);
+  function pos(x,ms){c.style.transition=ms?'transform '+ms+'ms linear':'none';c.style.transform='translateX('+x+'px)'}
+  function at(f,ms){T.push(setTimeout(f,ms))}
+  function end(){for(var i=0;i<T.length;i++)clearTimeout(T[i]);ov.remove();busy=false}
+  pos(a,0);void c.offsetWidth;
+  var t1=500,t2=t1+IN,t3=t2+STAY,t4=t3+300,t5=t4+OUT;
+  at(function(){pos(m,IN)},t1);                                                              /* 左端から歩いてくる */
+  at(function(){k.classList.add('st');b.classList.add('sh');try{sfx('tap')}catch(e){}},t2);  /* 真ん中で止まって吹き出し */
+  at(function(){b.classList.add('ho')},t3);
+  at(function(){k.classList.remove('st');im.classList.add('fl');pos(a,OUT)},t4);             /* 左へ去っていく */
+  at(function(){ov.classList.add('fo')},t5+100);                                             /* 暗転をほどいてタイトルへ */
+  at(end,t5+800);
+  at(end,20000)}                                                                             /* 念のための保険 */
+ function init(){
+  var tt=document.getElementById('tt');if(!tt||!window.MutationObserver)return;
+  var prev=shown(tt),seen=prev;
+  new MutationObserver(function(){
+   var now=shown(tt);
+   if(now&&!prev&&seen&&!busy&&Math.random()<chance()){
+    try{run()}catch(e){console.error(e);var o=document.getElementById('awov');if(o)o.remove();busy=false}}
+   if(now)seen=true;prev=now}).observe(tt,{attributes:true,attributeFilter:['style','class']})}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()
+})();
+</script>
 </body></html>
