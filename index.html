@@ -5066,9 +5066,8 @@ function openBook(){
  var helpN=pages.length+1;pages.push({k:'helper'});
  var monN=pages.length+1;pages.push({k:'mon'});
  var passN=pages.length+1;pages.push({k:'pass'});
- var cheatN=pages.length+1;pages.push({k:'cheat'});
  var secretN=pages.length+1;pages.push({k:'secret'});
- pages[1]={k:'toc',G:G,gStart:gStart,gIndex:gIndex,favN:favN,allyN:allyN,helpN:helpN,monN:monN,hintN:hintN,passN:passN,cheatN:cheatN,secretN:secretN};
+ pages[1]={k:'toc',G:G,gStart:gStart,gIndex:gIndex,favN:favN,allyN:allyN,helpN:helpN,monN:monN,hintN:hintN,passN:passN,secretN:secretN};
 
  var ov=document.createElement('div');ov.id='bookov';
  ov.style.cssText='position:fixed;inset:0;z-index:90;background:rgba(60,30,50,.55);display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box';
@@ -5179,8 +5178,6 @@ function openBook(){
     mr.append(para('','👾 モンスター図鑑（一部）'),para('font-size:12px;color:#c97a1e','p.'+P.monN));mr.onclick=function(){go(P.monN-1)};box.appendChild(mr);
     var pr=para(rowCss+';cursor:pointer','');
     pr.append(para('','🔑 パスコードのこと'),para('font-size:12px;color:#c97a1e','p.'+P.passN));pr.onclick=function(){go(P.passN-1)};box.appendChild(pr);
-    var cr=para(rowCss+';cursor:pointer','');
-    cr.append(para('','🛠 改造コード集'),para('font-size:12px;color:#c97a1e','p.'+P.cheatN));cr.onclick=function(){go(P.cheatN-1)};box.appendChild(cr);
     var sr2=para(rowCss+';cursor:pointer','');
      sr2.append(para('','ひみつの裏技（けずって読む）'),para('font-size:12px;color:#c97a1e','p.'+P.secretN));sr2.onclick=function(){go(P.secretN-1)};box.appendChild(sr2);
      
@@ -5376,48 +5373,6 @@ function openBook(){
    var CRL=[['Executive producer','Mia Uchida'],['Assistant manager','Rina Uchida'],['Character designer','Lil Kaname'],['Sound creator','Yero'],['Associate coordinator','Emu Ai'],['Special appearance','Afuo Tanaka'],['Special thanks',null],['Developed by','Karaage Records']],pnm='';
    try{pnm=(localStorage.getItem('miarina_td_name_v1')||'').trim()}catch(e){}
    CRL.forEach(function(l,i){body.appendChild(para('text-align:center;font-size:11px;color:#c97a1e;margin-top:'+(i?14:2)+'px;letter-spacing:.04em',l[0]));body.appendChild(para('text-align:center;font-size:15px;font-weight:900;color:#7a4a1e;margin-top:2px;word-break:break-all',l[1]===null?(pnm||'あなた'):l[1]))});
-  }else if(P.k==='cheat'){
-   body.appendChild(head('🛠 改造コード集','18px'));
-   body.appendChild(para('text-align:center;font-size:12px;line-height:1.6;color:#9a7048;margin-bottom:4px','「決定」を おすと、ほんとうにゲームが かいぞうされるよ'));
-    body.appendChild(para('margin:6px 4px 8px;padding:8px 10px;border:2px solid #e0568f;border-radius:12px;background:#fff0f0;color:#c0283f;font-size:13px;font-weight:900;line-height:1.5;text-align:center','⚠️ ゲームが 壊れる恐れあり ⚠️\nつかうときは 自分のせきにんで ね！'));
-    body.lastChild.style.whiteSpace='pre-line';
-   var LS=function(k,v){try{localStorage.setItem(k,v)}catch(e){}};
-   var CODES=[
-    {t:'なまえを 無理やり また変える',d:'一度きめたら変えられない なまえを、もういちど つけなおせるよ',c:['011110001110100111','0000011111001'],name:1},
-    {t:'街の名前を 変える',d:'街の名前を じゆうに つけられるよ（8もじまで）。いつでも 何回でも つけなおせるよ',c:['001101011010011001','1010011010110'],town:1},
-    {t:'ルナティック かいほう',d:'いちばん むずかしい ルナティックが 遊べるようになるよ',c:['110010011101001','010111000110'],run:function(){LS('miarina_td_lunatic_v1','1');return 'ルナティックが かいほうされたよ！'},reload:1},
-     {t:'味方の数 2倍',d:'味方を 持てる数が 2倍になるよ（横綱とくちびるは 1体のまま）。もういちど 決定すると もとにもどるよ',c:['101100110101001011','0110100011101'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_allyx2_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_allyx2_v1')}catch(e){}return '味方の数が もとにもどったよ'}LS('miarina_td_allyx2_v1','1');return '味方の数が 2倍に なったよ！'},reload:1},
-     {t:'たからもの 全消し',d:'宝物図鑑の「たからもの」が ぜんぶ きえて ゼロにもどるよ。もとには もどせないから 気をつけてね！（ひみつ道具は のこるよ）',c:['001011101100100110','1100010110011'],run:function(){try{localStorage.removeItem('miarina_td_treasure_v1')}catch(e){}return 'たからものが ぜんぶ きえたよ…'},reload:1},
-     {t:'オコジョが おしゃべり',d:'オコジョが「ボスだー！」いがいも しゃべりはじめるよ。もういちど 決定すると もとにもどるよ',c:['110101001011010011','0011101001101'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_ermtalk_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_ermtalk_v1')}catch(e){}return 'オコジョは もとどおり ボスのときだけ しゃべるよ'}LS('miarina_td_ermtalk_v1','1');try{localStorage.removeItem('miarina_td_noerm_v1')}catch(e){}return 'オコジョが おしゃべりに なったよ！'},reload:1},
-     {t:'オコジョが 出なくなる',d:'ゲーム中に オコジョが 顔を出さなくなるよ。もういちど 決定すると もとにもどるよ',c:['010011011010110101','1011001001011'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_noerm_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_noerm_v1')}catch(e){}return 'オコジョが また出てくるよ！'}LS('miarina_td_noerm_v1','1');try{localStorage.removeItem('miarina_td_ermtalk_v1')}catch(e){}return 'オコジョは もう出てこないよ'},reload:1},
-     {t:'キリンが 出なくなる',d:'ゲーム中に キリンさんが 出てこなくなるよ（攻略本の表紙には のこるよ）。もういちど 決定すると もとにもどるよ',c:['100110101101001010','0101101100110'],run:function(){var on=false;try{on=localStorage.getItem('miarina_td_nokiri_v1')==='1'}catch(e){}if(on){try{localStorage.removeItem('miarina_td_nokiri_v1')}catch(e){}return 'キリンさんが また出てくるよ！'}LS('miarina_td_nokiri_v1','1');return 'キリンさんは もう出てこないよ'},reload:1}];
-   CODES.forEach(function(C){
-    var card=para('margin:10px 0;padding:10px;border:2px solid #ecd3a0;border-radius:12px;background:#fffdf5','');
-    var code=para('margin:6px 0;padding:7px 9px;border-radius:8px;background:#1f2a24;color:#7dffb0;font:12px/1.6 monospace;letter-spacing:1px;word-break:break-all','');code.innerHTML=C.c.join('<br>');
-    var msg=para('margin-top:6px;font-size:12px;font-weight:800;color:#c97a1e;min-height:16px;text-align:center','');
-    var go1=document.createElement('button');go1.textContent='決定';
-    go1.style.cssText='display:block;margin:6px auto 0;padding:8px 26px;min-height:0;height:auto;border-radius:999px;background:#ffd1e3;border:2px solid #e0568f;border-bottom-width:4px;color:#b0306a;font-size:14px;font-weight:900';
-    var nameBox=null;
-    if(C.name||C.town){
-     nameBox=para('display:none;margin-top:6px;text-align:center','');
-     var ni=document.createElement('input');ni.type='text';ni.maxLength=8;ni.placeholder=C.town?'あたらしい 街の名前（8もじまで）':'あたらしい なまえ（8もじまで）';
-     ni.style.cssText='width:100%;box-sizing:border-box;padding:8px 12px;font-size:14px;font-weight:700;border:2px solid #d9962b;border-radius:999px;background:#fffdf5;color:#4a2e14;text-align:center';
-     nameBox.appendChild(ni);
-    }
-    var armed=false;
-    go1.onclick=function(){
-     try{sfx('tap')}catch(e){}
-     if(C.name||C.town){
-      if(nameBox.style.display==='none'){nameBox.style.display='block';go1.textContent=C.town?'この 名前に する':'この なまえに する';if(C.town){try{var t0=JSON.parse(localStorage.getItem('miarina_town_v1')||'null');if(t0&&typeof t0.name==='string')ni.value=t0.name}catch(e){}}ni.focus();return}
-      var v=ni.value.trim().slice(0,8);if(!v){msg.textContent=C.town?'街の名前を いれてね':'なまえを いれてね';return}
-      if(C.town){var to=null;try{to=JSON.parse(localStorage.getItem('miarina_town_v1')||'null')}catch(e){to=null}if(!(to&&to.start&&Array.isArray(to.res))){var dd=new Date();to={start:new Date(dd.getFullYear(),dd.getMonth(),dd.getDate()).getTime(),res:[]}}to.name=v;LS('miarina_town_v1',JSON.stringify(to));LS('miarina_td_cheated_v1','1');try{window.__ecTitleFx&&window.__ecTitleFx()}catch(e){}try{window.__ktBtn&&window.__ktBtn()}catch(e){}msg.textContent='街の名前が「'+v+'」に かいぞうされたよ！';go1.textContent='決定';nameBox.style.display='none';return}
-      LS('miarina_td_cheated_v1','1');try{window.__ecTitleFx&&window.__ecTitleFx()}catch(e){}LS('miarina_td_name_v1',v);try{var pn=document.getElementById('pn');if(pn){pn.value=v;pn.readOnly=true}}catch(e){}
-      msg.textContent='なまえが「'+v+'」に かいぞうされたよ！';go1.textContent='決定';nameBox.style.display='none';return}
-     if(C.reload&&!armed){armed=true;go1.textContent='ほんとうに？（画面を読みこみなおすよ）';return}
-     LS('miarina_td_cheated_v1','1');try{window.__ecTitleFx&&window.__ecTitleFx()}catch(e){}msg.textContent=C.run();
-     if(C.reload){go1.disabled=true;setTimeout(function(){location.reload()},1400)}};
-    card.append(para('font-size:14px;font-weight:900;color:#c97a1e',C.t),para('font-size:12px;line-height:1.5;font-weight:700;color:#7a5230;margin-top:2px',C.d),code);
-    if(nameBox)card.appendChild(nameBox);card.append(go1,msg);body.appendChild(card)});
   }else if(P.k==='index'){
    body.appendChild(head('索引','18px'));
    if(!P.items.length)body.appendChild(para('text-align:center;padding:18px 6px;font-size:13px;line-height:1.7;color:#7a5230','まだ 見つけたヒントがないよ'));
@@ -6522,22 +6477,7 @@ P.measureText=function(t){t=String(t);if(!has(t))return _meas.call(this,t);const
    if(f)show();
   }catch(er){console.error(er)}
  };
-  /* 改造コード「オコジョが おしゃべり」：ボス以外でも ときどき しゃべる */
-  var TALK=false;try{TALK=localStorage.getItem('miarina_td_ermtalk_v1')==='1'}catch(e){}
-  if(TALK){
-   var LN=['がんばれー！','いいかんじだよ！','タワー ふやそう！','お金 たまってる？','強化も わすれずに！','ふわぁ…ねむい','もうすこしだよ！','空の敵に きをつけて','ゴールを まもってね','いいぞいいぞー！','おやつ たべたい','ぼく 見てるよ！','ドキドキするね','味方も よんでみて！','宝箱 ねらってね','だいじょうぶ！','わあ すごい！','ぼくも たたかうよ！'],lastL=-1,nextT=Date.now()+6000;
-   var vis2=function(id){var e=document.getElementById(id);return !!e&&getComputedStyle(e).display!=='none'};
-   setInterval(function(){
-    try{
-     var tt=document.getElementById('tt');
-     if(!tt||tt.style.display!=='none'||!G||G.over||!G.active||showing||document.hidden)return;
-     if(['ov','pz','ap','mp','pf','pc','rk'].some(vis2))return;
-     if(Date.now()<nextT)return;
-     var i;do{i=Math.random()*LN.length|0}while(i===lastL);lastL=i;
-     show(LN[i]);nextT=Date.now()+(12+Math.random()*14)*1000;
-    }catch(er){}
-   },1000);
-  }
+
 
 })();
 </script>
