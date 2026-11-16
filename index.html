@@ -1599,8 +1599,10 @@ btn.onclick=()=>{if(document.getElementById('vtq'))return;try{sfx('tap')}catch(e
   const lucky=()=>{const t=String(inp.value||'').trim();if(!/^7{2,16}$/.test(t))return 0;const n=Number(t);if(!Number.isSafeInteger(n))return 0;inp.value='';try{sfx('up')}catch(e){}if(!sg(gp()+n)){say('この端末では保存できなかったよ');return -1}say('🎰 7のゾロ目ボーナス！ '+n+'G もらったよ',1);return 1};
  const dep=a=>{a=Math.floor(a);if(!(a>0)){say('金額を入れてね');return}if(a>gp()){say('手持ちがたりないよ');return}const o=cur();o.bal+=a;if(!wv(o)||!sg(gp()-a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 預けたよ',1)};
  const wd=a=>{a=Math.floor(a);if(!(a>0)){say('金額がたりないよ');return}const o=cur(),fee=o.n>=FREE?FEE:0;if(a+fee>o.bal){say(fee?'手数料'+FEE+'Gこみで金庫がたりないよ':'金庫がたりないよ');return}o.bal-=a+fee;o.n++;if(!wv(o)||!sg(gp()+a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 引き出したよ'+(fee?'（手数料 '+fee+'G）':''),1)};
- const r1=mkRow(),r2=mkRow();
- r1.append(mkB('預ける',()=>dep(val())),mkB('引き出す',()=>{if(lucky())return;wd(val())}));
+ const secret=()=>{const h=(window.__vaultCodes||{})[String(inp.value||'').trim()];if(!h)return false;let m='';try{m=h()}catch(e){console.error(e)}if(!m)return false;inp.value='';try{sfx('up')}catch(e){}say(m,1);return true};
+  (window.__vaultCodes=window.__vaultCodes||{})['5678']=()=>{const KY=365*24*3600*1000,TKY='miarina_town_v1';let o=null;try{o=JSON.parse(localStorage.getItem(TKY)||'null')}catch(e){}if(!o||!o.pot||typeof o.pot.t!=='number')return '';const t=Date.now()-KY;if(o.pot.t<=t)return '';o.pot.t=t;try{localStorage.setItem(TKY,JSON.stringify(o))}catch(e){return ''}try{window.__potSync&&window.__potSync(t)}catch(e){}return '🌸 闇鍋の花が ぐんぐん育って 立派に咲いたよ'};
+  const r1=mkRow(),r2=mkRow();
+ r1.append(mkB('預ける',()=>dep(val())),mkB('引き出す',()=>{if(secret())return;if(lucky())return;wd(val())}));
  r2.append(mkB('ぜんぶ預ける',()=>dep(gp())),mkB('ぜんぶ引き出す',()=>{const o=cur(),fee=o.n>=FREE?FEE:0;wd(o.bal-fee)}));
  const cl=mkB('とじる',()=>q.remove());cl.style.flex='none';cl.style.width='100%';
  bx.append(h,info,fe,inp,r1,r2,msg,cl);q.append(bx);q.onclick=e=>{if(e.target===q)q.remove()};document.body.append(q);show()}})();
@@ -4415,6 +4417,7 @@ function openShop(i){try{window.__buhiVisit&&window.__buhiVisit(BLD[i])}catch(er
   function kdish(k){return KDISH.filter(function(d){return d[0]===k})[0]||KDISH[0]}
   function kspot(){var R=[[78,140,345,395],[220,282,345,395],[12,55,400,470],[305,348,400,470]],r=R[Math.floor(Math.random()*R.length)];return{x:Math.round(r[0]+Math.random()*(r[1]-r[0])),y:Math.round(r[2]+Math.random()*(r[3]-r[2]))}}
   function kgrow(P){return Math.max(0,Math.min(1,(Date.now()-P.t)/KYEAR))}
+  window.__potSync=function(t){if(alive&&TS&&TS.pot)TS.pot.t=t};
   function drawPotFlower(g,s){var P=TS&&TS.pot;if(!P)return;var d=kdish(P.k),p=kgrow(P),sc=.5+.7*p,n=2+Math.floor(p*3.01),k;
    g.save();g.translate(P.x,P.y);g.scale(sc,sc);g.lineJoin='round';
    g.fillStyle='rgba(60,90,50,.22)';g.beginPath();g.ellipse(0,1,11,3,0,0,7);g.fill();
@@ -4994,8 +4997,9 @@ function openBook(){
  var monN=pages.length+1;pages.push({k:'mon'});
  var passN=pages.length+1;pages.push({k:'pass'});
  var cheatN=pages.length+1;pages.push({k:'cheat'});
+ var secretN=pages.length+1;pages.push({k:'secret'});
  var creditN=pages.length+1;pages.push({k:'credit'});
- pages[1]={k:'toc',G:G,gStart:gStart,gIndex:gIndex,favN:favN,allyN:allyN,helpN:helpN,monN:monN,hintN:hintN,passN:passN,cheatN:cheatN,creditN:creditN};
+ pages[1]={k:'toc',G:G,gStart:gStart,gIndex:gIndex,favN:favN,allyN:allyN,helpN:helpN,monN:monN,hintN:hintN,passN:passN,cheatN:cheatN,secretN:secretN,creditN:creditN};
 
  var ov=document.createElement('div');ov.id='bookov';
  ov.style.cssText='position:fixed;inset:0;z-index:90;background:rgba(60,30,50,.55);display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box';
@@ -5108,7 +5112,9 @@ function openBook(){
     pr.append(para('','🔑 パスコードのこと'),para('font-size:12px;color:#c97a1e','p.'+P.passN));pr.onclick=function(){go(P.passN-1)};box.appendChild(pr);
     var cr=para(rowCss+';cursor:pointer','');
     cr.append(para('','🛠 改造コード集'),para('font-size:12px;color:#c97a1e','p.'+P.cheatN));cr.onclick=function(){go(P.cheatN-1)};box.appendChild(cr);
-    var cdr=para(rowCss+';cursor:pointer','');
+    var sr2=para(rowCss+';cursor:pointer','');
+     sr2.append(para('','ひみつの裏技（けずって読む）'),para('font-size:12px;color:#c97a1e','p.'+P.secretN));sr2.onclick=function(){go(P.secretN-1)};box.appendChild(sr2);
+     var cdr=para(rowCss+';cursor:pointer','');
     cdr.append(para('','🎬 クレジット'),para('font-size:12px;color:#c97a1e','p.'+P.creditN));cdr.onclick=function(){go(P.creditN-1)};box.appendChild(cdr);
     if(!unlocked)box.appendChild(para('margin-top:12px;font-size:11px;line-height:1.6;color:#9a7048','※ まだ見つけていないヒントは、表紙の「全部読む」で読めるようになるよ'));
    }
@@ -5229,7 +5235,57 @@ function openBook(){
    pb('パスコードで もっていけるもの',['称号','なまえ・プロフィール（段位・最高得点）','宝物図鑑','ルナティック・エクリプス・難易度の解放','「いちばん置いた武器」「いちばん倒した敵」の記録','つづきのセーブ（発行のとき チェックを入れた場合だけ）'],'#e4f6d8');
    pb('もっていけないもの',['リナコイン','攻略本の購入・見つけたヒント・お気に入り','最終兵器田中の購入','町のデータ（お金・借金・プレゼント）','作ったモンスター','日記・クエスト・直線モードの記録','音量などの設定'],'#fde0e0');
    body.appendChild(para('margin-top:10px;font-size:11.5px;line-height:1.6;color:#9a7048','※ 機種変更の前に、かならず いまの機種で発行してね'));
-  }else if(P.k==='credit'){
+  }else if(P.k==='secret'){
+    body.appendChild(head('ひみつの裏技','18px'));
+    body.appendChild(para('text-align:center;font-size:12px;line-height:1.6;color:#9a7048;margin-bottom:6px','銀色の部分を 指でこすって けずると 読めるよ\n（スクロールは 銀色の そとがわで やってね）'));
+    body.lastChild.style.whiteSpace='pre-line';
+    var SECRETS=[
+     ['🔐 金庫「1234」','金庫に 1234 と入れて「引き出す」を押すと、チャルメラ屋台が その日だけ 昼でも街に来るよ。すでに来ているときは ふつうに 1234G 引き出そうとするよ'],
+     ['🔐 金庫「5678」','金庫に 5678 と入れて「引き出す」を押すと、街の闇鍋の花が 最終段階まで 一気に育つよ（花がないとき・育ちきっているときは ふつうの引き出し）'],
+     ['🎰 7のゾロ目ボーナス','金庫に 77 や 7777 のように 7だけを 2〜16こ ならべて「引き出す」を押すと、入れた数ぶんの ゴールドが もらえるよ'],
+     ['💸 金庫の手数料','金庫の引き出しは 1か月に 10回まで 無料。それをこえると 1回ごとに 手数料 200G かかるよ。まとめて 引き出すのが おとく'],
+     ['🍜 ラーメン屋台','屋台は ふだん 夕方〜深夜だけ。ラーメンは 1日1杯まで。しょうゆ・しお・とんこつは 食べてから 24時間 効果が続いて、みそだけは 街の住人に はたらくよ'],
+     ['👆 クレジットの出しかた','タイトル画面の「📱 iPhone / Android 対応」の文字を 2回 すばやくタップ！ なまえを決めて、モンスターを作ったあとに 見られるよ'],
+     ['🛠 改造コード集','この攻略本の「改造コード集」では、なまえの変更・街の名前の変更・ルナティック解放・味方の数2倍など 本当に ゲームを 改造できるよ'],
+     ['🦸 味方の出撃','バトル中に ゴールの絵を タップすると 味方パネルが ひらくよ。「出撃」ボタンで 1体ずつ 出せて、全自動バトルのときは じどうで 出撃するよ'],
+     ['📖 味方の説明','味方パネルで キャラの行を タップすると、せつめいが 上の電光けいじばんに 流れるよ。買う前じゃなくても 読めるから 強化の前に チェック'],
+     ['👾 モンスター図鑑','図鑑の モンスターを タップすると ふきだしで ヒントが 出るよ。ボスの 弱点も ここに のっているよ'],
+     ['📚 ヒントを ぜんぶ読む','まだ 見つけていない ヒントも、攻略本の表紙の「全部読む」で まとめて 読めるようになるよ']];
+    SECRETS.forEach(function(S,ix){
+     var cd=para('position:relative;margin:10px 0;border:2px solid #ecd3a0;border-radius:12px;background:#fffdf5;overflow:hidden','');
+     var in1=para('padding:10px 12px','');
+     in1.append(para('font-size:13px;font-weight:900;color:#c97a1e;margin-bottom:4px',S[0]),para('font-size:12.5px;line-height:1.6;font-weight:700;color:#4a2e14',S[1]));
+     cd.appendChild(in1);
+     var cv=document.createElement('canvas');cv.style.cssText='position:absolute;left:0;top:0;width:100%;height:100%;touch-action:none;cursor:crosshair;border:0;box-shadow:none;border-radius:0;transition:opacity .4s';
+     cd.appendChild(cv);body.appendChild(cd);
+     var dpr=Math.min(2,window.devicePixelRatio||1),X2=null,done=false,tries=0;
+     function setup(){
+      var w=cd.offsetWidth,h=cd.offsetHeight;
+      if(!w||!h){if(tries++<40)setTimeout(setup,50);return}
+      cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);X2=cv.getContext('2d');X2.scale(dpr,dpr);
+      var gr=X2.createLinearGradient(0,0,w,h);gr.addColorStop(0,'#b8bec8');gr.addColorStop(.35,'#eef0f4');gr.addColorStop(.6,'#aeb4be');gr.addColorStop(1,'#dfe2e8');
+      X2.fillStyle=gr;X2.fillRect(0,0,w,h);
+      for(var q=0;q<90;q++){X2.fillStyle='rgba(255,255,255,'+(Math.random()*.5)+')';X2.fillRect(Math.random()*w,Math.random()*h,1+Math.random()*2,1+Math.random()*2)}
+      X2.fillStyle='rgba(90,96,110,.9)';X2.font='bold 14px sans-serif';X2.textAlign='center';X2.textBaseline='middle';
+      X2.fillText('✨ ここを こすってね ✨',w/2,h/2);
+     }
+     requestAnimationFrame(setup);
+     var down=false,lx=0,ly=0,mv=0;
+     function pos(e){var r=cv.getBoundingClientRect();return[(e.clientX-r.left)*(cv.width/r.width)/dpr,(e.clientY-r.top)*(cv.height/r.height)/dpr]}
+     function cut(a,b){if(!X2)return;X2.save();X2.globalCompositeOperation='destination-out';X2.lineCap='round';X2.lineJoin='round';X2.lineWidth=30;X2.beginPath();X2.moveTo(a[0],a[1]);X2.lineTo(b[0],b[1]);X2.stroke();X2.restore()}
+     function check(){
+      if(!X2||done)return;
+      try{var d=X2.getImageData(0,0,cv.width,cv.height).data,n=0,t=0;for(var i=3;i<d.length;i+=64){t++;if(d[i]<40)n++}
+       if(t&&n/t>.55){done=true;cv.style.opacity='0';cv.style.pointerEvents='none';setTimeout(function(){cv.remove()},450);try{sfx('up')}catch(e){}}}catch(e){}
+     }
+     ['touchstart','touchend','pointerdown','pointerup','click'].forEach(function(n){cv.addEventListener(n,function(e){e.stopPropagation()},{passive:true})});
+     cv.addEventListener('pointerdown',function(e){down=true;try{cv.setPointerCapture(e.pointerId)}catch(er){}var p=pos(e);lx=p[0];ly=p[1];cut(p,[p[0]+.1,p[1]+.1]);mv=0;e.preventDefault()});
+     cv.addEventListener('pointermove',function(e){if(!down)return;var p=pos(e);cut([lx,ly],p);lx=p[0];ly=p[1];if(++mv%12===0)check();e.preventDefault()});
+     var up=function(){if(!down)return;down=false;check()};
+     cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+    });
+    body.appendChild(para('margin-top:10px;font-size:11px;line-height:1.6;color:#9a7048','※ ページを とじると また 銀色に もどるよ'));
+   }else if(P.k==='credit'){
    body.appendChild(head('🎬 クレジット','18px'));
    var CRL=[['Executive producer','Mia Uchida'],['Assistant manager','Rina Uchida'],['Character designer','Lil Kaname'],['Sound creator','Yero'],['Associate coordinator','Emu Ai'],['Special appearance','Afuo Tanaka'],['Special thanks',null],['Developed by','Karaage Records']],pnm='';
    try{pnm=(localStorage.getItem('miarina_td_name_v1')||'').trim()}catch(e){}
@@ -12914,13 +12970,18 @@ drawEn2=wrapper;
  /* ---------- 屋台の見た目 ---------- */
  var vis=false,bub={t:0,txt:'',next:2,ls:0};
  var LINES=['♪ ぷあ〜ぷぷぷぷぷ〜','……いらっしゃい。','♪ ぷあ〜ぷ ぷぷぷぷ〜','うちの味は 変わらん。','……食っていくか。','飛ぶぞ！','頑固一徹！','へい、おまち！','替え玉？ ねえよ！','スープは 命だ！','麺は のびたら終わりだ','文句あるか！','流行りは 知らん！','黙って食え！','一杯入魂！','ふん、まだまだだな','手は 抜かん！','うまいに 決まってる','……煮込み中だ','コショウは かけるな！'];
- function visible(TD){return!!TD&&(TD.k==='夕'||TD.k==='夜'||TD.k==='深夜')}
+ function byTime(){var d=new Date(),h=d.getHours()+d.getMinutes()/60;return h>=16&&h<19||h>=19&&h<23||h>=23||h<4}
+  function forced(){try{return localStorage.getItem('miarina_ramen_come_v1')===today()}catch(e){return false}}
+  function visible(TD){return!!TD&&(forced()||TD.k==='夕'||TD.k==='夜'||TD.k==='深夜')}
+  /* 金庫の合言葉から呼ばれる：すでに街にいれば false（何もしない）、来たら true */
+  window.__ramenCome=function(){try{if(byTime()||forced())return false;localStorage.setItem('miarina_ramen_come_v1',today());return true}catch(e){return false}};
+  (window.__vaultCodes=window.__vaultCodes||{})['1234']=function(){return window.__ramenCome()?'🍜 チャルメラの音が聞こえてきた…ラーメン屋さんが街に来たよ':''};
  window.__ramenDraw=function(g,s,TD){
   vis=visible(TD);if(!vis)return;
   var dt=Math.max(0,Math.min(.1,s-bub.ls));bub.ls=s;
   if(bub.t>0)bub.t-=dt;
   if(s>=bub.next&&bub.t<=0){bub.txt=LINES[Math.random()*LINES.length|0];bub.t=3.4;bub.next=s+8+Math.random()*7}
-  var night=TD.k!=='夕',k,wx,a,u;
+  var night=!(TD.k==='夕'||TD.k==='朝'||TD.k==='昼'||TD.k==='早朝'),k,wx,a,u;
   g.save();g.translate(SX,SY);g.lineJoin='round';g.lineCap='round';
   /* かげ・あかり */
   g.fillStyle='rgba(60,50,40,.28)';g.beginPath();g.ellipse(2,1,40,5,0,0,7);g.fill();g.strokeStyle='#6b4423';g.lineWidth=1.4;g.beginPath();g.moveTo(37,-9);g.lineTo(35,0);g.moveTo(45,-9);g.lineTo(47,0);g.stroke();g.fillStyle='#b8804a';g.beginPath();g.ellipse(41,-10,7,2.6,0,0,7);g.fill();g.stroke();g.fillStyle='#d9a56a';g.beginPath();g.ellipse(41,-10.6,5,1.4,0,0,7);g.fill();
