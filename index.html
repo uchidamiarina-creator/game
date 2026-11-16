@@ -1,10 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><script>try{if((window.devicePixelRatio||1)<2&&matchMedia('(hover:hover) and (pointer:fine) and (min-width:720px)').matches)Object.defineProperty(window,'devicePixelRatio',{configurable:true,get:function(){return 2}})}catch(e){}</script><script>/* 所持上限: ゴールド99999999999 / リナコイン999999999 / チップ99999999 / ブヒポ9999 */
-(function(){try{var LIM={'miarina_td_gold_v1':99999999999,'miarina_td_rinacoin_v1':999999999,'miarina_td_medal_v1':99999999},PT=9999,SP=Storage.prototype,gi=SP.getItem,si=SP.setItem;
-function cl(k,v){if(v==null)return v;if(k in LIM){var n=Number(v);if(isFinite(n)&&n>LIM[k])return String(LIM[k]);return v}
-if(k==='miarina_td_vault_v1'){try{var vo=JSON.parse(v);if(vo&&typeof vo==='object'&&vo.bal>999999999999){vo.bal=999999999999;return JSON.stringify(vo)}}catch(e){}}if(k==='buhipo_v1'){try{var o=JSON.parse(v),LM=(o&&(o.sv||o.gd))?99999:PT;if(o&&typeof o==='object'&&o.pt>LM){o.pt=LM;return JSON.stringify(o)}}catch(e){}}return v}
-SP.getItem=function(k){return cl(k,gi.call(this,k))};
-SP.setItem=function(k,v){return si.call(this,k,cl(k,v))}}catch(e){}})();
-</script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="shpui-css">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><script>try{if((window.devicePixelRatio||1)<2&&matchMedia('(hover:hover) and (pointer:fine) and (min-width:720px)').matches)Object.defineProperty(window,'devicePixelRatio',{configurable:true,get:function(){return 2}})}catch(e){}</script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="shpui-css">
 button.sb.sb:not(.sb-card){font-family:inherit!important;color:#000!important;font-weight:800!important;-webkit-text-stroke:3px #fff!important;paint-order:stroke fill!important;text-shadow:1px 0 #fff,-1px 0 #fff,0 1px #fff,0 -1px #fff!important;border-radius:12px!important;min-height:38px!important;height:auto!important;box-sizing:border-box!important;outline:none!important;line-height:1.2!important;animation:none!important;cursor:pointer;position:relative}
 button.sb.sb-opt:not(.sb-card){background:#eceef5!important;border:3px solid #9aa0b4!important;box-shadow:0 3px 0 #9aa0b4!important}
 button.sb.sb-on:not(.sb-card){background:#ffd93d!important;border:4px solid #e0245e!important;box-shadow:0 0 0 3px #fff,0 4px 0 3px #e0245e!important}
@@ -211,18 +205,17 @@ body{width:100%;margin:0;overflow:hidden;
 #tt .tin h2 .t1{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#fff3b0 0%,#ffc2dc 28%,#ff6aa8 62%,#ff3f8e 100%)}
 #tt .tin h2 .t2{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#ffd9ec 0%,#ff8fc0 38%,#ee4f9c 70%,#c93a9e 100%);animation-delay:.25s}
 #tt .tin h2 .t3{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#e6d9ff 0%,#a98bff 45%,#6a4cf0 100%);animation-delay:.5s}
-#tt .tin h2 .tdeco{display:inline-block;color:#ff6fa5;-webkit-text-fill-color:#ff6fa5;background:none;animation:ttfloat 2.2s ease-in-out infinite;margin:0 2px}#tt .tin h2 .tdeco:nth-of-type(2){animation-delay:.6s}#tt .tin h2 .t1{letter-spacing:.02em}#tt .tin h2 .dx{font-size:1.1em;background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#fffbc2 0%,#ffd43b 45%,#ff9a1f 100%);animation-delay:.65s}
+#tt .tin h2 .dx{font-size:1.1em;background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%),linear-gradient(180deg,#fffbc2 0%,#ffd43b 45%,#ff9a1f 100%);animation-delay:.65s}
+#tt .tin h2 .tsp{position:absolute;font-style:normal;font-family:sans-serif;line-height:1;pointer-events:none;animation:ttw 2.6s ease-in-out infinite}
+#tt .tin h2 .tsp.a{left:2%;top:0;font-size:.62em;color:#ffe27a;-webkit-text-fill-color:#ffe27a}
+#tt .tin h2 .tsp.b{right:4%;top:2%;font-size:.55em;color:#ff7eb6;-webkit-text-fill-color:#ff7eb6;animation-delay:.7s}
+#tt .tin h2 .tsp.c{left:6%;bottom:6%;font-size:.5em;color:#ffd23f;-webkit-text-fill-color:#ffd23f;animation-delay:1.3s}
+#tt .tin h2 .tsp.d{right:2%;bottom:4%;font-size:.6em;color:#fff;-webkit-text-fill-color:#fff;animation-delay:1.9s}
 @keyframes ttshine{0%,55%{background-position:160% 0,0 0}100%{background-position:-60% 0,0 0}}
-@media (prefers-reduced-motion:reduce){#tt .tin h2 .tl,
-/* 見やすさ改善：大きく・白＋濃い紫のふち取り・濃いめの色 */
-#tt #thd h2{font-size:clamp(18px,6.2vw,26px);font-weight:900;letter-spacing:.02em;line-height:1.25}
-#tt .tin h2{filter:drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff) drop-shadow(2px 0 0 #6a2373) drop-shadow(-2px 0 0 #6a2373) drop-shadow(0 2px 0 #6a2373) drop-shadow(0 -2px 0 #6a2373) drop-shadow(0 4px 0 #6a2373) drop-shadow(0 8px 8px rgba(255,79,147,.4))!important}
-#tt .tin h2 .t1{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.35) 50%,transparent 58%),linear-gradient(180deg,#ff8ec0 0%,#ff4f9d 55%,#e0247a 100%)}
-#tt .tin h2 .t2{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.35) 50%,transparent 58%),linear-gradient(180deg,#ff7fb8 0%,#f0409a 55%,#c42a9a 100%)}
-#tt .tin h2 .t3{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.35) 50%,transparent 58%),linear-gradient(180deg,#a98bff 0%,#7a55ee 55%,#5236d6 100%)}
-#tt .tin h2 .dx{background-image:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.35) 50%,transparent 58%),linear-gradient(180deg,#ffe45c 0%,#ffb000 55%,#ff7a00 100%)}
+@keyframes ttw{0%,100%{transform:scale(.55) rotate(0);opacity:.35}50%{transform:scale(1.15) rotate(25deg);opacity:1}}
+@media (prefers-reduced-motion:reduce){#tt .tin h2 .tl,#tt .tin h2 .tsp{animation:none!important}#tt .tin h2 .tsp{opacity:.9}}
 </style>
-<div class="tin"><div id="thd"><img id="tmia" alt="未亜" width="60" height="60"><h2><span class="tl t1">みありな</span><br><span class="tl t2">タワーディフェンス</span><br><span class="tl t3">ウルトラ</span><span class="tl dx">DX</span></h2><img id="trin" alt="利奈" width="60" height="56"></div><div style="font-size:10.5px;font-weight:700;color:var(--ink);text-align:center;margin:-2px 0 8px;letter-spacing:.01em">- 最終完全ちょっとバグってるファイナル Ultimate Version -</div><input id="pn" maxlength="8" placeholder="なまえ（8文字まで）" style="font:inherit;font-size:15px;text-align:center;padding:9px;border-radius:14px;border:3px solid var(--line);background:var(--card);color:var(--ink);width:70%;margin:0 0 6px"><div id="dan" style="font-size:13px;color:var(--accent2);min-height:18px;margin:0 0 8px;text-align:center"></div><div id="df"></div><div id="dsc" style="display:none"></div><button class="go" id="cnb" style="display:none;margin:0 auto 8px;line-height:1.35"></button><button class="go" id="stb">はじめる</button><div style="margin-top:10px"><button id="rkb" hidden style="padding:8px 22px;font-size:14px">🏆 ランキング</button> <button id="pcb" style="padding:8px 22px;font-size:14px">🔑 パスコード</button></div><div style="margin-top:8px"><button id="pfb" style="padding:8px 22px;font-size:14px">👤 プロフィール</button> <button id="vtb" style="padding:8px 22px;font-size:14px">🔐 金庫</button></div><div id="crTap" style="margin-top:12px;font-size:11px;color:var(--mute);letter-spacing:.04em">📱 iPhone / Android 対応</div><ul style="display:none">強化・売却</li><li id="cli">30フェーズ守りきればクリア</li></ul></div></div>
+<div class="tin"><div id="thd"><img id="tmia" alt="未亜" width="60" height="60"><h2><span class="tl t1">みありな</span><br><span class="tl t2">タワーディフェンス</span><br><span class="tl t3">ウルトラ</span><span class="tl dx">DX</span><i class="tsp a" aria-hidden="true">✦</i><i class="tsp b" aria-hidden="true">♥</i><i class="tsp c" aria-hidden="true">★</i><i class="tsp d" aria-hidden="true">✧</i></h2><img id="trin" alt="利奈" width="60" height="56"></div><div style="font-size:10px;color:var(--mute);text-align:center;margin:-2px 0 8px;letter-spacing:.04em">- 最終完全ちょっとバグってるファイナル Ultimate Version -</div><input id="pn" maxlength="8" placeholder="なまえ（8文字まで）" style="font:inherit;font-size:15px;text-align:center;padding:9px;border-radius:14px;border:3px solid var(--line);background:var(--card);color:var(--ink);width:70%;margin:0 0 6px"><div id="dan" style="font-size:13px;color:var(--accent2);min-height:18px;margin:0 0 8px;text-align:center"></div><div id="df"></div><div id="dsc" style="display:none"></div><button class="go" id="cnb" style="display:none;margin:0 auto 8px;line-height:1.35"></button><button class="go" id="stb">はじめる</button><div style="margin-top:10px"><button id="rkb" hidden style="padding:8px 22px;font-size:14px">🏆 ランキング</button> <button id="pcb" style="padding:8px 22px;font-size:14px">🔑 パスコード</button></div><div style="margin-top:8px"><button id="pfb" style="padding:8px 22px;font-size:14px">👤 プロフィール</button> <button id="vtb" style="padding:8px 22px;font-size:14px">🔐 金庫</button></div><div id="crTap" style="margin-top:12px;font-size:11px;color:var(--mute);letter-spacing:.04em">📱 iPhone / Android 対応</div><ul style="display:none">強化・売却</li><li id="cli">30フェーズ守りきればクリア</li></ul></div></div>
 <h1>みありなタワーディフェンス ウルトラDX</h1>
 <div id="wrap">
 <div id="stats"><span id="sg"></span><span id="sl"></span><span id="sw" style="display:none"></span><span id="stm" style="display:none"></span></div>
@@ -431,7 +424,7 @@ go.onclick=()=>{if(G.over||G.active||G.wave>=D.cl||!pathOK())return;if(G.setup){
   sfx('clear');say('⏭ スキップ！','#7a5cff');hud();panel()};
 sp.onclick=()=>{sfx('tap');G.speed=G.speed%3+1;sp.textContent='⏩'+G.speed};
 rs.onclick=()=>{init();bgm(true)};am.onclick=()=>autoMap();
-const TTL='たまごのひよこ|ねぼすけうさぎ|よちよちぺんぎん|おさんぽこねこ|まいごのこぐま|ふわふわわたあめ|ぷるぷるプリン|ころころどんぐり|ちいさなてんとうむし|おひるねハムスター|もぐもぐりす|ぽかぽかおひさま|にこにこたんぽぽ|あまえんぼこいぬ|ひらひらちょうちょ|はなまるおにぎり|ぴょんぴょんかえる|のんびりかたつむり|すやすやこぐま|きらきらしずく|ほわほわひつじ|ちょこんとことり|ぱたぱたこうさぎ|ふんわりマシュマロ|とことこあひる|もちもちおもち|ゆらゆらたんぽぽ|ほっぺふくらむりす|ぽてぽてたぬき|おだんごシスターズ|いちごのよかん|あまいクッキー|ちびっこナイト|ふわふわくもの子|はちみつくまさん|ことりのシンガー|おほしさまコレクター|ぷりぷりさんぽ|くるくるリボン|ぴかぴかビーズ|ミルクティーのまほう|きまぐれにゃんこ|かぜのようせい|ゆめみるうさぎ|おかしのまもりびと|にじいろキャンディ|ハートのみならい|ぽんぽんチアガール|すてきなリボンナイト|まじかる見習いちゃん|ハートのきしだん|きらめきタワーマスター|ピンクアローのたつじん|こおりのおひめさま|いかずちプリンセス|どくどくポイズンキュート|ドカンほうのアイドル|にじビームのまじょ|かざんのパティシエ|たつまきフェアリー|みちづくりのてんさい|おとしあなマイスター|みあのおきにいり|りなのだいしんゆう|おうちのまもりがみ|ふわもこガーディアン|スイーツきしだんちょう|ぷにぷにせいれい|ほしぞらのひめぎみ|ゆめかわヒーロー|キラキラえんじぇる|きせきのパティシエール|にじいろのほうせき|はなびらのまほうつかい|ハートビームのせんし|パステルのじょおう|ちょうちょのじょおうさま|ふわふわだいまおう|まほうのくにのえいゆう|ぴかぴかゆうしゃさま|ミラクルスイートクイーン|きらきらぎんがのひめ|ゆめのくにのだいひょう|ハッピーのまじょ|かわいさのてんし|しあわせのはこびや|みありなマスター|ぜんぶまもるおひめさま|だいせいれいさま|ミラクルパステルクイーン|キラキラぎんがのおうじょ|ゆめかわだいまじょ|ぷりてぃーじょおう|でんせつのスイーツおうじょ|てんしのガーディアン|かわいさのかみさま|みありなのだいじょおう|きせきのスーパーアイドル|ぜんせかいのアイドル|みありなタワーのでんせつ|ぷるぷるたいやき|ほかほかことり|ぽよぽよぺんぎん|ぽよぽよたまごやき|ぷるぷるこりす|むにむにたまごやき|ころころこねこ|ころころぺんぎん|ころころこいぬ|ころころこぐま|ぷるぷるぺんぎん|むにむにもちうさぎ|ぷるぷるおだんご|ふにふにもちうさぎ|ころころこぶた|うとうとこぐま|ぽよぽよたいやき|よちよちこねこ|もこもこたいやき|ほかほかこいぬ|むにむにおだんご|ふにふにこりす|もこもこもちうさぎ|よちよちこりす|ふにふにこねこ|てくてくことり|ちょこちょここぶた|ほかほかぺんぎん|ぽよぽよこりす|ふにふにこぐま|ぴよぴよぺんぎん|ぴよぴよこねこ|ぷるぷるひよこ|もこもこことり|ぽよぽよこぶた|ぴよぴよこいぬ|ぷるぷるたまごやき|むにむにこねこ|ほかほかこぶた|ふにふにたまごやき|てくてくこぐま|ころころことり|ぴよぴよこぐま|ぽよぽよこねこ|ぴよぴよたまごやき|てくてくぺんぎん|てくてくこりす|ふにふにこいぬ|ぽよぽよもちうさぎ|ぽよぽよおだんご|ゆらゆらぶどう|ほわほわドーナツ|もぐもぐおほしさま|ぽかぽかいちご|ふわふわドーナツ|ぽかぽかおほしさま|もぐもぐパンケーキ|ほくほくパンケーキ|さくさくたんぽぽ|しゃりしゃりいちご|ぱりぱりみかん|ぽかぽかたんぽぽ|ぽかぽかシュークリーム|ふわふわぶどう|とろとろドーナツ|とろーりシュークリーム|とろーりパンケーキ|ぽかぽかホットケーキ|きらきらわたあめ|しゃりしゃりシュークリーム|きらきらいちご|ふわふわおほしさま|ほわほわみかん|ふわふわいちご|とろーりホットケーキ|ぱりぱりシュークリーム|ほくほくアイスクリーム|もぐもぐみかん|とろーりたんぽぽ|ほくほくシュークリーム|ほわほわたんぽぽ|きらきらぶどう|ほわほわおほしさま|ぽかぽかドーナツ|しゃりしゃりたんぽぽ|もぐもぐアイスクリーム|しゃりしゃりホットケーキ|ぱりぱりパンケーキ|もぐもぐいちご|ほわほわシュークリーム|しゃりしゃりアイスクリーム|さくさくドーナツ|とろーりドーナツ|ぽかぽかマカロン|きらきらアイスクリーム|もぐもぐホットケーキ|ほくほくたんぽぽ|ぽかぽかみかん|とろーりわたあめ|ぱりぱりホットケーキ|まじかるハートのたまご|ふしぎなハートのたまご|ゆめみるまほうのこ|ちいさなきのこようせい|ミラクルちょうちょのこ|ほしくずのリボンのこ|ふしぎなほしのこ|ミラクルきのこようせい|まじかるみならいようせい|おはなのちょうちょのこ|ミラクルほうきのこ|ひらひらまほうのこ|ふしぎなおまじないやさん|くるくるおまじないやさん|ちいさなおはなやさん|くるくるまほうのこ|おほしさまのふうせんやさん|おはなのみならいようせい|ひらひらちょうちょのこ|おほしさまのおはなやさん|くるくるリボンのこ|ひみつのみならいようせい|ゆめみるハートのたまご|ちいさなちょうちょのこ|ひらひらほうきのこ|くるくるちょうちょのこ|くるくるハートのたまご|ふしぎなふうせんやさん|くるくるみならいようせい|ひらひらふうせんやさん|ひらひらパティシエみならい|ゆめみるおはなやさん|おはなのリボンのこ|ふしぎなほうきのこ|ふしぎなみならいようせい|くるくるおはなやさん|ちいさなほうきのこ|ミラクルリボンのこ|ゆめみるちょうちょのこ|くるくるほうきのこ|ひみつのふうせんやさん|おはなのハートのたまご|くるくるパティシエみならい|ひみつのおはなやさん|ふしぎなおはなやさん|ひみつのほしのこ|まじかるリボンのこ|おはなのきのこようせい|そよかぜのちょうちょのこ|ひみつのパティシエみならい|たのもしいガーディアン|ひたむきなはたもち|ふわもこしょうたいちょう|ふわもこきしみならい|ハートのきしみならい|たのもしいタワーばん|ゆうきのはたもち|せいぎのガーディアン|まじめなぐんしさま|ハートのしょうたいちょう|ピンクのぼうえいたい|ぴかぴかのしょうたいちょう|ピンクのナイト|りりしいガードマン|ピンクのきしみならい|きらめくぐんしさま|ひたむきなぐんしさま|ぴかぴかのはたもち|まじめなはたもち|ぴかぴかのぼうえいたい|たのもしいたてもち|ひたむきなきしみならい|まじめなおまもりたい|がんばりやのはたもち|きらめくはたもち|ゆうきのきしみならい|ハートのたてもち|がんばりやのガードマン|ふわもこはたもち|せいぎのぼうえいたい|りりしいおまもりたい|きらめくタワーばん|がんばりやのおまもりたい|せいぎのはたもち|たのもしいナイト|ハートのナイト|まじめなナイト|せいぎのタワーばん|りりしいしょうたいちょう|ひたむきなタワーばん|ふわもこおまもりたい|ピンクのガードマン|きらめくしょうたいちょう|ぴかぴかのたてもち|ゆうきのほうえいたい|がんばりやのぼうえいたい|がんばりやのナイト|ゆうきのタワーばん|ピンクのたてもち|ゆうきのぐんしさま|ピンクアローのだいすきっこ|ハートビームのきょうじゅ|ドカンほうのマイスター|きらめきタワーのはかせ|ピンクアローのはかせ|かざんのめいじん|ドカンほうのせんせい|たつまきのスペシャリスト|ピンクアローのきょうじゅ|いかずちのはかせ|こおりタワーのおうさま|いかずちのスペシャリスト|こおりタワーのせんせい|かざんのきょうじゅ|たつまきのまほうつかい|たつまきのだいすきっこ|にじビームのマイスター|どくどくのはかせ|ハートビームのだいすきっこ|みちづくりのまほうつかい|ドカンほうのおうさま|たつまきのせんせい|どくどくのてんさい|こおりタワーのきょうじゅ|きらめきタワーのせんせい|いかずちのおうさま|たつまきのおうさま|おとしあなのおうさま|おとしあなのスペシャリスト|にじビームのめいじん|ピンクアローのせんせい|にじビームのはかせ|たつまきのはかせ|ピンクアローのまほうつかい|ピンクアローのめいじん|かざんのマイスター|にじビームのスペシャリスト|ドカンほうのめいじん|いかずちのだいすきっこ|かざんのだいすきっこ|にじビームのおうさま|いかずちのまほうつかい|ドカンほうのだいすきっこ|ドカンほうのてんさい|きらめきタワーのおうさま|ピンクアローのてんさい|ハートビームのめいじん|ハートビームのてんさい|にじビームのきょうじゅ|かざんのてんさい|スイートティアラのこ|パステルだいじょおう|ハッピーだいじょおう|スイートレディ|ハッピーおひめさま|ハッピーアイドル|ほしぞらのクイーン|スイートせいじょ|パステルレディ|ミラクルプリンセス|ほしぞらのアイドル|ロイヤルじょおうさま|ハッピーティアラのこ|ミラクルアイドル|キラキラティアラのこ|ロイヤルひめぎみ|マジカルアイドル|スイートプリンセス|キラキラおうこくのはな|ハッピープリンセス|ぎんがのプリンセス|ぎんがのおうこくのはな|ぎんがのレディ|スイートクイーン|スイートだいじょおう|ミラクルおひめさま|マジカルおうこくのはな|マジカルじょおうさま|ぎんがのおひめさま|キラキラアイドル|パステルひめぎみ|ハッピーせいじょ|スイートおうじょ|ゆめかわせいじょ|プリティーおうじょ|ふわふわプリンセス|プリティープリンセス|スイートひめぎみ|ミラクルおうこくのはな|スイートおひめさま|ゆめかわプリンセス|プリティーひめぎみ|ほしぞらのだいじょおう|ふわふわおうこくのはな|ゆめかわレディ|キラキラプリンセス|ぎんがのだいじょおう|スイートおうこくのはな|プリティークイーン|ふわふわおひめさま|そらとぶヒロイン|そらとぶヒーロー|ほしのしょうぐん|やさしいヒーロー|やさしいぼうけんしゃ|ほしのきしだんちょう|さいきょうのガーディアン|ほしのガーディアン|ひかりのヒーロー|ゆうかんなパラディン|かがやくせんし|むてきのヒーロー|まほうのくにのパラディン|むてきのヒロイン|むてきのゆうしゃ|きせきのえいゆう|ゆうかんなガーディアン|でんせつのハンター|かがやくしょうぐん|やさしいハンター|でんせつのしょうぐん|ほしのドラゴンライダー|ほしのゆうしゃ|ふしぎのくにのヒロイン|ゆうかんなぼうけんしゃ|ふしぎのくにのハンター|さいきょうのえいゆう|ひかりのハンター|さいきょうのしょうぐん|きせきのヒーロー|でんせつのガーディアン|ゆうかんなせんし|そらとぶしょうぐん|ゆうかんなえいゆう|まほうのくにのガーディアン|ひかりのしょうぐん|きせきのきしだんちょう|むてきのきしだんちょう|まほうのくにのゆうしゃ|でんせつのせんし|そらとぶドラゴンライダー|ほしのえいゆう|ひかりのせんし|やさしいしょうぐん|むてきのパラディン|でんせつのゆうしゃ|やさしいきしだんちょう|ふしぎのくにのヒーロー|でんせつのきしだんちょう|まほうのくにのヒーロー|うちゅうのほうせき|オーロラのてんし|うちゅうのまじょ|せかいのだいせいれい|にじいろのひめ|ほうせきのひめ|ゆめのくにのしんじゅ|てんくうのかみさま|こうごうしいきせき|うちゅうのきせき|にじいろのまじょ|にじいろのおうさま|ほうせきのおうさま|てんくうのひめ|しんわのきせき|しんわのアイドル|せかいのおうさま|ぎんがのきせき|ほうせきのまじょ|こうごうしいだいせいれい|にじいろのきせき|てんくうのきせき|せかいのしんじゅ|ゆめのくにのだいせいれい|にじいろのだいせいれい|せかいのきせき|きらめくきせき|しんわのおうさま|せかいのほうせき|にじいろのひかり|オーロラのほうせき|ほうせきのアイドル|ぎんがのまじょ|ほうせきのせいれいおう|ほうせきのきせき|ぎんがのおうさま|せかいのひめ|ほしぞらのひめ|うちゅうのせいれいおう|てんくうのひかり|ゆめのくにのせいれいおう|ほしぞらのだいせいれい|ほうせきのだいせいれい|てんくうのおうさま|オーロラのだいせいれい|ゆめのくにのひかり|せかいのてんし|きらめくほうせき|ほしぞらのしんじゅ|にじいろのしんじゅ|みありなミラクルおうじょ|みありなだいすきなアイドル|みありなタワーのアイドル|みありなさいこうのアイドル|みあのだいすきなマスター|みありなのスター|みありなミラクルせいれい|りなのだいすきなスター|みありなゆめかわまもりがみ|みありなファンのきせき|みあのだいすきなスター|みありなさいこうのスター|みありなキラキラきせき|りなのだいすきなエース|みありなタワーのおうじょ|みあのだいすきなだいひょう|みありなキラキラせいれい|りなのだいすきなせいれい|みありなスペシャルヒーロー|みありなマスターのアイドル|みありなキラキラおうじょ|りなのだいすきなヒーロー|みありなゆめかわマスター|みありなだいすきなおうじょ|みありなゆめかわアイドル|りなのだいすきなきせき|みありなミラクルきせき|みありなマスターのエース|みありなファンのだいひょう|みありなのおうじょ|みあのだいすきなヒーロー|りなのだいすきなマスター|みありなタワーのきせき|みありなのだいひょう|みありなタワーのスター|みありなファンのスター|みありなタワーのまもりがみ|みありなマスターのスター|みありなゆめかわだいひょう|みありなファンのマスター|みあのだいすきなまもりがみ|みありなさいこうのせいれい|みありなさいこうのきせき|みありなゆめかわヒーロー|みあのだいすきなせいれい|みありなマスターのヒーロー|みありなファンのせいれい|みありなタワーのせいれい|みありなタワーのだいひょう|みありなだいすきなエース|しんのアイドルのかみさま|ウルトラきせきのだいまじょ|ミラクルスーパーヒーロー|スーパーみありなのでんせつ|えいえんのスーパーヒーロー|ゆめかわスーパーヒーロー|スーパーきせきのだいまじょ|しんのウルトラクイーン|えいえんのウルトラクイーン|しんのみありなタワーのかみ|でんせつのだいかみさま|ゆめかわみありなキング|スーパーだいかみさま|ふたりのみありなキング|ゆめかわきせきのだいまじょ|ぜんせかいのだいかみさま|ミラクルみありなキング|ミラクルきせきのだいまじょ|ふたりのきせきのだいまじょ|ゆめかわアイドルのかみさま|アルティメットだいかみさま|ウルトラみありなのでんせつ|ちょうぜつウルトラクイーン|しんのだいかみさま|ふたりのだいかみさま|ウルトラウルトラクイーン|ウルトラゆめかわだいまおう|しんのスーパーヒーロー|ウルトラみありなキング|ふたりのゆめかわだいまおう|でんせつのウルトラクイーン|でんせつのみありなキング|しんのみありなだいじょおう|しんのきせきのだいまじょ|ミラクルゆめかわだいまおう|しんのぜんせかいのアイドル|ミラクルウルトラクイーン|みありなタワーだいかみさま|ミラクルみありなのでんせつ|しんのみありなキング|ミラクルだいかみさま|ウルトラだいかみさま|えいえんのだいかみさま|スーパースーパーヒーロー|ふたりのウルトラクイーン|スーパーアイドルのかみさま|ちょうぜつみありなキング|しんのゆめかわだいまおう|ふたりのアイドルのかみさま|ウルトラアイドルのかみさま'.split('|');function tfmt(s){s=Math.floor(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+const TTL='たまごのひよこ|ねぼすけうさぎ|よちよちぺんぎん|おさんぽこねこ|まいごのこぐま|ふわふわわたあめ|ぷるぷるプリン|ころころどんぐり|ちいさなてんとうむし|おひるねハムスター|もぐもぐりす|ぽかぽかおひさま|にこにこたんぽぽ|あまえんぼこいぬ|ひらひらちょうちょ|はなまるおにぎり|ぴょんぴょんかえる|のんびりかたつむり|すやすやこぐま|きらきらしずく|ほわほわひつじ|ちょこんとことり|ぱたぱたこうさぎ|ふんわりマシュマロ|とことこあひる|もちもちおもち|ゆらゆらたんぽぽ|ほっぺふくらむりす|ぽてぽてたぬき|おだんごシスターズ|いちごのよかん|あまいクッキー|ちびっこナイト|ふわふわくもの子|はちみつくまさん|ことりのシンガー|おほしさまコレクター|ぷりぷりさんぽ|くるくるリボン|ぴかぴかビーズ|ミルクティーのまほう|きまぐれにゃんこ|かぜのようせい|ゆめみるうさぎ|おかしのまもりびと|にじいろキャンディ|ハートのみならい|ぽんぽんチアガール|すてきなリボンナイト|まじかる見習いちゃん|ハートのきしだん|きらめきタワーマスター|ピンクアローのたつじん|こおりのおひめさま|いかずちプリンセス|どくどくポイズンキュート|ドカンほうのアイドル|にじビームのまじょ|かざんのパティシエ|たつまきフェアリー|みちづくりのてんさい|おとしあなマイスター|みあのおきにいり|りなのだいしんゆう|おうちのまもりがみ|ふわもこガーディアン|スイーツきしだんちょう|ぷにぷにせいれい|ほしぞらのひめぎみ|ゆめかわヒーロー|キラキラえんじぇる|きせきのパティシエール|にじいろのほうせき|はなびらのまほうつかい|ハートビームのせんし|パステルのじょおう|ちょうちょのじょおうさま|ふわふわだいまおう|まほうのくにのえいゆう|ぴかぴかゆうしゃさま|ミラクルスイートクイーン|きらきらぎんがのひめ|ゆめのくにのだいひょう|ハッピーのまじょ|かわいさのてんし|しあわせのはこびや|みありなマスター|ぜんぶまもるおひめさま|だいせいれいさま|ミラクルパステルクイーン|キラキラぎんがのおうじょ|ゆめかわだいまじょ|ぷりてぃーじょおう|でんせつのスイーツおうじょ|てんしのガーディアン|かわいさのかみさま|みありなのだいじょおう|きせきのスーパーアイドル|ぜんせかいのアイドル|みありなタワーのでんせつ'.split('|');function tfmt(s){s=Math.floor(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 function tmUp(){return;const s=G.over?(G.tm||0):(performance.now()-G.t0)/1000,v='⏱ '+tfmt(s);if(stm.textContent!==v)stm.textContent=v}
 function autoMap(){if(!G||!G.setup||G.active)return;const bad=new Set(G.tw.map(o=>o.cx+','+o.cy)),ok=(a,b)=>a>=0&&b>=0&&a<COLS&&b<ROWS&&!(a<=2&&b>=8)&&!bad.has(a+','+b),D4=[[1,0],[-1,0],[0,1],[0,-1]];let path=null;
  for(let tr=0;tr<80&&!path;tr++){const e=[];for(let i=0;i<COLS;i++)e.push([i,0],[i,ROWS-1]);for(let j=1;j<ROWS-1;j++)e.push([0,j],[COLS-1,j]);const cd=e.filter(p=>ok(p[0],p[1])),s=cd[Math.random()*cd.length|0],gs=cd.filter(p=>Math.abs(p[0]-s[0])+Math.abs(p[1]-s[1])>=9);if(!gs.length)continue;const ge=gs[Math.random()*gs.length|0],mn=18+(Math.random()*10|0),used=new Set([s.join(',')]),P=[s];let cnt=0;
@@ -443,7 +436,7 @@ function autoMap(){if(!G||!G.setup||G.active)return;const bad=new Set(G.tw.map(o
 const LTTL=['ころんじゃったひよこ','べそかきこぐま','ぷるぷるなみだプリン','ねむねむたおれうさぎ','しょんぼりわたあめ','へにゃへにゃこねこ','ぺしゃんこマシュマロ','おちこみハムスター','しょんぼりぺんぎん','うるうるこりす','ほろにがクッキー','あしたはがんばるぞさん','ぴえんのたまご','ふにゃふにゃおもち','ずっこけナイトみならい','とけちゃったアイス','しおしおたんぽぽ','くすんくすんこいぬ','もういっかいのちびっこ','なきむしリボン'];
 function end(win){let lunNew=false,unNew=0,ecNew=false;try{ecHide()}catch(e){}G.over=true;bgm(false);if(!win)sfx('lose');
  let sc=Math.round(((win?D.cl:G.wave-1)*100+G.lives*20+(win?1000:0)+G.tw.reduce((a,o)=>a+(o.k=='X'?0:o.lv),0)*100)*(1+lv*.5));const ts=Math.max(0,(performance.now()-(G.t0||performance.now()))/1000);G.tm=ts;G.ttl='';G.ex='';bnx.textContent='';
- if(win){try{if(lv>=3&&!lunOK()){localStorage.setItem('miarina_td_lunatic_v1','1');lunNew=true}}catch(e){}try{if(lv===4&&!ecOK()){localStorage.setItem(EC_KEY,'1');ecNew=true}}catch(e){}try{var _un=unlN();if(lv<4&&lv+1>_un){localStorage.setItem(UNL_KEY,String(lv+1));unNew=lv+1}}catch(e){}const par=D.cl*12,mx=D.cl*40,tbn=0,ms=1+Math.floor(Math.random()*10000),cm=ms>9000?'ぱーふぇくと！だいすき！':ms>6000?'すごーい！かんぺきに近いよ！':ms>3000?'いいね！じょうずだったよ！':ms>1000?'まあまあかな〜！':'うーん、もうちょっとがんばろ！';const bs=sc,eb=D.ec?EC_BONUS:0;sc=bs+tbn+ms+eb;const cap=(D.cl*100+D.lives*20+1000)*(1+lv*.5)+D.cl*150+10000,ix=Math.random()<.3?Math.floor(Math.random()*100):Math.max(0,Math.min(99,Math.round(Math.min(1,sc/cap/.8)*99+(Math.random()+Math.random()+Math.random()-1.5)*50)));if(Math.random()*6>=1)ix=100+ix*5+Math.floor(Math.random()*5);G.ttl=G._auto?'全自動':TTL[ix];let nw=false,n=0;try{const kk='miarina_td_titles_v1',a=JSON.parse(localStorage.getItem(kk)||'[]'),st=new Set(Array.isArray(a)?a:[]);nw=!st.has(ix);st.add(ix);localStorage.setItem(kk,JSON.stringify([...st]));n=st.size}catch(e){}
+ if(win){try{if(lv>=3&&!lunOK()){localStorage.setItem('miarina_td_lunatic_v1','1');lunNew=true}}catch(e){}try{if(lv===4&&!ecOK()){localStorage.setItem(EC_KEY,'1');ecNew=true}}catch(e){}try{var _un=unlN();if(lv<4&&lv+1>_un){localStorage.setItem(UNL_KEY,String(lv+1));unNew=lv+1}}catch(e){}const par=D.cl*12,mx=D.cl*40,tbn=0,ms=1+Math.floor(Math.random()*10000),cm=ms>9000?'ぱーふぇくと！だいすき！':ms>6000?'すごーい！かんぺきに近いよ！':ms>3000?'いいね！じょうずだったよ！':ms>1000?'まあまあかな〜！':'うーん、もうちょっとがんばろ！';const bs=sc,eb=D.ec?EC_BONUS:0;sc=bs+tbn+ms+eb;const cap=(D.cl*100+D.lives*20+1000)*(1+lv*.5)+D.cl*150+10000,ix=Math.max(0,Math.min(99,Math.round(Math.min(1,sc/cap/.8)*99+Math.random()*16-8)));G.ttl=G._auto?'全自動':TTL[ix];let nw=false,n=0;try{const kk='miarina_td_titles_v1',a=JSON.parse(localStorage.getItem(kk)||'[]'),st=new Set(Array.isArray(a)?a:[]);nw=!st.has(ix);st.add(ix);localStorage.setItem(kk,JSON.stringify([...st]));n=st.size}catch(e){}
   G.ex='クリア '+bs+' ＋ タイム '+tbn+' ＋ 未亜 '+ms+(eb?' ＋ エクリプスたえぬきボーナス '+eb:'');bnx.textContent='🏁 クリアポイント +'+bs+'点\n💗 未亜の採点 +'+ms+'点'+(eb?'\n👑 エクリプス10分たえぬきボーナス +'+eb+'点':'')+'\n🎀 称号「'+G.ttl+'」'}
  else{const ms=-(1+Math.floor(Math.random()*1000)),bs=sc;sc=bs+ms;G.ttl=LTTL[Math.random()*LTTL.length|0];G.ex='とうたつ '+bs+' ＋ 未亜のおしおき '+ms;bnx.textContent='🌸 がんばりポイント +'+bs+'点\n💔 未亜のおしおき '+ms+'点\n🎀 称号「'+G.ttl+'」'}
  if(win&&G.hi&&(G.hi.sb||G.hi.nd)){const sm=sc,mu=(G.hi.sb?.5:1)*(G.hi.nd?1.5:1),lb=(G.hi.sb?'シメサバ ×0.5':'')+(G.hi.sb&&G.hi.nd?'・':'')+(G.hi.nd?'ノドグロ ×1.5':'');sc=Math.round(sc*mu);G.ex+=' ＋ お寿司補正（'+lb+'） '+(sc-sm);bnx.textContent+=(bnx.textContent?'\n':'')+'🍣 お寿司（'+lb+'） '+sm+'点 → '+sc+'点'}if((G.debt|0)>0){sc-=G.debt;G.ex+=' － 借金 '+G.debt;bnx.textContent+=(bnx.textContent?'\n':'')+'🏦 銀行の借金 −'+G.debt+'点'}G.sc=sc;if(win){try{rkAdd(PN||'あなた',sc,lv)}catch(er){}}profUpd(PN,sc,G.ttl);let dn=null;if(win&&!G._dd){G._dd=1;dn=danUp(PN,(DAN_XP[Math.max(0,DIFF.indexOf(D))]||40))}G.dn=dn;try{stS(sc)}catch(er){}rkResult(null);if(win)rkm.textContent='';ot.textContent=(PN?PN+'さん ':'')+(win?'クリア！🎉':'ゲームオーバー');om.textContent=win?((ecNew?'🌑 新しい難易度「エクリプス」が出現したよ！タイトルの難易度から選べるよ！ ':lunNew?'🌙 ルナティック（フェーズ100）が解放されたよ！ ':unNew?'🔓 「'+DIFF[unNew].n+'」が選べるようになったよ！ ':'')+(dn?(dn.nw>dn.old?'🥋 段位アップ！ '+danTxt(dn.old)+' → '+danTxt(dn.nw):dn.nw>=DAN_MAX?'🥋 最高段位「'+danTxt(dn.nw)+'」を保っているよ！':''):'')):'フェーズ '+(D.ec?'∞':G.wave)+' でやられちゃった… スコア '+G.sc+'点';(win&&window.__celebrate?(window.__celebrate(),setTimeout(function(){document.getElementById('ov').style.display='flex'},4800)):document.getElementById('ov').style.display='flex');mkCard(win);tw.href='https://twitter.com/intent/tweet?text='+encodeURIComponent('みありなタワーディフェンス ウルトラDX【'+D.n+'】で'+PN+'（'+danTxt(danGet(PN))+'）'+'は'+(win?(D.ec?'フェーズ∞を10分たえぬいた！':'全'+D.cl+'フェーズクリア！'):'フェーズ'+(D.ec?'∞':G.wave)+'まで進んだ！')+' スコア'+G.sc+'点'+(G.ttl?' 称号「'+G.ttl+'」':''))+(location.protocol.indexOf('http')==0?'&url='+encodeURIComponent(location.href.split(/[?#]/)[0]):'')+'&hashtags='+encodeURIComponent('みありなタワーディフェンスウルトラDX')}
@@ -1545,7 +1538,7 @@ function loadGame(){
  init();
  Object.assign(G,{gold:sv.gold,lives:sv.lives,wave:sv.wave,speed:sv.speed||1,setup:false,starts:sv.starts||[],goal:sv.goal||null,xr:sv.xr||[],pits:sv.pits||[],loans:sv.loans|0,debt:sv.debt|0,candy:sv.candy|0,hi:sv.hi||{z:0,zz:0},own:sv.own||{},alv:sv.alv||{},ml:sv.ml||1,sf:sv.sf||1,cnt:sv.cnt|0,tc:sv.tc|0,fc:sv.fc|0});
  if(D.ec){const _ecf=EC_SEC/(+sv.ecS||3600);G.ecT=Math.min(EC_SEC-1,Math.max(0,(+sv.ecT||0)*_ecf));G.ecBs=Array.isArray(sv.ecBs)?sv.ecBs.map(function(b){return b&&typeof b==='object'?Object.assign({},b,{t:(+b.t||0)*_ecf}):b}):null;G._ecR={en:Array.isArray(sv.ecEn)?sv.ecEn:[],q:Array.isArray(sv.ecQ)?sv.ecQ:[]}}
- if(Number.isInteger(sv.th)&&sv.th>=0&&(sv.th<39||sv.th===40)){G.th=sv.th;window.NZ={t0:performance.now(),n:THN[G.th]}}
+ if(Number.isInteger(sv.th)&&sv.th>=0&&sv.th<39){G.th=sv.th;window.NZ={t0:performance.now(),n:THN[G.th]}}
  road=new Set(sv.road);R=sv.R.map(o=>({P:o.P,segs:[],tot:0,cs:new Set(o.cs)}));
  G.rv=(G.rv||1)+1;G.rc=[];G._pk=undefined;G._pv=undefined;
  G.tw=sv.tw.map(t=>Object.assign({cd:0},t));G.t0=performance.now();build='A';G.sel=null;
@@ -1600,7 +1593,7 @@ gub.onclick=()=>{if(!G||G.over||tt.style.display!=='none'||document.getElementBy
  yes.onclick=()=>{q.remove();try{pz.style.display='none'}catch(e){}G.active=false;G.q=[];G.en=[];try{localStorage.setItem('miarina_td_giveup_v1',String(Date.now()))}catch(e){}try{localStorage.removeItem(SAVE_KEY)}catch(e){}G.snap=null;G.snapSaved=null;toTitle();boom()};
  no.onclick=()=>{q.remove();PZ=wasP;try{sfx('tap')}catch(e){}};
  rw.append(yes,no);bx.append(ic,tx,rw);q.append(bx);document.body.append(q)};
-(function(){const VK='miarina_td_vault_v1',GK='miarina_td_gold_v1',FREE=10,FEE=200,VMAX=999999999999;
+(function(){const VK='miarina_td_vault_v1',GK='miarina_td_gold_v1',FREE=10,FEE=200;
 const mk=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
 const rv=()=>{try{const o=JSON.parse(localStorage.getItem(VK)||'null');if(o&&typeof o.bal==='number')return{bal:Math.max(0,Math.floor(o.bal)),mo:o.mo||mk(),n:o.n|0}}catch(e){}return{bal:0,mo:mk(),n:0}};
 const wv=o=>{try{localStorage.setItem(VK,JSON.stringify(o));return true}catch(e){return false}};
@@ -1622,7 +1615,7 @@ btn.onclick=()=>{if(document.getElementById('vtq'))return;try{sfx('tap')}catch(e
  const say=(t,ok)=>{msg.style.color=ok?'#2e9e5b':'#e0103a';msg.textContent=t;show()};
  const val=()=>Math.floor(Number(inp.value)||0);
   const lucky=()=>{const t=String(inp.value||'').trim();if(!/^7{2,16}$/.test(t))return 0;const n=Number(t);if(!Number.isSafeInteger(n))return 0;inp.value='';try{sfx('up')}catch(e){}if(!sg(gp()+n)){say('この端末では保存できなかったよ');return -1}say('🎰 7のゾロ目ボーナス！ '+n+'G もらったよ',1);return 1};
- const dep=a=>{a=Math.floor(a);if(!(a>0)){say('金額を入れてね');return}if(a>gp()){say('手持ちがたりないよ');return}const o=cur(),room=VMAX-o.bal;if(room<=0){say('金庫がいっぱいだよ（上限 '+VMAX+'G）');return}const cut=a>room;if(cut)a=room;o.bal+=a;if(!wv(o)||!sg(gp()-a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 預けたよ'+(cut?'（金庫の上限 '+VMAX+'G まで）':''),1)};
+ const dep=a=>{a=Math.floor(a);if(!(a>0)){say('金額を入れてね');return}if(a>gp()){say('手持ちがたりないよ');return}const o=cur();o.bal+=a;if(!wv(o)||!sg(gp()-a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 預けたよ',1)};
  const wd=a=>{a=Math.floor(a);if(!(a>0)){say('金額がたりないよ');return}const o=cur(),fee=o.n>=FREE?FEE:0;if(a+fee>o.bal){say(fee?'手数料'+FEE+'Gこみで金庫がたりないよ':'金庫がたりないよ');return}o.bal-=a+fee;o.n++;if(!wv(o)||!sg(gp()+a)){say('この端末では保存できなかったよ');return}inp.value='';try{sfx('up')}catch(e){}say(a+'G 引き出したよ'+(fee?'（手数料 '+fee+'G）':''),1)};
  const secret=()=>{const h=(window.__vaultCodes||{})[String(inp.value||'').normalize('NFKC').trim().toLowerCase().replace(/[\u30a1-\u30f6]/g,c=>String.fromCharCode(c.charCodeAt(0)-96))];if(!h)return false;let m='';try{m=h()}catch(e){console.error(e)}if(!m)return false;inp.value='';try{sfx('up')}catch(e){}say(m,1);return true};
   (window.__vaultCodes=window.__vaultCodes||{})['5678']=()=>{const KY=365*24*3600*1000,TKY='miarina_town_v1';let o=null;try{o=JSON.parse(localStorage.getItem(TKY)||'null')}catch(e){}if(!o||!o.pot||typeof o.pot.t!=='number')return '';const t=Date.now()-KY;if(o.pot.t<=t)return '';o.pot.t=t;try{localStorage.setItem(TKY,JSON.stringify(o))}catch(e){return ''}try{window.__potSync&&window.__potSync(t)}catch(e){}return '🌸 闇鍋の花が ぐんぐん育って 立派に咲いたよ'};
@@ -1634,7 +1627,7 @@ btn.onclick=()=>{if(document.getElementById('vtq'))return;try{sfx('tap')}catch(e
   const nm=(LG('miarina_td_name_v1')||'').trim();
   if(!LS('miarina_td_lunatic_v1','1'))return '';
   LS('miarina_td_eclipse_v1','1');LS('miarina_td_unlock_v1','5');LS('miarina_td_guide_unlock_v1','1');
-  const ti=[];for(let i=0;i<600;i++)ti.push(i);LS('miarina_td_titles_v1',JSON.stringify(ti));
+  const ti=[];for(let i=0;i<100;i++)ti.push(i);LS('miarina_td_titles_v1',JSON.stringify(ti));
   const tr=[];for(let i=0;i<5000;i++)tr.push(i);
   const to=JP('miarina_td_treasure_v1'),tk=Object.keys(to);if(nm)tk.push(nk(nm));tk.forEach(k=>{to[k]=tr});LS('miarina_td_treasure_v1',JSON.stringify(to));
   const po=JP('miarina_td_profile_v1'),pk=Object.keys(po);if(nm)pk.push(nk(nm));pk.forEach(k=>{const p=po[k]&&typeof po[k]==='object'?po[k]:(po[k]={});if(!p.n&&nm)p.n=nm;p.d=33;p.x=594;p.u=Date.now()});LS('miarina_td_profile_v1',JSON.stringify(po));
@@ -7271,7 +7264,7 @@ function bz(id,key,name,ds,msg,fn,can,extra){sv(id,name,'buhi_'+key,ds,msg,fn,ca
 bz('buhi_man','man','ブヒマン','つかうと 味方のブヒマン（ブタのスーパーマン）がバトルに参戦！ そのゲームのあいだ 毎フェーズ出撃するよ（ブヒポで交換）','ブヒブヒ〜！',
  function(){if(!live()||G.buhiman)return 0;G.buhiman=1;try{window.__buhiAddBM&&window.__buhiAddBM(true)}catch(e){}return 1},
  function(){return live()&&!G.buhiman});
-bz('buhi_nikuman','nikuman','豚まん','食べるとライフが 50 回復する（ライフは最大99まで／ブヒポで交換）','ほかほか〜！',heal(50),canHeal,{max:1});
+bz('buhi_nikuman','nikuman','豚まん','食べるとライフが 50 回復する（ライフは最大99まで／ブヒポで交換）','ほかほか〜！',heal(50),canHeal,{max:5});
 bz('buhi_beam','beam','ブヒビーム','もっていると 武器に「ブヒビーム」がふえる！ 豚鼻を敵に投げて、投げられた敵はみんな豚の敵キャラに！（ずっと使えるよ／ブヒポで交換）','',
  function(){return 0},function(){return false},{max:1,own:1});
 bz('buhi_x','x','ブヒエナX','ジュース。のむと マップ上の全ての武器が レベルMAXになる（ブヒポで交換）','ゴクゴク！ ブヒエナX！',
@@ -12858,24 +12851,17 @@ drawEn2=wrapper;
  var SV=function(){return window.__buhiSVG||{}};
  /* 交換できるグッズ（ひみつ道具5つ） */
  var GOODS=[
-  {id:'buhi_man',key:'man',name:'ブヒマン',cost:3000,max:3,ds:'使うと 味方のブヒマン（ブタのスーパーマン）がバトルに参戦'},
-  {id:'buhi_nikuman',key:'nikuman',name:'豚まん',cost:3,max:1,ds:'食べるとライフ50回復'},
+  {id:'buhi_man',key:'man',name:'ブヒマン',cost:8,max:3,ds:'使うと 味方のブヒマン（ブタのスーパーマン）がバトルに参戦'},
+  {id:'buhi_nikuman',key:'nikuman',name:'豚まん',cost:3,max:5,ds:'食べるとライフ50回復'},
   {id:'buhi_beam',key:'beam',name:'ブヒビーム',cost:20,max:1,ds:'オリジナル武器。豚鼻を投げて、あたった敵は豚の敵キャラに'},
-  {id:'buhi_x',key:'x',name:'ブヒエナX',cost:5000,max:3,ds:'ジュース。のむとマップ上の武器がぜんぶレベルMAX'},
+  {id:'buhi_x',key:'x',name:'ブヒエナX',cost:12,max:3,ds:'ジュース。のむとマップ上の武器がぜんぶレベルMAX'},
   {id:'seal',key:'seal',name:'豚シール',cost:5,max:1,ds:'プロフィールのボタンのアイコンが 豚鼻のイラストに'}
  ];
  /* ---- ポイントのデータ ---- */
- function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'{}')||{},r={pt:Math.max(0,o.pt|0),rem:Math.max(0,o.rem|0),seal:o.seal?1:0,vis:Math.max(0,o.vis|0),sv:o.sv?1:0,gd:o.gd?1:0};if(r.gd)r.sv=1;return r}catch(e){return{pt:0,rem:0,seal:0,vis:0,sv:0,gd:0}}}
- /* ランク：9999pt ためるとシルバー（上限99999）／シルバーで99999pt ためるとゴールド（ブヒブヒ王国マップかいほう） */
- function rankOf(s){return s.gd?2:s.sv?1:0}
- function ptMax(s){return(s.sv||s.gd)?99999:9999}
- var rkNote='';
- function rankMsg(r){rkNote=r===2?'👑 ゴールドランクに なったよ！ ブヒブヒ王国マップが かいほうされたよ（バトルでたまに登場）':'✨ シルバーランクに なったよ！ ポイントの上限が 99999 に アップ！';try{flash(r===2?'👑 ゴールドランク！':'✨ シルバーランク！')}catch(e){}}
- function save(s){try{var a=s.pt;if(!s.sv&&a>=9999){s.sv=1;rankMsg(1)}s.pt=Math.min(a,ptMax(s));if(s.sv&&!s.gd&&s.pt>=99999){s.gd=1;rankMsg(2)}localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
- window.__buhiRank=function(){try{return rankOf(load())}catch(e){return 0}};
- function rkBtn(s0){if(!btnEl)return;if(btnEl._bg0==null)btnEl._bg0=btnEl.style.background;var r=rankOf(s0);btnEl.style.background=r===2?'linear-gradient(135deg,#fff2a8,#ffc83d)':r===1?'linear-gradient(135deg,#f6f8fc,#aab4c6)':btnEl._bg0}
+ function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'{}')||{};return{pt:Math.max(0,o.pt|0),rem:Math.max(0,o.rem|0),seal:o.seal?1:0,vis:Math.max(0,o.vis|0)}}catch(e){return{pt:0,rem:0,seal:0,vis:0}}}
+ function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  var btnEl=null,modalEl=null,rerender=null;
- function refresh(){try{if(btnEl){var s0=load(),p=btnEl.querySelector('.bp');if(p)p.textContent=s0.pt+'pt';rkBtn(s0)}if(rerender)rerender()}catch(e){}}
+ function refresh(){try{if(btnEl){var p=btnEl.querySelector('.bp');if(p)p.textContent=load().pt+'pt'}if(rerender)rerender()}catch(e){}}
  function flash(txt){try{
   var r=btnEl?{left:parseFloat(btnEl.style.left)||10,top:parseFloat(btnEl.style.top)||300}:{left:10,top:300};
   var d=document.createElement('div');d.textContent=txt;
@@ -12917,19 +12903,16 @@ drawEn2=wrapper;
   (host||document.body).appendChild(m);modalEl=m;
   var msg='';
   function render(){
-   var s=load();box.innerHTML='';if(rkNote){msg=rkNote;rkNote=''}
-   var rk=rankOf(s),P=rk===2?{bg:'linear-gradient(135deg,#fff6bf 0%,#ffd04a 55%,#f2a900 100%)',sh:'#b87400',nm:'GOLD RANK'}:rk===1?{bg:'linear-gradient(135deg,#fafbfd 0%,#c4ccda 55%,#8f9bb0 100%)',sh:'#68748a',nm:'SILVER RANK'}:{bg:'linear-gradient(135deg,#ffc9dc 0%,#ff8fb5 100%)',sh:'#e0457f',nm:''};
-   var card=mk('div','position:relative;overflow:hidden;border-radius:16px;padding:12px 14px;background:'+P.bg+';color:#fff;box-shadow:0 3px 0 '+P.sh+'');
+   var s=load();box.innerHTML='';
+   var card=mk('div','position:relative;overflow:hidden;border-radius:16px;padding:12px 14px;background:linear-gradient(135deg,#ffc9dc 0%,#ff8fb5 100%);color:#fff;box-shadow:0 3px 0 #e0457f');
    var nz=mk('div','position:absolute;right:-8px;top:-2px;width:118px;height:118px;opacity:.95');nz.innerHTML=SV().nose||'';
    var sv=nz.firstChild;if(sv){sv.style.width='100%';sv.style.height='100%'}
    card.appendChild(nz);
-   if(rk)card.appendChild(mk('div','position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.6) 50%,transparent 62%);pointer-events:none'));
-   card.appendChild(mk('div','position:relative;font-size:10px;letter-spacing:.25em;opacity:.9','POINT CARD'+(P.nm?'　★ '+P.nm+' ★':'')));
-   card.appendChild(mk('div','position:relative;font-size:28px;font-weight:bold;text-shadow:0 2px 0 '+P.sh+';margin-top:2px','ブヒポ'));
+   card.appendChild(mk('div','position:relative;font-size:10px;letter-spacing:.25em;opacity:.9','POINT CARD'));
+   card.appendChild(mk('div','position:relative;font-size:28px;font-weight:bold;text-shadow:0 2px 0 #e0457f;margin-top:2px','ブヒポ'));
    var pr=mk('div','position:relative;margin-top:8px;font-size:12px','いまの ポイント');card.appendChild(pr);
-   var pp=mk('div','position:relative;font-size:32px;font-weight:bold;text-shadow:0 2px 0 '+P.sh+';line-height:1.1');pp.appendChild(document.createTextNode(String(s.pt)));pp.appendChild(mk('span','font-size:14px;margin-left:3px','pt'));card.appendChild(pp);
+   var pp=mk('div','position:relative;font-size:32px;font-weight:bold;text-shadow:0 2px 0 #e0457f;line-height:1.1');pp.appendChild(document.createTextNode(String(s.pt)));pp.appendChild(mk('span','font-size:14px;margin-left:3px','pt'));card.appendChild(pp);
    card.appendChild(mk('div','position:relative;margin-top:6px;font-size:10px;opacity:.95','お店に入る 1回 = 1pt　／　ゴールド 200G つかう = 1pt（つぎまで あと '+(PER-s.rem)+'G）'));
-   card.appendChild(mk('div','position:relative;margin-top:3px;font-size:10px;font-weight:bold;opacity:.97',rk===2?'👑 ブヒブヒ王国マップ かいほう中！（バトルでたまに登場）／上限 99999pt':rk===1?'✨ 上限 99999pt ／ 99999pt ためると ゴールドランク！':'上限 9999pt ／ 9999pt ためると シルバーランク！'));
    box.appendChild(card);
    if(msg)box.appendChild(mk('div','margin:8px 0 0;padding:6px 8px;border-radius:10px;background:#ffeef6;color:#c0456f;font-size:12px;line-height:1.4',msg));
    box.appendChild(mk('div','margin:10px 2px 2px;font-size:12px;font-weight:bold;color:#c0456f','ブヒブヒグッズと こうかん'));
@@ -12970,7 +12953,7 @@ drawEn2=wrapper;
   var tx=mk('span','display:block');
   tx.appendChild(mk('span','display:block;font-size:11px;font-weight:bold;text-shadow:0 1px 0 #e0457f','ブヒポ'));
   var p=mk('span','display:block;font-size:14px;font-weight:bold;text-shadow:0 1px 0 #e0457f',load().pt+'pt');p.className='bp';tx.appendChild(p);
-  b.appendChild(ic);b.appendChild(tx);ov.appendChild(b);btnEl=b;try{rkBtn(load())}catch(e){}
+  b.appendChild(ic);b.appendChild(tx);ov.appendChild(b);btnEl=b;
   b.addEventListener('click',function(e){e.stopPropagation();try{sfx('tap')}catch(er){}openCard(ov)});
   var iv=0;function place(){if(!document.body.contains(ov)){clearInterval(iv);window.removeEventListener('resize',place);if(btnEl===b)btnEl=null;closeModal();return}
    var r=cn.getBoundingClientRect();b.style.left=(r.left+8)+'px';b.style.top=(r.bottom-b.offsetHeight-8)+'px';b.style.transition='transform .25s';b.style.transform=(ov.querySelector('[data-shp]')||document.querySelector('.mkbox'))?'translateX(-160%)':'none'}
@@ -13253,225 +13236,6 @@ drawEn2=wrapper;
    }catch(er){console.error('burning cross draw',er)}
   };
  }catch(er){console.error('ramen: burning cross setup',er)}
-})();
-</script>
-<script>
-/* ===== ブヒブヒ王国マップ（ブヒポカード ゴールドランク限定・バトルでたまに登場） ===== */
-(function(){
- try{
-  var BH=40,BTR=[0,2,3,4,5,6,7,8],bgc=null;
-  THN[BH]='ブヒブヒ王国';
-  TH[BH]={bg:'#ffd6e8',ck:'#ffcce2',r1:'#f0a0b8',r2:'#fff6e6',dot:'#ff6fa5'};
-  VT[BH]=[255,120,170,.1];
-  try{window.MC[BH]='#ffb3d9'}catch(e){}
-  function heart(c,px,py,sz,col){c.fillStyle=col;c.beginPath();c.moveTo(px,py+sz*.35);c.bezierCurveTo(px-sz,py-sz*.3,px-sz*.5,py-sz,px,py-sz*.45);c.bezierCurveTo(px+sz*.5,py-sz,px+sz,py-sz*.3,px,py+sz*.35);c.fill()}
-  function pig(c,px,py,r){
-   c.save();c.translate(px,py);c.lineJoin='round';c.strokeStyle='rgba(138,42,85,.7)';c.lineWidth=1;
-   c.fillStyle='#ff9fc0';
-   [-1,1].forEach(function(sd){c.beginPath();c.moveTo(sd*r*.3,-r*.75);c.lineTo(sd*r*.95,-r*1.2);c.lineTo(sd*r*.95,-r*.25);c.closePath();c.fill();c.stroke()});
-   c.fillStyle='#ffb8cf';c.beginPath();c.arc(0,0,r,0,7);c.fill();c.stroke();
-   c.fillStyle='#4a2740';c.beginPath();c.arc(-r*.4,-r*.15,r*.13,0,7);c.arc(r*.4,-r*.15,r*.13,0,7);c.fill();
-   c.fillStyle='rgba(255,90,140,.35)';c.beginPath();c.arc(-r*.7,r*.15,r*.16,0,7);c.arc(r*.7,r*.15,r*.16,0,7);c.fill();
-   c.fillStyle='#ffd0df';c.beginPath();c.ellipse(0,r*.3,r*.5,r*.36,0,0,7);c.fill();c.stroke();
-   c.fillStyle='#a83a68';c.beginPath();c.ellipse(-r*.18,r*.3,r*.09,r*.15,0,0,7);c.ellipse(r*.18,r*.3,r*.09,r*.15,0,0,7);c.fill();
-   c.restore()}
-  /* 背景：ピンクのお空・にじ・雲・ブヒブヒ城 */
-  function bhBG(){
-   if(bgc)return bgc;
-   var s=Math.min(2,Math.max(1,window.devicePixelRatio||1)),c=document.createElement('canvas');
-   c.width=360*s;c.height=440*s;
-   var g=c.getContext('2d');g.scale(s,s);
-   var seed=7;function r(){seed=(seed*16807)%2147483647;return seed/2147483647}
-   var gr=g.createLinearGradient(0,0,0,440);gr.addColorStop(0,'#ffe9f4');gr.addColorStop(.55,'#ffd3e6');gr.addColorStop(1,'#ffc4db');
-   g.fillStyle=gr;g.fillRect(0,0,360,440);
-   var i,rc=['#ff8fa8','#ffb67a','#ffe27a','#9be39b','#8fd0ff','#c0a2ff'];
-   g.globalAlpha=.3;g.lineWidth=7;
-   for(i=0;i<6;i++){g.strokeStyle=rc[i];g.beginPath();g.arc(300,450,150-i*7,Math.PI,Math.PI*2);g.stroke()}
-   g.globalAlpha=1;
-   for(i=0;i<5;i++){var cx=30+r()*300,cy=30+r()*380;g.fillStyle='rgba(255,255,255,.55)';
-    [[0,0,16],[16,4,12],[-15,5,11],[6,-7,11]].forEach(function(o){g.beginPath();g.arc(cx+o[0],cy+o[1],o[2],0,7);g.fill()})}
-   for(i=0;i<46;i++){g.globalAlpha=.22+r()*.22;if(i%3===0)heart(g,r()*360,r()*440,4+r()*5,'#ff7fae');else{g.fillStyle='#fff';g.beginPath();g.arc(r()*360,r()*440,1.5+r()*3,0,7);g.fill()}}
-   g.globalAlpha=.42;g.lineJoin='round';g.strokeStyle='#d86a98';g.lineWidth=1.2;
-   g.fillStyle='#ffb3cf';g.fillRect(288,34,52,38);g.strokeRect(288,34,52,38);
-   [[282,16,22,50],[326,16,22,50]].forEach(function(t){g.fillStyle='#ffa3c4';g.fillRect(t[0],t[3]-22,18,40);g.strokeRect(t[0],t[3]-22,18,40);g.fillStyle='#ff6fa5';g.beginPath();g.moveTo(t[0]-3,t[3]-22);g.lineTo(t[0]+9,t[3]-40);g.lineTo(t[0]+21,t[3]-22);g.closePath();g.fill();g.stroke()});
-   g.fillStyle='#fff';g.beginPath();g.arc(314,62,7,Math.PI,Math.PI*2);g.lineTo(321,72);g.lineTo(307,72);g.closePath();g.fill();
-   g.globalAlpha=1;
-   return bgc=c}
-  var _rbg=window.richBG;
-  window.richBG=function(th){return th===BH?bhBG():_rbg(th)};
-  /* 地面の飾り：ぶたさん・お花・ハート・どろんこ */
-  var _dec=decor;
-  decor=function(i,j,th){
-   if(th!==BH)return _dec(i,j,th);
-   try{
-    var h=(i*73+j*151+i*j*7)%13,px=i*C+20,py=j*C+20,t=performance.now()/1000,k;
-    if(h===0||h===7){pig(x,px,py+Math.sin(t*2.2+i+j)*1.6,9)}
-    else if(h===1||h===8){
-     x.fillStyle='#fff';for(k=0;k<5;k++){x.beginPath();x.arc(px+Math.cos(k*1.2566)*5,py+Math.sin(k*1.2566)*5,3.3,0,7);x.fill()}
-     x.fillStyle='#ffd23f';x.beginPath();x.arc(px,py,2.8,0,7);x.fill()}
-    else if(h===2){heart(x,px,py,7+Math.sin(t*3+i)*1,'rgba(255,100,155,.8)')}
-    else if(h===3||h===9){
-     x.fillStyle='rgba(176,112,84,.5)';x.beginPath();x.ellipse(px,py+3,13,6,0,0,7);x.fill();
-     x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.ellipse(px-3,py+1.5,4,1.6,0,0,7);x.fill()}
-    else if(h===4){
-     var a=.45+.45*Math.sin(t*3+i*2+j);x.fillStyle='rgba(255,214,70,'+a+')';x.beginPath();
-     x.moveTo(px,py-7);x.lineTo(px+2,py-2);x.lineTo(px+7,py);x.lineTo(px+2,py+2);x.lineTo(px,py+7);x.lineTo(px-2,py+2);x.lineTo(px-7,py);x.lineTo(px-2,py-2);x.closePath();x.fill()}
-    else if(h===5){
-     x.fillStyle='#ff5a6e';x.beginPath();x.arc(px,py+1,6,0,7);x.fill();
-     x.fillStyle='#6fcf6f';x.beginPath();x.ellipse(px+3,py-6,3.5,1.8,-.6,0,7);x.fill()}
-   }catch(e){}
-  };
-  /* 空気：のぼっていくハートとキラキラ */
-  var _damb=drawAmb;
-  drawAmb=function(t){
-   if(!G||G.th!==BH)return _damb(t);
-   try{
-    var s=t/1000,k,ph,px,py,a;
-    x.save();
-    for(k=0;k<14;k++){
-     ph=(s*.055+k*.0714)%1;px=((k*97)%360)+Math.sin(s*.9+k)*12;py=440-ph*470;a=Math.sin(ph*Math.PI)*.65;
-     heart(x,px,py,4+(k%3)*2,'rgba(255,110,165,'+a+')')}
-    x.globalCompositeOperation='lighter';
-    for(k=0;k<10;k++){
-     px=((k*131)%360)+Math.sin(s*.7+k*2)*8;py=((k*173+s*8)%440);a=.25+.25*Math.sin(s*2.4+k);
-     x.fillStyle='rgba(255,236,150,'+a+')';x.fillRect(px,py,2,2)}
-    x.restore();
-   }catch(e){}
-  };
-  var _dg=drawGim;drawGim=function(t){if(G&&G.th===BH)return;return _dg(t)};
-  var _gm=gim;gim=function(dt){if(G&&G.th===BH)return;return _gm.apply(this,arguments)};
-  /* BGMは毎回ランダム（ゲーム開始時に決定） */
-  var _trk=trk;
-  trk=function(){
-   if(G&&G.th===BH){if(G.bhBgm==null)G.bhBgm=BTR[Math.random()*BTR.length|0];return G.bhBgm}
-   return _trk()};
-  /* ゴールドランクなら、たまに（約10%）ブヒブヒ王国で開始 */
-  var _init=init;
-  init=function(){
-   _init.apply(this,arguments);
-   try{
-    if(D&&D.ec)return;
-    var rk=window.__buhiRank?window.__buhiRank():0;
-    if(rk===2&&!window.__resume&&Math.random()<.1){
-     G.th=BH;G.bhBgm=BTR[Math.random()*BTR.length|0];
-     window.NZ={t0:performance.now(),n:THN[BH]};
-     G.fx.push({x:180,y:200,txt:'🐷 ブヒブヒ王国へ ようこそ！',t:2.4,c:'#ff4f93'});
-     hud();panel();
-    }
-   }catch(e){console.error('buhi kingdom',e)}
-  };
- }catch(e){console.error('buhi kingdom setup',e)}
-})();
-</script>
-<script>
-/* ===== プロフィール：しょうごうコレクション（これまで手に入れた称号の一覧） ===== */
-(function(){
- try{
-  var BANDS=['ひよっこ','おかしの国','ようせいみならい','きしだん','タワーマスター','おひめさま','ゆうしゃ','てんくう','みありな','でんせつ'];
-  function got(){try{var a=JSON.parse(localStorage.getItem('miarina_td_titles_v1')||'[]');return new Set((Array.isArray(a)?a:[]).filter(function(n){return Number.isInteger(n)&&n>=0&&n<TTL.length}))}catch(e){return new Set()}}
-  function order(i){return i<100?i*6:Math.floor((i-100)/5)*6+1+(i-100)%5}
-  function el(t,css,txt){var e=document.createElement(t);if(css)e.style.cssText=css;if(txt!=null)e.textContent=txt;return e}
-  function openTitles(box,showAll){
-   box.textContent='';window._pfSub=true;
-   var have=got(),total=TTL.length,idx=[],i;
-   for(i=0;i<total;i++)idx.push(i);
-   idx.sort(function(a,b){return order(a)-order(b)});
-   box.appendChild(el('div','margin:4px 0 4px;font-size:16px;font-weight:bold;color:var(--accent);text-align:center','🎀 しょうごうコレクション'));
-   box.appendChild(el('div','text-align:center;font-size:14px;margin-bottom:4px','ゲットした称号 '+have.size+' / '+total));
-   var bar=el('div','height:10px;border-radius:999px;background:var(--line);overflow:hidden;margin:0 6px 8px');
-   bar.appendChild(el('div','height:100%;width:'+Math.round(have.size/total*100)+'%;background:linear-gradient(90deg,#ff9cc4,#ff4f93)'));
-   box.appendChild(bar);
-   var tabs=el('div','display:flex;gap:6px;margin:0 0 6px');
-   [['ゲットした称号',false],['ぜんぶ（？？？つき）',true]].forEach(function(t){
-    var b=el('button','flex:1;padding:8px 4px;font-size:13px'+(showAll===t[1]?';outline:3px solid var(--accent)':''),t[0]);
-    b.onclick=function(){try{sfx('tap')}catch(e){}openTitles(box,t[1])};tabs.appendChild(b)});
-   box.appendChild(tabs);
-   if(!have.size&&!showAll){box.appendChild(el('div','padding:16px 6px;text-align:center;font-size:13px;color:var(--mute);line-height:1.6','まだ称号がないよ。ゲームをクリアすると、称号がもらえるよ'));box.scrollTop=0;return}
-   for(var b=0;b<10;b++){
-    var members=idx.filter(function(n){return Math.floor(order(n)/60)===b}),c=members.filter(function(n){return have.has(n)}).length;
-    if(!showAll&&!c)continue;
-    box.appendChild(el('div','margin:10px 2px 4px;font-size:13px;font-weight:bold;color:var(--accent2,var(--accent))','✿ '+BANDS[b]+'（'+c+'/'+members.length+'）'));
-    var wrap=el('div','display:flex;flex-wrap:wrap;gap:5px');
-    members.forEach(function(n){
-     var on=have.has(n);if(!on&&!showAll)return;
-     wrap.appendChild(el('span','display:inline-block;padding:3px 9px;border-radius:999px;font-size:12px;line-height:1.4;'+(on?'background:var(--card);border:2px solid var(--accent);color:var(--ink)':'background:transparent;border:2px dashed var(--line);color:var(--mute)'),on?TTL[n]:'？？？'))});
-    box.appendChild(wrap)}
-   box.scrollTop=0}
-  var _pr=pfRank;
-  pfRank=function(box,nm){
-   var r=_pr.apply(this,arguments);
-   try{
-    var b=el('button','width:100%;margin:8px 0 0;padding:12px 8px;font-size:15px;flex:none','🎀 しょうごうコレクション（'+got().size+'/'+TTL.length+'）');
-    b.onclick=function(){try{sfx('tap')}catch(e){}openTitles(box,false)};
-    box.appendChild(b);
-   }catch(e){console.error('title book',e)}
-   return r};
- }catch(e){console.error('title book setup',e)}
-})();
-</script>
-<script>
-/* ===== タイトルに戻ったあと、ときどき「ゲームのやりすぎに注意」：真っ暗な画面を未亜か利奈がとことこ歩いてくる ===== */
-(function(){
- var P=0.3,                               /* 出現確率（0〜1）。1にすると毎回出ます。URL末尾に #aw を付けて開いても毎回出ます（テスト用） */
-     MSG='ゲームのやりすぎに\n注意しようね？',
-     IN=3200,STAY=2600,OUT=3000,          /* 歩いてくる／立ち止まる／去っていく（ミリ秒） */
-     busy=false;
- function shown(t){try{return getComputedStyle(t).display!=='none'}catch(e){return false}}
- function chance(){return /[?#&]aw\b/.test(location.search+location.hash)?1:P}
- function addCss(){
-  if(document.getElementById('awst'))return;
-  var s=document.createElement('style');s.id='awst';
-  s.textContent=[
-   '#awov{position:fixed;inset:0;z-index:100000;background:#000;opacity:1;transition:opacity .6s ease;touch-action:none;-webkit-user-select:none;user-select:none}',
-   '#awov.fo{opacity:0;pointer-events:none}',
-   '#awov .awc{position:absolute;left:0;top:50%;margin-top:calc(var(--aw)*-.3);will-change:transform}',
-   '#awov .awk{animation:awbob .46s ease-in-out infinite}',
-   '#awov .awk.st{animation:none}',
-   '#awov .awi{display:block;width:var(--aw);height:auto;filter:drop-shadow(0 0 14px rgba(255,170,215,.55))}',
-   '#awov .awi.fl{transform:scaleX(-1)}',
-   '#awov .awb{position:absolute;left:50%;bottom:100%;margin-bottom:14px;padding:8px 12px;background:#fff;color:#3a2540;border:3px solid #ff6fa5;border-radius:14px;font-size:13px;line-height:1.5;font-weight:bold;text-align:center;white-space:pre;box-shadow:0 3px 12px rgba(255,111,165,.45);opacity:0;transform:translateX(-50%) scale(.6);transform-origin:50% 100%}',
-   '#awov .awb::after{content:"";position:absolute;left:50%;bottom:-9px;width:12px;height:12px;background:#fff;border-right:3px solid #ff6fa5;border-bottom:3px solid #ff6fa5;transform:translateX(-50%) rotate(45deg)}',
-   '#awov .awb.sh{animation:awpop .32s cubic-bezier(.3,1.5,.5,1) forwards}',
-   '#awov .awb.ho{animation:awout .2s ease forwards}',
-   '@keyframes awbob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-9px) rotate(4deg)}}',
-   '@keyframes awpop{from{opacity:0;transform:translateX(-50%) scale(.6)}to{opacity:1;transform:translateX(-50%) scale(1)}}',
-   '@keyframes awout{from{opacity:1;transform:translateX(-50%) scale(1)}to{opacity:0;transform:translateX(-50%) scale(.6)}}'
-  ].join('');
-  document.head.appendChild(s)}
- function run(){
-  var el=document.getElementById(Math.random()<.5?'tmia':'trin'),src=el&&el.getAttribute('src');
-  if(!src)return;
-  busy=true;addCss();
-  var vw=window.innerWidth||document.documentElement.clientWidth||360,
-      w=Math.round(Math.max(88,Math.min(132,vw*.3))),
-      ov=document.createElement('div');
-  ov.id='awov';ov.style.setProperty('--aw',w+'px');
-  ov.innerHTML='<div class="awc"><div class="awb"></div><div class="awk"><img class="awi" alt=""></div></div>';
-  var c=ov.firstChild,b=c.firstChild,k=c.lastChild,im=k.firstChild,T=[];
-  b.textContent=MSG;im.src=src;im.style.borderRadius=el.id==='tmia'?'50%':'12px';
-  document.body.appendChild(ov);
-  var a=-w-20,m=Math.round((vw-w)/2);
-  function pos(x,ms){c.style.transition=ms?'transform '+ms+'ms linear':'none';c.style.transform='translateX('+x+'px)'}
-  function at(f,ms){T.push(setTimeout(f,ms))}
-  function end(){for(var i=0;i<T.length;i++)clearTimeout(T[i]);ov.remove();busy=false}
-  pos(a,0);void c.offsetWidth;
-  var t1=500,t2=t1+IN,t3=t2+STAY,t4=t3+300,t5=t4+OUT;
-  at(function(){pos(m,IN)},t1);                                                              /* 左端から歩いてくる */
-  at(function(){k.classList.add('st');b.classList.add('sh');try{sfx('tap')}catch(e){}},t2);  /* 真ん中で止まって吹き出し */
-  at(function(){b.classList.add('ho')},t3);
-  at(function(){k.classList.remove('st');im.classList.add('fl');pos(a,OUT)},t4);             /* 左へ去っていく */
-  at(function(){ov.classList.add('fo')},t5+100);                                             /* 暗転をほどいてタイトルへ */
-  at(end,t5+800);
-  at(end,20000)}                                                                             /* 念のための保険 */
- function init(){
-  var tt=document.getElementById('tt');if(!tt||!window.MutationObserver)return;
-  var prev=shown(tt),seen=prev;
-  new MutationObserver(function(){
-   var now=shown(tt);
-   if(now&&!prev&&seen&&!busy&&Math.random()<chance()){
-    try{run()}catch(e){console.error(e);var o=document.getElementById('awov');if(o)o.remove();busy=false}}
-   if(now)seen=true;prev=now}).observe(tt,{attributes:true,attributeFilter:['style','class']})}
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()
 })();
 </script>
 </body></html>
