@@ -1106,9 +1106,7 @@ function drawAlly(a,t,ctx){if(a.k==='L'){drawLips(a,t,ctx||GX);return}if(a.conv&
  if(a.sleep){x.fillStyle='#7a5cff';x.font='bold 11px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('Zzz',a.x+16,a.y-30+Math.sin(t/300)*3)}
  if(a.eng&&a.tg){x.fillStyle=Math.floor(t/220)%2?'#ffd9a0':'#ff9a6a';x.font='bold 13px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('\u2726',(a.x+a.tg.x)/2,(a.y+a.tg.y)/2-4)}
  const yy=a.y-r-(fl?16:8);x.fillStyle='rgba(20,5,40,.45)';x.fillRect(a.x-11,yy,22,4);x.fillStyle='#4cc9f0';x.fillRect(a.x-11,yy,22*Math.max(0,a.hp/a.mhp),4)}
-function sortie(){G.al=(G.al||[]).filter(function(a){return a&&!a.dead});G.alSp=G.alSp||{};const g=R[0].P[R[0].P.length-1],b=G.hpb||20;let n=0;
- for(const k of Object.keys(AL)){const d=AL[k],c=G.own[k]||0,lvm=1+.25*((G.alv[k]||1)-1);for(let i=(G.alSp[k]||0);i<c;i++){G.alSp[k]=i+1;G.al.push({k,ow:1,cv:k=='C'?i%4:0,x:g[0],y:g[1],hp:b*d.hp*lvm,mhp:b*d.hp*lvm,dps:b*d.dps*lvm,sp:d.sp,reach:d.reach,r:d.r,fly:d.fly,air:d.air,only:d.only,boss:d.boss,dr:-1,tg:null,eng:false,ro:null,d:0,wt:n*.3});n++}}
- if(n)G.fx.push({x:g[0],y:g[1]-44,txt:'味方が出撃！',t:1.6,c:'#7a5cff'})}
+function sortie(){G.al=(G.al||[]).filter(function(a){return a&&!a.dead});G.alSp=G.alSp||{}}
 const AX2=(function(){try{return localStorage.getItem('miarina_td_allyx2_v1')==='1'}catch(e){return false}})();
 function allyMax(k){var m=Math.max(1,AL[k].max);if(AX2&&AL[k].max>1)m*=2;return m}
 function allyCost(k){return Math.round(AL[k].price*(1+.35*(G.own[k]||0))*D.cost)}
@@ -1123,7 +1121,7 @@ function apHi(){for(const k in apRows){const r=apRows[k].row;if(r)r.style.backgr
 function updAp(){if(!apRows.S||!G||!G.own)return;const gd=document.getElementById('apg');if(gd)gd.textContent='💰'+G.gold;
  for(const k in apRows){const r=apRows[k],o=G.own[k]||0,m=allyMax(k),l=G.alv[k]||1;r.st.textContent='所持 '+o+'/'+m+'　Lv'+l;r.bb.textContent=o>=m?'最大':'購入💰'+allyCost(k);r.bb.disabled=o>=m||G.gold<allyCost(k);r.lb.textContent=l>=30?'最大Lv':'強化💰'+allyLvCost(k);r.lb.disabled=o==0||l>=30||G.gold<allyLvCost(k)}}
 function buildAp(){const ap=document.createElement('div');ap.id='ap';const card=document.createElement('div');
- const hd=document.createElement('div');hd.style.cssText='display:flex;justify-content:space-between;align-items:center;font-weight:bold;margin-bottom:4px';const ht=document.createElement('span');ht.textContent='味方（自動で出撃）';const gd=document.createElement('span');gd.id='apg';hd.append(ht,gd);card.appendChild(hd);const apl=document.createElement('div');apl.style.cssText='height:46px;margin:2px 0 4px';apl.className='aplx';card.appendChild(apl);apLedEl=apl;
+ const hd=document.createElement('div');hd.style.cssText='display:flex;justify-content:space-between;align-items:center;font-weight:bold;margin-bottom:4px';const ht=document.createElement('span');ht.textContent='味方（出撃ボタンで1体ずつ）';const gd=document.createElement('span');gd.id='apg';hd.append(ht,gd);card.appendChild(hd);const apl=document.createElement('div');apl.style.cssText='height:46px;margin:2px 0 4px';apl.className='aplx';card.appendChild(apl);apLedEl=apl;
 
  for(const k of Object.keys(AL)){const d=AL[k],row=document.createElement('div');row.className='ar';
   const cvn=document.createElement('canvas');cvn.width=40;cvn.height=40;cvn.style.cssText='width:36px;height:36px;border:0;box-shadow:none;border-radius:0;flex:none';
@@ -4653,7 +4651,7 @@ var TIPS=[
 '街のお寿司屋さんでは、ひみつ道具の「お寿司」が買えるよ',
 '街のおたすけ屋さんでは、バトル中におたすけキャラを呼べる「おたすけ券」が買えるよ',
 '街のリナコイン屋さんでは、リナコインを売り買いできるよ。相場は毎日かわるよ',
-'街の味方屋さんでは、味方キャラが買えるよ。買った味方は、次のバトルから出撃するよ',
+'街の味方屋さんでは、味方キャラが買えるよ。買った味方は、味方パネルの「出撃」ボタンで1体ずつ出撃させられるよ',
 '街の味方屋さんでは、自分だけのオリジナル味方を300Gでつくれるよ（1体だけ）',
 '街のペットショップでは、犬と猫が買えるよ。買うと街にもいるよ',
 '街のカジノでは、チップでバカラ・ブラックジャック・ポーカー・ハイ＆ローなどが遊べるよ',
@@ -9980,6 +9978,10 @@ function bestCell(k){
 function place(k,c){var n=G.tw.length,ob=build;G.sel=null;build=k;try{tapMap(c[0]*C+20,c[1]*C+20)}finally{build=ob}return G.tw.length>n}
 function upgrade(t){var g=G.gold;G.sel=t;panel();var u=$('up');if(u&&!u.disabled)u.click();G.sel=null;hud();panel();return G.gold<g}
 var AK=['B','C','H','S','D','P','X','L'];
+function deployA(){
+ var c=AK.filter(function(k){return AL[k]&&(G.own[k]||0)-((G.alSp&&G.alSp[k])||0)>0});
+ if(c.length&&window.deployAlly){window.deployAlly(c[0]);return true}
+ return false}
 function buyA(){
  var c=AK.filter(function(k){return AL[k]&&(G.own[k]||0)<allyMax(k)}).sort(function(a,b){return (G.own[a]||0)/allyMax(a)-(G.own[b]||0)/allyMax(b)});
  for(var i=0;i<c.length;i++){var k=c[i],n=G.own[k]||0;if(G.gold>=allyCost(k)){buyAlly(k);if((G.own[k]||0)>n)return true}}
@@ -10015,6 +10017,7 @@ function tick(){
  if(G.active)AU.wa=true;else if(AU.wa){AU.wa=false;AU.st='clr';if(!AU.pi)clr(G.wave)}
  if(AU.pi&&now>=(AU.cu||0)){var _pw=AU.pi;AU.pi=0;intro(_pw)}
  try{spend()}catch(e){console.error(e)}
+  try{deployA()}catch(e){console.error(e)}
  if(G.active){say('第'+G.wave+'幕「'+(AU.t||'たたかい')+'」 ❤️'+G.lives);AU.st='fight';return}
  if(G.wave>=D.cl)return;
  AU.st='go';AU.pi=G.wave+1;$('go').click()}
@@ -11676,7 +11679,7 @@ function buyRender(){
  var xb=el('button','flex:none;width:auto;min-height:0;height:auto;line-height:1;padding:3px 9px;font-size:12px;border:2px solid #f0a8c8;border-radius:10px;background:#fff;color:#d05a8a;font-family:inherit','✕');xb.onclick=closeBuy;
  hd.append(el('span',null,'🧸 味方屋さん'),xb);card.appendChild(hd);
  card.appendChild(el('div','text-align:center;font-size:12px;color:#8a3a6a;background:#fff;border-radius:999px;padding:4px 10px;margin-bottom:6px','💰 もちこしゴールド '+gold()+'G'));
- card.appendChild(el('div','font-size:11px;color:#8a5a7a;text-align:center;margin-bottom:4px','味方は ここで買うよ。買った子は つぎのバトルから いっしょに出撃！'));
+ card.appendChild(el('div','font-size:11px;color:#8a5a7a;text-align:center;margin-bottom:4px','味方は ここで買うよ。買った子は 出撃ボタンを おすと 1体ずつ出撃するよ'));
  if(BMSG){card.appendChild(el('div','text-align:center;font-size:12px;color:#d0457f;margin-bottom:4px',BMSG));BMSG=''}
  var ow=owned();
  Object.keys(AL).forEach(function(k){
@@ -11853,8 +11856,11 @@ html body .czg.czg.czg button.cz-fake[style] div,html body .czg.czg.czg button.c
 /* 味方は ぜんぶ街の「味方屋さん」で買う：ゲーム中のパネルでは買えない（強化だけできる） */
 (function(){
  var _ub=updAp;
- updAp=function(){_ub.apply(this,arguments);try{for(var k in apRows){var r=apRows[k];if(r&&r.bb){r.bb.textContent=(G.own&&G.own[k]>0?'出撃中':'お店で買う');r.bb.disabled=true}}}catch(e){}};
+ updAp=function(){_ub.apply(this,arguments);try{for(var k in apRows){var r=apRows[k];if(r&&r.bb){var o=(G.own&&G.own[k])||0,rs=resAlly(k);r.bb.textContent=o<=0?'お店で買う':(rs>0?'出撃 残'+rs:'出撃中');r.bb.disabled=!(o>0&&rs>0&&!G.over);r.bb.onclick=(function(kk){return function(){deployAlly(kk)}})(k)}}}catch(e){}};
  buyAlly=function(k){try{sfx('deny');G.fx.push({x:180,y:300,txt:'味方は街の味方屋さんで買ってね',t:1.6,c:'#ff4d6d'})}catch(e){}};
+ function resAlly(k){return (G.own[k]||0)-((G.alSp&&G.alSp[k])||0)}
+ function deployAlly(k){try{if(!G||G.over||!R||!R[0])return;if(resAlly(k)<=0){sfx('deny');G.fx.push({x:180,y:300,txt:'出撃できる子は いないよ',t:1.4,c:'#ff4d6d'});return}spawnAlly(k,(G.alSp&&G.alSp[k])||0);sfx('place');hud()}catch(e){console.error('deployAlly',e)}}
+ window.deployAlly=deployAlly;
 })();
 /* ゴールを置いたあとは、持っていない味方を味方パネルから かくす */
 (function(){
