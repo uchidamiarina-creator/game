@@ -853,10 +853,11 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)TA.pause();
 tbgm(true);
 
 window.addEventListener('kt-open',()=>{try{TA.pause()}catch(e){}});window.addEventListener('kt-close',()=>{try{tbgm(true)}catch(e){}});const MI={cd:0,n:0};let mpEl,mpL,mpG,mpB;
-function miaCost(){return Math.round([0,0,1000,3000,8000,20000][(G.ml||1)+1]*D.cost)}
-function mpUpd(){if(!mpEl||!G)return;const l=G.ml||1,c=miaCost();mpL.textContent='未亜 Lv'+l+(l>=5?'（最大）':'');mpG.textContent='💰'+G.gold;mpB.textContent=l>=5?'最大Lv':'レベルアップ 💰'+c;mpB.disabled=l>=5||G.gold<c}
-function buildMp(){const m=document.createElement('div');m.id='mp';const c=document.createElement('div');c.style.textAlign='center';const t=document.createElement('div');t.style.cssText='font-size:18px;font-weight:bold;margin-bottom:8px';mpL=document.createElement('span');mpG=document.createElement('span');mpG.style.marginLeft='12px';t.append(mpL,mpG);mpB=document.createElement('button');mpB.style.cssText='width:100%;font-size:15px;padding:8px';mpB.onclick=()=>{if((G.ml||1)>=5)return;const c2=miaCost();if(G.gold<c2){sfx('deny');return}G.gold-=c2;G.ml=(G.ml||1)+1;mpEl.style.display='none';sfx('up');cheer('レベルアップ！');hud()};const cl=document.createElement('button');cl.textContent='とじる';cl.style.cssText='width:100%;margin-top:6px';cl.onclick=()=>{m.style.display='none'};c.append(t,mpB,cl);m.appendChild(c);document.getElementById('wrap').appendChild(m);mpEl=m}
-function openMia(){if(!mpEl)return;if((G.ml||1)>=5||G.gold<miaCost()){sfx('deny');return}mpEl.style.display='flex';mpUpd();sfx('tap')}
+function miaCap(){try{return Object.keys(window.__quest.state().d).length>=100?99:5}catch(e){return 5}}
+function miaCost(){const l=G.ml||1;return Math.round((l>=5?20000*(l-3):[0,0,1000,3000,8000,20000][l+1])*D.cost)}
+function mpUpd(){if(!mpEl||!G)return;const l=G.ml||1,cap=miaCap(),c=miaCost();mpL.textContent='未亜 Lv'+l+(l>=cap?'（最大）':'');mpG.textContent='💰'+G.gold;mpB.textContent=l>=cap?'最大Lv':'レベルアップ 💰'+c;mpB.disabled=l>=cap||G.gold<c}
+function buildMp(){const m=document.createElement('div');m.id='mp';const c=document.createElement('div');c.style.textAlign='center';const t=document.createElement('div');t.style.cssText='font-size:18px;font-weight:bold;margin-bottom:8px';mpL=document.createElement('span');mpG=document.createElement('span');mpG.style.marginLeft='12px';t.append(mpL,mpG);mpB=document.createElement('button');mpB.style.cssText='width:100%;font-size:15px;padding:8px';mpB.onclick=()=>{if((G.ml||1)>=miaCap())return;const c2=miaCost();if(G.gold<c2){sfx('deny');return}G.gold-=c2;G.ml=(G.ml||1)+1;mpEl.style.display='none';sfx('up');cheer('レベルアップ！');hud()};const cl=document.createElement('button');cl.textContent='とじる';cl.style.cssText='width:100%;margin-top:6px';cl.onclick=()=>{m.style.display='none'};c.append(t,mpB,cl);m.appendChild(c);document.getElementById('wrap').appendChild(m);mpEl=m}
+function openMia(){if(!mpEl)return;if((G.ml||1)>=miaCap()||G.gold<miaCost()){sfx('deny');return}mpEl.style.display='flex';mpUpd();sfx('tap')}
 ac();setTimeout(()=>loadB(0),1500);
 function ufoUp(dt){const u=G.ufo;if(!u)return;u.t+=dt;
  if(u.ph==0){const k=Math.min(1,u.t/1.4),e=1-Math.pow(1-k,3);u.x=400+(96-400)*e;u.y=120+(250-120)*e+Math.sin(u.t*5)*3;if(k>=1){u.ph=1;u.t=0;u.bx=96;u.by=262;u.amt=Math.round((100+Math.random()*2900)/10)*10;sfx('ufo')}}
@@ -5315,6 +5316,7 @@ function openBook(){
      ['🪢 エクリプスでかいてんムチ','難易度エクリプスで かいてんムチを タップして 手動で まわすと（1回💰1000・フェーズ中だけ）、はんいの中の敵が ラスボスも ふくめて 味方になって ほかの敵と たたかってくれるよ（いちどに 40体まで）。自動で たたくだけの ときは 味方にならないよ'],
      ['💗 未亜をレベル5（MAX）に','未亜のレベルアップは Lv4→5が 💰20000（難易度で ねだんが かわるよ）。Lv5になると 頭に「レベルMAX」が キラキラ光って、バトル中に 敵がいると 約18秒後から 22〜34秒ごとに 必殺技「ミラクルスターバースト！」が 発動するよ。画面の敵ぜんぶに ケタちがいの大ダメージが入るよ'],
      ['🏯 金庫「みありな」','金庫に「みありな」（ひらがな・カタカナ・ローマ字のどれでもOK）と入れて「引き出す」を押すと、ケロケロ不動産屋に お城「大江戸未亜利奈城」が ならぶよ。ねだんは めちゃくちゃ高い 💰10億G！ 買えば 毎月20日に 月 +1000万G が 入るよ。ほかの物件と おなじで 3軒まで しか もてないよ'],
+     ['🎯 未亜をレベル99に','クエストを 100個ぜんぶ 達成（コンプリート）すると、未亜の最大レベルが 5から 99まで ひろがるよ。レベルアップのねだんは Lv5→6が 💰40000（難易度で かわるよ）で、レベルが上がるほど 高くなって Lv98→99が 💰1900000。未亜のメニューで「レベルアップ」を 押してね'],
      ['🔎 まだまだあるよ！','これ以外にも沢山の裏技があるよ探してみよう！']];
     var SCK='miarina_td_guide_scratch_v1',SCD=[];try{var _a=JSON.parse(localStorage.getItem(SCK)||'[]');if(Array.isArray(_a))SCD=_a}catch(e){}
     function scDone(t){if(SCD.indexOf(t)<0){SCD.push(t);try{localStorage.setItem(SCK,JSON.stringify(SCD))}catch(e){}}}
