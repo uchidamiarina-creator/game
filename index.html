@@ -211,11 +211,14 @@ body{width:100%;margin:0;overflow:hidden;
 #tt .tin h2 .tsp.b{right:4%;top:2%;font-size:.55em;color:#ff7eb6;-webkit-text-fill-color:#ff7eb6;animation-delay:.7s}
 #tt .tin h2 .tsp.c{left:6%;bottom:6%;font-size:.5em;color:#ffd23f;-webkit-text-fill-color:#ffd23f;animation-delay:1.3s}
 #tt .tin h2 .tsp.d{right:2%;bottom:4%;font-size:.6em;color:#fff;-webkit-text-fill-color:#fff;animation-delay:1.9s}
-@keyframes ttshine{0%,55%{background-position:160% 0,0 0}100%{background-position:-60% 0,0 0}}
+@keyframes ttshine{0%,35%{background-position:160% 0,0 0}100%{background-position:-60% 0,0 0}}
+@keyframes ttbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+#tt .tin h2 .tl{animation:ttshine 2.8s ease-in-out infinite,ttbob 2.2s ease-in-out infinite}
+#tt .tin h2 .t2{animation-delay:.25s,.2s}#tt .tin h2 .t3{animation-delay:.5s,.4s}#tt .tin h2 .dx{animation-delay:.65s,.6s}
 @keyframes ttw{0%,100%{transform:scale(.55) rotate(0);opacity:.35}50%{transform:scale(1.15) rotate(25deg);opacity:1}}
 @media (prefers-reduced-motion:reduce){#tt .tin h2 .tl,#tt .tin h2 .tsp{animation:none!important}#tt .tin h2 .tsp{opacity:.9}}
 </style>
-<div class="tin"><div id="thd"><img id="tmia" alt="未亜" width="60" height="60"><h2><span class="tl t1">みありな</span><br><span class="tl t2">タワーディフェンス</span><br><span class="tl t3">ウルトラ</span><span class="tl dx">DX</span><i class="tsp a" aria-hidden="true">✦</i><i class="tsp b" aria-hidden="true">♥</i><i class="tsp c" aria-hidden="true">★</i><i class="tsp d" aria-hidden="true">✧</i></h2><img id="trin" alt="利奈" width="60" height="56"></div><div style="font-size:10px;color:var(--mute);text-align:center;margin:-2px 0 8px;letter-spacing:.04em">- 最終完全ちょっとバグってるファイナル Ultimate Version -</div><input id="pn" maxlength="8" placeholder="なまえ（8文字まで）" style="font:inherit;font-size:15px;text-align:center;padding:9px;border-radius:14px;border:3px solid var(--line);background:var(--card);color:var(--ink);width:70%;margin:0 0 6px"><div id="dan" style="font-size:13px;color:var(--accent2);min-height:18px;margin:0 0 8px;text-align:center"></div><div id="df"></div><div id="dsc" style="display:none"></div><button class="go" id="cnb" style="display:none;margin:0 auto 8px;line-height:1.35"></button><button class="go" id="stb">はじめる</button><div style="margin-top:10px"><button id="rkb" hidden style="padding:8px 22px;font-size:14px">🏆 ランキング</button> <button id="pcb" style="padding:8px 22px;font-size:14px">🔑 パスコード</button></div><div style="margin-top:8px"><button id="pfb" style="padding:8px 22px;font-size:14px">👤 プロフィール</button> <button id="vtb" style="padding:8px 22px;font-size:14px">🔐 金庫</button></div><div id="crTap" style="margin-top:12px;font-size:11px;color:var(--mute);letter-spacing:.04em">📱 iPhone / Android 対応</div><ul style="display:none">強化・売却</li><li id="cli">30フェーズ守りきればクリア</li></ul></div></div>
+<div class="tin"><div id="thd"><img id="tmia" alt="未亜" width="60" height="60"><h2><span class="tl t1">みありな</span><br><span class="tl t2">タワーディフェンス</span><br><span class="tl t3">ウルトラ</span><span class="tl dx">DX</span></h2><img id="trin" alt="利奈" width="60" height="56"></div><div style="font-size:10px;color:var(--mute);text-align:center;margin:-2px 0 8px;letter-spacing:.04em">- 最終完全ちょっとバグってるファイナル Ultimate Version -</div><input id="pn" maxlength="8" placeholder="なまえ（8文字まで）" style="font:inherit;font-size:15px;text-align:center;padding:9px;border-radius:14px;border:3px solid var(--line);background:var(--card);color:var(--ink);width:70%;margin:0 0 6px"><div id="dan" style="font-size:13px;color:var(--accent2);min-height:18px;margin:0 0 8px;text-align:center"></div><div id="df"></div><div id="dsc" style="display:none"></div><button class="go" id="cnb" style="display:none;margin:0 auto 8px;line-height:1.35"></button><button class="go" id="stb">はじめる</button><div style="margin-top:10px"><button id="rkb" hidden style="padding:8px 22px;font-size:14px">🏆 ランキング</button> <button id="pcb" style="padding:8px 22px;font-size:14px">🔑 パスコード</button></div><div style="margin-top:8px"><button id="pfb" style="padding:8px 22px;font-size:14px">👤 プロフィール</button> <button id="vtb" style="padding:8px 22px;font-size:14px">🔐 金庫</button></div><div id="crTap" style="margin-top:12px;font-size:11px;color:var(--mute);letter-spacing:.04em">📱 iPhone / Android 対応</div><ul style="display:none">強化・売却</li><li id="cli">30フェーズ守りきればクリア</li></ul></div></div>
 <h1>みありなタワーディフェンス ウルトラDX</h1>
 <div id="wrap">
 <div id="stats"><span id="sg"></span><span id="sl"></span><span id="sw" style="display:none"></span><span id="stm" style="display:none"></span></div>
@@ -7264,7 +7267,7 @@ function bz(id,key,name,ds,msg,fn,can,extra){sv(id,name,'buhi_'+key,ds,msg,fn,ca
 bz('buhi_man','man','ブヒマン','つかうと 味方のブヒマン（ブタのスーパーマン）がバトルに参戦！ そのゲームのあいだ 毎フェーズ出撃するよ（ブヒポで交換）','ブヒブヒ〜！',
  function(){if(!live()||G.buhiman)return 0;G.buhiman=1;try{window.__buhiAddBM&&window.__buhiAddBM(true)}catch(e){}return 1},
  function(){return live()&&!G.buhiman});
-bz('buhi_nikuman','nikuman','豚まん','食べるとライフが 50 回復する（ライフは最大99まで／ブヒポで交換）','ほかほか〜！',heal(50),canHeal,{max:5});
+bz('buhi_nikuman','nikuman','豚まん','食べるとライフが 50 回復する（ライフは最大99まで／ブヒポで交換）','ほかほか〜！',heal(50),canHeal,{max:1});
 bz('buhi_beam','beam','ブヒビーム','もっていると 武器に「ブヒビーム」がふえる！ 豚鼻を敵に投げて、投げられた敵はみんな豚の敵キャラに！（ずっと使えるよ／ブヒポで交換）','',
  function(){return 0},function(){return false},{max:1,own:1});
 bz('buhi_x','x','ブヒエナX','ジュース。のむと マップ上の全ての武器が レベルMAXになる（ブヒポで交換）','ゴクゴク！ ブヒエナX！',
@@ -12852,13 +12855,13 @@ drawEn2=wrapper;
  /* 交換できるグッズ（ひみつ道具5つ） */
  var GOODS=[
   {id:'buhi_man',key:'man',name:'ブヒマン',cost:8,max:3,ds:'使うと 味方のブヒマン（ブタのスーパーマン）がバトルに参戦'},
-  {id:'buhi_nikuman',key:'nikuman',name:'豚まん',cost:3,max:5,ds:'食べるとライフ50回復'},
+  {id:'buhi_nikuman',key:'nikuman',name:'豚まん',cost:3,max:1,ds:'食べるとライフ50回復'},
   {id:'buhi_beam',key:'beam',name:'ブヒビーム',cost:20,max:1,ds:'オリジナル武器。豚鼻を投げて、あたった敵は豚の敵キャラに'},
-  {id:'buhi_x',key:'x',name:'ブヒエナX',cost:12,max:3,ds:'ジュース。のむとマップ上の武器がぜんぶレベルMAX'},
+  {id:'buhi_x',key:'x',name:'ブヒエナX',cost:5000,max:3,ds:'ジュース。のむとマップ上の武器がぜんぶレベルMAX'},
   {id:'seal',key:'seal',name:'豚シール',cost:5,max:1,ds:'プロフィールのボタンのアイコンが 豚鼻のイラストに'}
  ];
  /* ---- ポイントのデータ ---- */
- function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'{}')||{};return{pt:Math.max(0,o.pt|0),rem:Math.max(0,o.rem|0),seal:o.seal?1:0,vis:Math.max(0,o.vis|0)}}catch(e){return{pt:0,rem:0,seal:0,vis:0}}}
+ function load(){try{var o=JSON.parse(localStorage.getItem(KEY)||'{}')||{};var pt0=Math.max(0,o.pt|0);return{pt:pt0,tot:Math.max(pt0,o.tot|0),rem:Math.max(0,o.rem|0),seal:o.seal?1:0,vis:Math.max(0,o.vis|0)}}catch(e){return{pt:0,tot:0,rem:0,seal:0,vis:0}}}
  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  var btnEl=null,modalEl=null,rerender=null;
  function refresh(){try{if(btnEl){var p=btnEl.querySelector('.bp');if(p)p.textContent=load().pt+'pt'}if(rerender)rerender()}catch(e){}}
@@ -12871,9 +12874,9 @@ drawEn2=wrapper;
   setTimeout(function(){d.style.opacity='0'},1500);
   setTimeout(function(){d.remove()},2000)}catch(e){}}
  /* お店に入るたびに 1ポイント */
- window.__buhiVisit=function(){var s=load();s.pt+=1;s.vis+=1;save(s);flash('ブヒポ +1pt（お店に入った）');refresh()};
+ window.__buhiVisit=function(){var s=load();s.pt+=1;s.tot+=1;s.vis+=1;save(s);flash('ブヒポ +1pt（お店に入った）');refresh()};
  /* 200ゴールド使うごとに 1ポイント */
- function spend(d){if(!(d>0))return;var s=load(),acc=s.rem+d,add=Math.floor(acc/PER);s.rem=acc%PER;if(add>0){s.pt+=add;flash('ブヒポ +'+add+'pt（買い物）')}save(s);refresh()}
+ function spend(d){if(!(d>0))return;var s=load(),acc=s.rem+d,add=Math.floor(acc/PER);s.rem=acc%PER;if(add>0){s.pt+=add;s.tot+=add;flash('ブヒポ +'+add+'pt（買い物）')}save(s);refresh()}
  try{var _si=Storage.prototype.setItem;
   Storage.prototype.setItem=function(k,v){
    try{if(k===GK&&window.__townOn&&!window.__buhiNoPt){var old=parseInt(this.getItem(GK)||'0',10)||0,nw=parseInt(v,10)||0;if(nw<old)spend(old-nw)}}catch(e){}
@@ -12904,14 +12907,15 @@ drawEn2=wrapper;
   var msg='';
   function render(){
    var s=load();box.innerHTML='';
-   var card=mk('div','position:relative;overflow:hidden;border-radius:16px;padding:12px 14px;background:linear-gradient(135deg,#ffc9dc 0%,#ff8fb5 100%);color:#fff;box-shadow:0 3px 0 #e0457f');
+   var tier=s.tot>9999?2:(s.tot>999?1:0),TC=[['linear-gradient(135deg,#ffc9dc 0%,#ff8fb5 100%)','#e0457f','ブヒポ'],['linear-gradient(135deg,#f4f6fa 0%,#aab4c4 100%)','#6b7686','シルバーブヒポ'],['linear-gradient(135deg,#fff3b0 0%,#e8b730 100%)','#a8780f','ゴールドブヒポ']][tier];
+   var card=mk('div','position:relative;overflow:hidden;border-radius:16px;padding:12px 14px;background:'+TC[0]+';color:#fff;box-shadow:0 3px 0 '+TC[1]);
    var nz=mk('div','position:absolute;right:-8px;top:-2px;width:118px;height:118px;opacity:.95');nz.innerHTML=SV().nose||'';
    var sv=nz.firstChild;if(sv){sv.style.width='100%';sv.style.height='100%'}
    card.appendChild(nz);
    card.appendChild(mk('div','position:relative;font-size:10px;letter-spacing:.25em;opacity:.9','POINT CARD'));
-   card.appendChild(mk('div','position:relative;font-size:28px;font-weight:bold;text-shadow:0 2px 0 #e0457f;margin-top:2px','ブヒポ'));
+   card.appendChild(mk('div','position:relative;font-size:28px;font-weight:bold;text-shadow:0 2px 0 '+TC[1]+';margin-top:2px',TC[2]));
    var pr=mk('div','position:relative;margin-top:8px;font-size:12px','いまの ポイント');card.appendChild(pr);
-   var pp=mk('div','position:relative;font-size:32px;font-weight:bold;text-shadow:0 2px 0 #e0457f;line-height:1.1');pp.appendChild(document.createTextNode(String(s.pt)));pp.appendChild(mk('span','font-size:14px;margin-left:3px','pt'));card.appendChild(pp);
+   var pp=mk('div','position:relative;font-size:32px;font-weight:bold;text-shadow:0 2px 0 '+TC[1]+';line-height:1.1');pp.appendChild(document.createTextNode(String(s.pt)));pp.appendChild(mk('span','font-size:14px;margin-left:3px','pt'));card.appendChild(pp);
    card.appendChild(mk('div','position:relative;margin-top:6px;font-size:10px;opacity:.95','お店に入る 1回 = 1pt　／　ゴールド 200G つかう = 1pt（つぎまで あと '+(PER-s.rem)+'G）'));
    box.appendChild(card);
    if(msg)box.appendChild(mk('div','margin:8px 0 0;padding:6px 8px;border-radius:10px;background:#ffeef6;color:#c0456f;font-size:12px;line-height:1.4',msg));
